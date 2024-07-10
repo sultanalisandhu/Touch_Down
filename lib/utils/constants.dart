@@ -1,0 +1,38 @@
+
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class AppColor {
+  static const Color primaryColor= Color.fromRGBO(222, 57, 9, 1);
+  static const Color greyColor= Color.fromRGBO(182, 182, 182, 1);
+  static const Color lightGreyColor= Color.fromRGBO(244, 244, 244, 1);
+   static const Color whiteColor = Colors.white;
+   static const Color blackColor = Colors.black;
+}
+
+Size get mQ => MediaQuery.of(Get.context!).size;
+
+
+
+//color ful print statement
+void printWarning(String text) {
+  print('\x1B[33m$text\x1B[0m');
+}
+void printError(String text) {
+  print('\x1B[31m$text\x1B[0m');
+}
+
+
+TextStyle primaryTextStyle({double? fontSize, FontWeight? fontWeight,Color? color}){
+  return GoogleFonts.inter(
+      textStyle: TextStyle(
+        decoration:TextDecoration.none,
+        fontSize: fontSize !=null ?fontSize: 20,
+        fontWeight: fontWeight??FontWeight.w300,
+        color: color,
+      )
+  );
+}
