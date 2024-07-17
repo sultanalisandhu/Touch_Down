@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/view/coach_ui/book_venue_screen.dart';
+import 'package:touch_down/view/coach_ui/coach_screen.dart';
 import 'package:touch_down/view/home_ui/home_screen.dart';
-import 'package:touch_down/view/more_ui/more_screen.dart';
-import 'package:touch_down/view/person_ui/person_screen.dart';
-import 'package:touch_down/view/profile_ui/profile_screen.dart';
+import 'package:touch_down/view/profile_ui/user_profile_screen.dart';
 import 'package:touch_down/view/store_ui/store_screen.dart';
 import 'package:touch_down/widgets/k_svg_icon.dart';
 
@@ -16,10 +16,10 @@ class CustomBottomBar extends StatelessWidget {
   final RxInt _currentIndex = 0.obs;
   final List<Widget> _pages = [
      HomeScreen(),
-    const PersonScreen(),
-    const MoreScreen(),
-    const StoreScreen(),
-    const ProfileScreen(),
+     CoachProfileScreen(),
+    const BookVenueScreen(),
+    StoreScreen(),
+    UserProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -52,15 +52,15 @@ class CustomBottomBar extends StatelessWidget {
                       Container(
                         height: 10,
                         width: 10,
-                        decoration: const BoxDecoration(
+                        decoration:  BoxDecoration(
                             shape: BoxShape.circle,
-                            color: Colors.black
+                            color: AppColor.yellowColor
                         ),
                       )else const SizedBox.shrink(),
                     10.height,
                     ColorFiltered(
                       colorFilter: const ColorFilter.mode(
-                        Colors.white,
+                        AppColor.blackColor,
                         BlendMode.srcIn,
                       ),
                       child: showSvgIconWidget(

@@ -81,7 +81,7 @@ Widget kDrawer({
   return  Drawer(
     backgroundColor: AppColor.whiteColor,
     child: Container(
-      color: AppColor.primaryColor,
+      color: AppColor.yellowColor,
             child: ListView(
         children: [
           DrawerHeader(child: Row(
@@ -118,10 +118,10 @@ Widget kDrawer({
                     break;
                   }
                 },
-                titleTextStyle: primaryTextStyle(fontSize: 18,fontWeight: FontWeight.w400,color: AppColor.whiteColor),
+                titleTextStyle: primaryTextStyle(fontSize: 18,fontWeight: FontWeight.w400,color: AppColor.blackColor),
                 contentPadding: EdgeInsets.only(left: 10),
                 title: Text(drawerList[index].title.toString()),
-                shape: Border(bottom: BorderSide(color: AppColor.whiteColor)),
+                shape: Border(bottom: BorderSide(color: Colors.green)),
               );
             }),
           ),

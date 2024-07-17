@@ -6,9 +6,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppColor {
-  static const Color primaryColor= Color.fromRGBO(222, 57, 9, 1);
+  static const Color primaryColor= Color.fromRGBO(119, 221, 119, 1);
+  static const Color yellowColor= Color.fromRGBO(254, 242, 80, 1);
   static const Color greyColor= Color.fromRGBO(182, 182, 182, 1);
   static const Color lightGreyColor= Color.fromRGBO(244, 244, 244, 1);
+  static const Color containerGreyColor= Color.fromRGBO(243, 241, 254, 1);
    static const Color whiteColor = Colors.white;
    static const Color blackColor = Colors.black;
 }

@@ -21,10 +21,10 @@ class CustomCheckbox extends StatelessWidget {
               isChecked.value = value!;
           },
           checkColor: Colors.white,
-          activeColor: Colors.red,
+          activeColor: AppColor.primaryColor,
           side: MaterialStateBorderSide.resolveWith(
                 (states) => BorderSide(
-              color: states.contains(MaterialState.selected) ? Colors.red : AppColor.lightGreyColor,
+              color: states.contains(MaterialState.selected) ? AppColor.primaryColor : AppColor.lightGreyColor,
               width: 1.5,
             ),
           ),

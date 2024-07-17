@@ -6,6 +6,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/view/home_ui/cricket_home_screen.dart';
 import 'package:touch_down/widgets/home_widgets/drawer_content.dart';
 import 'package:touch_down/widgets/home_widgets/home_widgets.dart';
 import 'package:touch_down/widgets/home_widgets/k_drawer.dart';
@@ -124,15 +125,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Select Sports', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
+                    Text('Select Sports', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
                     20.height,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Centauraus(iconPath: ImgUtils.cricketImg, sportName: 'Cricket'),
-                        Centauraus(iconPath: ImgUtils.footballImg, sportName: 'Football'),
-                        Centauraus(iconPath: ImgUtils.badmintonImg, sportName: 'Badminton'),
-                        Centauraus(iconPath: ImgUtils.tableTennisImg, sportName: 'Tennis'),
+                        Centauraus(
+                            onTap: (){
+                              Get.to(()=> CricketHomeScreen());
+                            },
+                            iconPath: ImgUtils.cricketImg, sportName: 'Cricket'),
+                        Centauraus(onTap: (){}, iconPath: ImgUtils.footballImg, sportName: 'Football'),
+                        Centauraus(onTap: (){}, iconPath: ImgUtils.badmintonImg, sportName: 'Badminton'),
+                        Centauraus(onTap: (){}, iconPath: ImgUtils.tableTennisImg, sportName: 'Table Tennis'),
                       ],
                     ),
                    20.height,

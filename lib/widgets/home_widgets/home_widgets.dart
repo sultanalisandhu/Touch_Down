@@ -5,29 +5,33 @@ import 'package:touch_down/utils/extensions.dart';
 class Centauraus extends StatelessWidget {
   final String? iconPath;
   final String? sportName;
-  Centauraus({super.key, this.iconPath, this.sportName});
+  Function()? onTap;
+  Centauraus({super.key, this.iconPath, this.sportName,this.onTap});
 
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      size: Size(150, 150),
-      painter: SegmentedCirclePainter(),
-      child: Column(
-        children: [
-          Container(
-            height: 80,
-            width: 80,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-              image: DecorationImage(image: AssetImage(iconPath!), )
+    return GestureDetector(
+      onTap: onTap,
+      child: CustomPaint(
+        size: Size(150, 150),
+        painter: SegmentedCirclePainter(),
+        child: Column(
+          children: [
+            Container(
+              height: 80,
+              width: 80,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                image: DecorationImage(image: AssetImage(iconPath!), )
+              ),
             ),
-          ),
-          10.height,
-          Text(sportName!,style: primaryTextStyle(fontSize: 14,fontWeight: FontWeight.w400),)
-        ],
+            10.height,
+            Text(sportName!,style: primaryTextStyle(fontSize: 14,fontWeight: FontWeight.w400),)
+          ],
+        ),
       ),
     );
   }
@@ -49,7 +53,7 @@ class SegmentedCirclePainter extends CustomPainter {
 
     // Paint for the segmented strokes
     Paint paint = Paint()
-      ..color = Colors.red
+      ..color = AppColor.primaryColor
       ..strokeWidth = 8
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round; // Set stroke edges to be rounded
@@ -112,10 +116,43 @@ Widget newsContainer ({
               shape: BoxShape.circle,
               color: AppColor.primaryColor,
             ),
-            child: Icon(Icons.next_plan_sharp,color: Colors.white,),
+            child:Icon(Icons.fast_forward),
           )
         ],
       ),
+    ),
+  );
+}
+
+
+Widget addMatchContainer({
+  String? title,
+  Function()? onTap,
+  required final bool isSelected,
+}){
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+    padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10) ,
+    decoration: BoxDecoration(
+      color: isSelected? AppColor.primaryColor:Colors.transparent,
+    borderRadius: BorderRadius.circular(18),
+    border: Border.all(color: AppColor.primaryColor)
+    ),
+    child: Text(title!,style: primaryTextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: isSelected? AppColor.whiteColor:AppColor.blackColor),),
+    ),
+  );
+}
+
+Widget imgContainer({
+  String? imgPath,
+}){
+  return Container(
+    height: mQ.height*0.15,
+    width: mQ.width,
+    margin: EdgeInsets.symmetric(vertical: 10),
+    decoration:  BoxDecoration(
+        image: DecorationImage(image: AssetImage(imgPath!),fit: BoxFit.cover)
     ),
   );
 }
