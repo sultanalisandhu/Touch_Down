@@ -12,6 +12,7 @@ class ImgUtils {
   static const String cricketImg='assets/photos/cricket.png';
   static const String cricketUpdateImg='assets/photos/cricketUpdateImg.png';
   static const String cricketChampion='assets/photos/cricketChampion.png';
+  static const String containerBorderImg='assets/photos/containerBorderImg.png';
   static const String blueTshirt='assets/photos/blueTshirt.jpg';
   static const String greenTshirt='assets/photos/greenTshirt.jpg';
   static const String sliderImg3='assets/photos/sliderImg3.jpg';
@@ -33,4 +34,8 @@ class IconUtils{
   static const String profileIcon= 'assets/icons/profileIcon.svg';
   static const String nextIcon= 'assets/icons/nextIcon.svg';
   static const String checkIcon= 'assets/icons/checkIcon.svg';
+  static const String chatIcon= 'assets/icons/chatIcon.svg';
+  static const String shareIcon= 'assets/icons/shareIcon.svg';
+  static const String rateIcon= 'assets/icons/rateIcon.svg';
+  static const String bellIcon= 'assets/icons/bellIcon.svg';
 }

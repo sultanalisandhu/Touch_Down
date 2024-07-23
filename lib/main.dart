@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -5,7 +6,8 @@ import 'package:touch_down/view/auth/welcome_screen.dart';
 import 'package:touch_down/view/home_ui/home_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(DevicePreview(builder: (BuildContext context)=> const MyApp()));
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,6 +25,8 @@ class MyApp extends StatelessWidget {
               useMaterial3: true,
             ),
             home:  HomeScreen(),
+            useInheritedMediaQuery: true,
+            locale: DevicePreview.locale(context),
           );
         });
 

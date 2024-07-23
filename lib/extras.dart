@@ -305,45 +305,81 @@
 // }
 
 
-///home screen expanded
-// Expanded(
-// child: SingleChildScrollView(
-// child: Padding(
-// padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-// child: Column(
-// crossAxisAlignment: CrossAxisAlignment.start,
-// children: [
-// Text('Select Sports', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
-// 20.height,
-// Row(
-// mainAxisAlignment: MainAxisAlignment.spaceAround,
-// children: [
-// Centauraus(
-// onTap: (){
-// Get.to(()=> CricketHomeScreen());
-// },
-// iconPath: ImgUtils.greenCricketImg, sportName: 'Cricket'),
-// Centauraus(onTap: (){}, iconPath: ImgUtils.basketBallImg, sportName: 'Football'),
-// Centauraus(onTap: (){}, iconPath: ImgUtils.greenBadmintonImg, sportName: 'Badminton'),
-// Centauraus(onTap: (){}, iconPath: ImgUtils.volleyBalImg, sportName: 'Table Tennis'),
-// ],
-// ),
-// 20.height,
-// Text('Recent News Updates', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
-// ListView.builder(
-// itemCount: 10,
-// shrinkWrap: true,
-// padding: EdgeInsets.zero,
-// physics: const NeverScrollableScrollPhysics(),
-// itemBuilder: (context, index) {
-// return newsContainer(
-// updateName: 'News Update ${index + 1}',
-// newsDetails: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-// );
-// },
-// ),
-// ],
-// ),
-// ),
-// ),
-// ),
+/// cenaturus ceicket game contaner
+// class Centauraus extends StatelessWidget {
+//   final String? iconPath;
+//   final String? sportName;
+//   Function()? onTap;
+//   Centauraus({super.key, this.iconPath, this.sportName,this.onTap});
+//
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: onTap,
+//       child: CustomPaint(
+//         size: Size(150, 150),
+//         painter: SegmentedCirclePainter(),
+//         child: Column(
+//           children: [
+//             Container(
+//               height: 80,
+//               width: 80,
+//               alignment: Alignment.center,
+//               decoration: BoxDecoration(
+//                   shape: BoxShape.circle,
+//                   color: Colors.white,
+//                   image: DecorationImage(image: AssetImage(iconPath!), )
+//               ),
+//             ),
+//             10.height,
+//             Text(sportName!,style: primaryTextStyle(fontSize: 14,fontWeight: FontWeight.w400),)
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+// class SegmentedCirclePainter extends CustomPainter {
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     double radius = size.width / 2;
+//
+//     // Paint for the complete circle background
+//     Paint backgroundPaint = Paint()
+//       ..color = Colors.grey.shade300
+//       ..strokeWidth = 15
+//       ..style = PaintingStyle.stroke;
+//
+//     // Draw the complete circle background
+//     canvas.drawCircle(Offset(radius, radius), radius, backgroundPaint);
+//
+//     // Paint for the segmented strokes
+//     Paint paint = Paint()
+//       ..color = AppColor.primaryColor
+//       ..strokeWidth = 8
+//       ..style = PaintingStyle.stroke
+//       ..strokeCap = StrokeCap.round; // Set stroke edges to be rounded
+//
+//     double segmentWidth = 30; // Width of each segment
+//     double gapWidth = 33; // Width of the gap between segments
+//     double angle = 0; // Starting angle
+//
+//     for (int i = 0; i < 4; i++) {
+//       canvas.drawArc(
+//         Rect.fromCircle(center: Offset(radius, radius), radius: radius),
+//         angle,
+//         segmentWidth / radius,
+//         false,
+//         paint,
+//       );
+//       angle += (segmentWidth + gapWidth) / radius;
+//     }
+//   }
+//
+//   @override
+//   bool shouldRepaint(CustomPainter oldDelegate) {
+//     return false;
+//   }
+// }

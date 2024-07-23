@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
+import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/widgets/k_svg_icon.dart';
 
 
 class KAnimatedContainer extends StatelessWidget {
+
    KAnimatedContainer({super.key});
   final RxBool selected = false.obs;
+
   @override
   Widget build(BuildContext context) {
     return  Obx(()=>AnimatedPositioned(
-      height: selected.value ? 27.0.h : 5.0.h,
-      width: selected.value ? 50.0 : 20.0,
+      height: selected.value ? 27.0.h : 6.0.h,
+      width: selected.value ? 11.0.w : 6.0.w,
       top: selected.value ? 5.0.h : 10.h,
       right: 0,
       duration: const Duration(milliseconds: 500),
@@ -32,20 +37,24 @@ class KAnimatedContainer extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.chat)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.share)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.thumb_up_off_alt_rounded)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.notifications)),
+                IconButton(onPressed: () {}, icon: Icon(Icons.chat,size: 3.h,)),
+                showSvgIconWidget(onTap: (){}, iconPath: IconUtils.chatIcon,height: 3.h,width: 3.w),
+                2.height,
+                showSvgIconWidget(onTap: (){}, iconPath: IconUtils.shareIcon,height: 3.h,width: 3.w),
+                2.height,
+                showSvgIconWidget(onTap: (){}, iconPath: IconUtils.rateIcon,height: 3.h,width: 3.w),
+                2.height,
+                showSvgIconWidget(onTap: (){}, iconPath: IconUtils.bellIcon,height: 3.h,width: 3.w),
                 IconButton(
                   onPressed: () {
                     selected.value = !selected.value;
                   },
-                  icon: Icon(Icons.clear),
+                  icon: Icon(Icons.keyboard_arrow_up_outlined,size: 4.h,),
                 ),
               ],
             ),
           )
-              : Icon( Icons.arrow_back_ios_new_rounded),
+              : Icon( Icons.arrow_back_ios_new_rounded,size: 2.5.h,),
         ),
       ),
     ));

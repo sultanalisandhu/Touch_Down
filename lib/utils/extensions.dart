@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 extension CustomSizeBox on int {
-  SizedBox get height => SizedBox(height: toDouble());
-  SizedBox get width => SizedBox(width: toDouble());
+  SizedBox get height => SizedBox(height: toDouble().h);
+  SizedBox get width => SizedBox(width: toDouble().w);
 }
 
 extension DismisskeyBoard on BuildContext {

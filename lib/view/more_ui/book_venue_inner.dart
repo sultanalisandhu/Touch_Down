@@ -34,6 +34,7 @@ class _BookVenueInnerScreenState extends State<BookVenueInnerScreen> {
         backgroundColor: Colors.transparent,
         // systemOverlayStyle: SystemUiOverlayStyle(
         //   statusBarColor: AppColor.primaryColor,
+        //
         // ),
       ),
       body: Column(
