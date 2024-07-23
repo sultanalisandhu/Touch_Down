@@ -7,6 +7,7 @@ import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/view/home_ui/cricket_home_screen.dart';
+import 'package:touch_down/widgets/home_widgets/aimated_container.dart';
 import 'package:touch_down/widgets/home_widgets/drawer_content.dart';
 import 'package:touch_down/widgets/home_widgets/home_widgets.dart';
 import 'package:touch_down/widgets/home_widgets/k_drawer.dart';
@@ -20,9 +21,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
    late PageController controller;
-
    RxInt currentIndex=0.obs;
-
    Timer? timer;
 
    @override
@@ -40,19 +39,23 @@ class _HomeScreenState extends State<HomeScreen> {
    }
 
    void startTimer() {
-     timer = Timer.periodic(const Duration(seconds: 4), (timer) {
-       if (currentIndex < carouselPictures.length - 1) {
-         controller.animateToPage(currentIndex.value + 1, duration: const  Duration(milliseconds: 500), curve: Curves.ease);
+     timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+       if (currentIndex.value < carouselPictures.length - 1) {
+         controller.nextPage(
+           duration: const Duration(milliseconds: 500),
+           curve: Curves.ease,
+         );
        } else {
-         timer.cancel();
+         controller.jumpToPage(0);
        }
      });
    }
 
   final List<String> carouselPictures=[
+    ImgUtils.sliderImg,
     ImgUtils.welcomeImage,
     ImgUtils.bgImg,
-    ImgUtils.logo
+    ImgUtils.sliderImg2
   ];
 
   @override
@@ -74,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: mQ.height / 3,
             width: mQ.width,
             decoration: const BoxDecoration(
-              color: Colors.blue, // Change to AppColor.primaryColor if defined
+              color: AppColor.primaryColor, // Change to AppColor.primaryColor if defined
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
@@ -101,6 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
+                  KAnimatedContainer(),
                   Positioned(
                     bottom: 10.0,
                     child: SmoothPageIndicator(
@@ -109,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       effect: const WormEffect(
                         dotHeight: 8.0,
                         dotWidth: 8.0,
-                        activeDotColor: Colors.blue, // Change to your active color
+                        activeDotColor: AppColor.primaryColor, // Change to your active color
                         dotColor: Colors.grey,
                       ),
                     ),
@@ -134,13 +138,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: (){
                               Get.to(()=> CricketHomeScreen());
                             },
-                            iconPath: ImgUtils.cricketImg, sportName: 'Cricket'),
-                        Centauraus(onTap: (){}, iconPath: ImgUtils.footballImg, sportName: 'Football'),
-                        Centauraus(onTap: (){}, iconPath: ImgUtils.badmintonImg, sportName: 'Badminton'),
-                        Centauraus(onTap: (){}, iconPath: ImgUtils.tableTennisImg, sportName: 'Table Tennis'),
+                            iconPath: ImgUtils.greenCricketImg, sportName: 'Cricket'),
+                        Centauraus(onTap: (){}, iconPath: ImgUtils.basketBallImg, sportName: 'Football'),
+                        Centauraus(onTap: (){}, iconPath: ImgUtils.greenBadmintonImg, sportName: 'Badminton'),
+                        Centauraus(onTap: (){}, iconPath: ImgUtils.volleyBalImg, sportName: 'Table Tennis'),
                       ],
                     ),
-                   20.height,
+                    20.height,
                     Text('Recent News Updates', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
                     ListView.builder(
                       itemCount: 10,

@@ -86,7 +86,8 @@ class RegisterScreen extends StatelessWidget {
                         onPressed: (){
                           Get.to(()=> CustomBottomBar());
                         },
-                        btnText: 'SIGN IN',
+                        btnText: 'SIGN UP',
+                        textColor: AppColor.blackColor,
                         color: AppColor.primaryColor,
                         width: 200,
                         borderRadius: 26,

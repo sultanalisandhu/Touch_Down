@@ -71,7 +71,7 @@ class UserProfileContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color:AppColor.greyColor,
+      color:AppColor.containerGreyColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -103,14 +103,10 @@ class UserProfileContainer extends StatelessWidget {
                 ),
                 Text(
                   matchScore,
-                  style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w400),
+                  style: primaryTextStyle(fontSize: 14,fontWeight: FontWeight.w600),
                 ),
               ],
             ),
-
-            8.height,
-
-
           ],
         ),
       ),

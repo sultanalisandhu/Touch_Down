@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/widgets/k_svg_icon.dart';
 
 class Centauraus extends StatelessWidget {
   final String? iconPath;
@@ -93,7 +95,7 @@ Widget newsContainer ({
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: AppColor.lightGreyColor,
+          color: AppColor.containerGreyColor,
           borderRadius: BorderRadius.circular(16)
       ),
       child: Row(
@@ -110,13 +112,14 @@ Widget newsContainer ({
               ],),
           ),
           Container(
-            height: mQ.height*0.06,
-            width: mQ.width*0.12,
+            height: mQ.height*0.04,
+            width: mQ.width*0.10,
+            alignment: Alignment.center,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: AppColor.primaryColor,
             ),
-            child:Icon(Icons.fast_forward),
+            child:showSvgIconWidget(iconPath: IconUtils.nextIcon,height: 15,width: 15),
           )
         ],
       ),
@@ -133,7 +136,7 @@ Widget addMatchContainer({
   return GestureDetector(
     onTap: onTap,
     child: Container(
-    padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10) ,
+    padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10) ,
     decoration: BoxDecoration(
       color: isSelected? AppColor.primaryColor:Colors.transparent,
     borderRadius: BorderRadius.circular(18),

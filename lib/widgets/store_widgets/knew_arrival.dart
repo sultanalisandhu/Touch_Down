@@ -1,9 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
-import 'package:touch_down/widgets/k_svg_icon.dart';
 
 Widget kStoreItemContainer({
   Function()? containerOnTap,
@@ -15,7 +13,7 @@ Widget kStoreItemContainer({
 }) {
 
   return Container(
-    margin: EdgeInsets.symmetric( horizontal: 5,vertical: 5),
+    margin: const EdgeInsets.symmetric( horizontal: 5,vertical: 5),
     height: 250,
     width: 200,
     decoration: BoxDecoration(
@@ -29,7 +27,7 @@ Widget kStoreItemContainer({
         Container(
           height:150,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(20,),topRight: Radius.circular(20)),
+              borderRadius: const BorderRadius.only(topLeft: Radius.circular(20,),topRight: Radius.circular(20)),
               image:   DecorationImage(image: NetworkImage(imgPath!),fit: BoxFit.cover)
           ),
         ),

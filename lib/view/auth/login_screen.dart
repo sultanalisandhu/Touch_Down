@@ -62,6 +62,7 @@ class LoginScreen extends StatelessWidget {
                     Get.to(()=> RegisterScreen());
                   },
                   btnText: 'SIGN IN',
+                  textColor: AppColor.blackColor,
                   color: AppColor.primaryColor,
                   width: 200,
                   borderRadius: 26,

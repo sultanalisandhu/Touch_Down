@@ -73,3 +73,76 @@ class KTextField extends StatelessWidget {
     );
   }
 }
+class GetTextField extends StatelessWidget {
+  final BuildContext context;
+  final String? hintText;
+  final Icon? prefixIcon;
+  final IconData? suffixIcon;
+  final String? Function(String?)? validator;
+  final Function()? suffixOnTap;
+  final TextInputType? keyboardType;
+  final TextEditingController? controller;
+  final bool? obSecureText;
+
+   GetTextField({super.key,
+     required this.context,
+     this.hintText,
+     this.prefixIcon,
+     this.suffixIcon,
+     this.validator,
+     this.keyboardType,
+     this.controller,
+     this.obSecureText,
+     this.suffixOnTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      validator: validator,
+      controller: controller,
+      cursorColor: AppColor.primaryColor,
+      maxLines: 1,
+      style: primaryTextStyle(color: AppColor.blackColor, fontSize: 20.0),
+      keyboardType: keyboardType ?? TextInputType.text,
+      textInputAction: TextInputAction.next,
+      obscureText: obSecureText??true,
+      onTapOutside: (event) {
+        context.dismissKeyBoard();
+      },
+      decoration: InputDecoration(
+        hintText: hintText,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon != null
+            ? IconButton(
+          icon: Icon(
+            suffixIcon,
+            color: AppColor.greyColor,
+          ),
+          onPressed: suffixOnTap,
+        )
+            : null,
+        contentPadding: const EdgeInsets.all(12.0),
+        hintStyle: primaryTextStyle(color: AppColor.greyColor, fontSize: 16.0),
+        filled: true,
+        isDense: true,
+        fillColor: Colors.transparent,
+        enabledBorder:  OutlineInputBorder(
+          borderRadius: BorderRadius.circular(22),
+          borderSide:  BorderSide(color:AppColor.primaryColor, width: 1.5),
+        ),
+        focusedBorder:  OutlineInputBorder(
+          borderRadius: BorderRadius.circular(22),
+          borderSide:  BorderSide(color: AppColor.primaryColor, width: 1.5,),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(22),
+          borderSide:  BorderSide(color: Colors.red, width: 1.0),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(22),
+          borderSide:  BorderSide(color: Colors.red, width: 1.0),
+        ),
+      ),
+    );
+  }
+}

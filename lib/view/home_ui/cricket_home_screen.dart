@@ -51,9 +51,10 @@ class _CricketHomeScreenState extends State<CricketHomeScreen> {
   }
 
   final List<String> carouselPictures=[
-    ImgUtils.welcomeImage,
+    ImgUtils.sliderImg2,
     ImgUtils.bgImg,
-    ImgUtils.logo
+    ImgUtils.sliderImg,
+    ImgUtils.welcomeImage,
   ];
 
   @override
@@ -110,7 +111,7 @@ class _CricketHomeScreenState extends State<CricketHomeScreen> {
                         effect: const WormEffect(
                           dotHeight: 8.0,
                           dotWidth: 8.0,
-                          activeDotColor: Colors.blue, // Change to your active color
+                          activeDotColor: AppColor.primaryColor,
                           dotColor: Colors.grey,
                         ),
                       ),
@@ -124,11 +125,12 @@ class _CricketHomeScreenState extends State<CricketHomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Match Score', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
-                    20.height,
+                    10.height,
+                    Text('Match Score', style: primaryTextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                    10.height,
                     Container(
                       width: mQ.width,
-                      padding: EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: AppColor.containerGreyColor,
                         borderRadius: BorderRadius.circular(12),
@@ -147,7 +149,7 @@ class _CricketHomeScreenState extends State<CricketHomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children: [
                              Text('Team A', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
-                             Text('10/2 (10.2)', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400,)),
+                             Text('128/2 (10.2)', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400,)),
                            ],
                           ),
                           const Divider(
@@ -162,7 +164,7 @@ class _CricketHomeScreenState extends State<CricketHomeScreen> {
                             ],
                           ),
                           15.height,
-                          Text('Team A won the task and Choose to Bat', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400,)),
+                          Text('Team A won the TOSS and Choose to Bat', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400,)),
                         ],
                       ),
                     ),

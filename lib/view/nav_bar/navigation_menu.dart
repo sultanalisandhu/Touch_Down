@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
-import 'package:touch_down/view/coach_ui/book_venue_screen.dart';
-import 'package:touch_down/view/coach_ui/coach_screen.dart';
+import 'package:touch_down/view/more_ui/search_venue_screen.dart';
+import 'package:touch_down/view/coach_ui/coach_profile_screen.dart';
 import 'package:touch_down/view/home_ui/home_screen.dart';
 import 'package:touch_down/view/profile_ui/user_profile_screen.dart';
 import 'package:touch_down/view/store_ui/store_screen.dart';
@@ -17,7 +17,7 @@ class CustomBottomBar extends StatelessWidget {
   final List<Widget> _pages = [
      HomeScreen(),
      CoachProfileScreen(),
-    const BookVenueScreen(),
+    const SearchVenueScreen(),
     StoreScreen(),
     UserProfileScreen(),
   ];

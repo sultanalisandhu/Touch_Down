@@ -4,11 +4,21 @@ class ImgUtils {
   static const String welcomeImage='assets/photos/welcomeImage.png';
   static const String tableTennisImg='assets/photos/table_tennis.png';
   static const String badmintonImg='assets/photos/badmintonImg.png';
+  static const String greenBadmintonImg='assets/photos/greenBadmintonImg.png';
+  static const String volleyBalImg='assets/photos/volleyBalImg.png';
+  static const String greenCricketImg='assets/photos/greenCricketImg.png';
   static const String footballImg='assets/photos/football.png';
+  static const String basketBallImg='assets/photos/basketbalImg.png';
   static const String cricketImg='assets/photos/cricket.png';
   static const String cricketUpdateImg='assets/photos/cricketUpdateImg.png';
   static const String cricketChampion='assets/photos/cricketChampion.png';
+  static const String blueTshirt='assets/photos/blueTshirt.jpg';
+  static const String greenTshirt='assets/photos/greenTshirt.jpg';
+  static const String sliderImg3='assets/photos/sliderImg3.jpg';
+  static const String sliderImg4='assets/photos/sliderImg4.jpg';
   static const String logo='assets/logo/logo.png';
+  static const String sliderImg='assets/photos/sliderImg.jpg';
+  static const String sliderImg2='assets/photos/sliderImg2.jpg';
 }
 
 
@@ -22,4 +32,5 @@ class IconUtils{
   static const String storeIcon= 'assets/icons/storeIcon.svg';
   static const String profileIcon= 'assets/icons/profileIcon.svg';
   static const String nextIcon= 'assets/icons/nextIcon.svg';
+  static const String checkIcon= 'assets/icons/checkIcon.svg';
 }

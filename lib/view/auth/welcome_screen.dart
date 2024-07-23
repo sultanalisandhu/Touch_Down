@@ -27,8 +27,9 @@ class WelcomeScreen extends StatelessWidget {
             const Spacer(),
             kTextButton(
               onPressed: (){},
-              btnText: 'Sign In',
+              btnText: 'SIGN IN',
               color: AppColor.primaryColor,
+              textColor: AppColor.blackColor,
               width: 150,
               borderRadius: 26,
             ),
@@ -42,7 +43,8 @@ class WelcomeScreen extends StatelessWidget {
               onPressed: (){
                 Get.to(()=> LoginScreen());
               },
-              btnText: 'New Account',
+              textColor: AppColor.blackColor,
+              btnText: 'NEW ACCOUNT',
               color: AppColor.primaryColor,
               width: 150,
               borderRadius: 26,
