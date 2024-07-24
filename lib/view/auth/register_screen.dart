@@ -35,7 +35,9 @@ class RegisterScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
+                          3.height,
                           const Image(image: AssetImage(ImgUtils.logo),fit: BoxFit.cover,),
+                          2.height,
                           Text('REGISTER',style: primaryTextStyle(fontSize: 20,fontWeight: FontWeight.w700,color: AppColor.whiteColor),),
                           Text('You And Your Friends Always Connected',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: AppColor.whiteColor),),
                         ],
@@ -45,7 +47,15 @@ class RegisterScreen extends StatelessWidget {
                     Text('User Name',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
                     KTextField(
                       hintText: 'Your User Name',
+                      controller: controller.nameController,
+                      obSecureText: false,
+                      context: context,
+                    ),
+                    2.height,
+                    Text('Enter Your Email',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
+                    KTextField(
                       controller: controller.emailController,
+                      hintText: 'email',
                       obSecureText: false,
                       context: context,
                     ),
@@ -66,14 +76,6 @@ class RegisterScreen extends StatelessWidget {
                     KTextField(
                       controller: controller.phoneNumberController,
                       hintText: '09876543211',
-                      obSecureText: false,
-                      context: context,
-                    ),
-                    2.height,
-                    Text('Enter Your Location',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
-                    KTextField(
-                      controller: controller.locationController,
-                      hintText: 'Bengaluru',
                       obSecureText: false,
                       context: context,
                     ),

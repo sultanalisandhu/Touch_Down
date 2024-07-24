@@ -11,7 +11,7 @@ class CustomCheckbox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(()=> Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Checkbox(
           value: isChecked.value,

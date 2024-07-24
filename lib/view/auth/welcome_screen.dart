@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/view/auth/login_screen.dart';
+import 'package:touch_down/view/auth/register_screen.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -27,7 +28,9 @@ class WelcomeScreen extends StatelessWidget {
             const Text('WELCOME',style: TextStyle(fontSize: 38,fontWeight: FontWeight.w900,color: AppColor.whiteColor),),
             const Spacer(),
             kTextButton(
-              onPressed: (){},
+              onPressed: (){
+                Get.to(()=> LoginScreen());
+              },
               btnText: 'SIGN IN',
               color: AppColor.primaryColor,
               textColor: AppColor.blackColor,
@@ -44,7 +47,7 @@ class WelcomeScreen extends StatelessWidget {
             ),
             kTextButton(
               onPressed: (){
-                Get.to(()=> LoginScreen());
+                Get.to(()=> RegisterScreen());
               },
               textColor: AppColor.blackColor,
               btnText: 'NEW ACCOUNT',

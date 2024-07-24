@@ -14,8 +14,8 @@ import 'view/profile_ui/user_profile_screen.dart';
 
 
 void main() {
-  runApp(DevicePreview(builder: (BuildContext context)=> const MyApp()));
-  // runApp(const MyApp());
+  // runApp(DevicePreview(builder: (BuildContext context)=> const MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home:  LoginScreen(),
+            home:  WelcomeScreen(),
             useInheritedMediaQuery: true,
             locale: DevicePreview.locale(context),
           );

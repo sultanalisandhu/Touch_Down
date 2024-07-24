@@ -8,6 +8,7 @@ import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/view/auth/register_screen.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
+import 'package:touch_down/widgets/k_snack_bar.dart';
 import 'package:touch_down/widgets/k_svg_icon.dart';
 import 'package:touch_down/widgets/k_textfields.dart';
 
@@ -35,11 +36,11 @@ class LoginScreen extends StatelessWidget {
                  4.height,
                  Align(
                      alignment: Alignment.topLeft,
-                     child: Text('User Name',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),)),
+                     child: Text('Email',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),)),
                 KTextField(
                   controller: controller.emailController,
                   obSecureText: false,
-                  hintText: 'Your user name',
+                  hintText: 'Your email',
                   context: context,
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -60,7 +61,18 @@ class LoginScreen extends StatelessWidget {
                 6.height,
                 kTextButton(
                   onPressed: (){
-                    Get.to(()=> RegisterScreen());
+                    if(controller.emailController.text.isEmpty){
+                      showSnackBar('Error', 'Enter email address',isError: true);
+                    }else if(controller.passwordController.text.isEmpty){
+                      showSnackBar('Error', 'Enter password',isError: true);
+                    }else if(!controller.isValidEmail(controller.emailController.text)){
+                      showSnackBar('Error', 'Enter a valid email address',isError: true);
+                    }else if(!controller.isValidPassword(controller.passwordController.text)){
+                      showSnackBar('Error', 'Password must be at least 8 characters long and include a special character',isError: true);
+                    }else{
+                      Get.to(()=> RegisterScreen());
+                    }
+
                   },
                   btnText: 'SIGN IN',
                   textColor: AppColor.blackColor,
@@ -85,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                 Text('Don\'t have an account ? Sign up here',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
                 2.height,
               ],
-            ).paddingSymmetric(horizontal: 20)
+            ).paddingSymmetric(horizontal: 4.w)
           )
         ],
       ),
