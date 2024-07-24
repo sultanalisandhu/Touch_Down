@@ -1,6 +1,7 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
@@ -27,7 +28,7 @@ class _PickDropScreenState extends State<PickDropScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: Text('Pick up & Drop',style: primaryTextStyle(fontSize: 18,fontWeight: FontWeight.w600),),),
+          title: Text('Pick up & Drop',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600),),),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,6 +38,21 @@ class _PickDropScreenState extends State<PickDropScreen> {
                 initialSelectedDate: DateTime.now(),
                 selectionColor: AppColor.primaryColor,
                 selectedTextColor: Colors.white,
+                width: 13.w,
+                dateTextStyle: primaryTextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                dayTextStyle: primaryTextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
+                monthTextStyle: primaryTextStyle(
+                  fontSize: 10,
+                  color: Colors.black,
+                ),
                 onDateChange: (date) {
                   // New date selected
                   setState(() {
@@ -44,9 +60,9 @@ class _PickDropScreenState extends State<PickDropScreen> {
                   });
                 },
               ),
-              15.height,
-              Text('Search Pick up Location',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-              5.height,
+              1.height,
+              Text('Search Pick up Location',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600),),
+              1.height,
               GetTextField(
                 context: context,
                 hintText: 'select current location/enter location',
@@ -54,9 +70,9 @@ class _PickDropScreenState extends State<PickDropScreen> {
                 obSecureText: false,
                 suffixIcon: Icons.my_location_outlined,
               ),
-              15.height,
-              Text('Search Drop Location',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-              5.height,
+              1.height,
+              Text('Search Drop Location',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600),),
+              1.height,
               GetTextField(
                 context: context,
                 hintText: 'enter drop location',
@@ -64,8 +80,8 @@ class _PickDropScreenState extends State<PickDropScreen> {
                 obSecureText: false,
                 suffixIcon: Icons.location_on,
               ),
-              15.height,
-              Text('Type of Pickup',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+              1.height,
+              Text('Type of Pickup',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600),),
               Row(
                 children: [
                   Row(
@@ -91,7 +107,7 @@ class _PickDropScreenState extends State<PickDropScreen> {
                       ),
                       Text(
                         "Individual Pickup",
-                        style: primaryTextStyle(fontSize: 16.0,),
+                        style: primaryTextStyle(fontSize: 10,),
                       ),
                     ],
                   ),
@@ -119,13 +135,13 @@ class _PickDropScreenState extends State<PickDropScreen> {
                       Text(
                         "Team Pickup",
                         maxLines: 2,
-                        style: primaryTextStyle(fontSize: 16.0,),
+                        style: primaryTextStyle(fontSize: 10.0,),
                       ),
                     ],
                   ),
                 ],
               ),
-              10.height,
+              1.height,
               Align(
                 alignment: Alignment.center,
                 child: kTextButton(
@@ -134,15 +150,15 @@ class _PickDropScreenState extends State<PickDropScreen> {
                     color: AppColor.primaryColor,
                     textColor: AppColor.blackColor,
                     borderRadius: 22,
-                    width: 180,
-                    height: 40
+                    width: 55.w,
+                    height: 5.h
                 ),
               ),
-              Text('News Updates',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+              Text('News Updates',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600),),
               ListView.builder(
                 itemCount: 1,
                 shrinkWrap: true,
-                padding: EdgeInsets.symmetric(vertical: 15),
+                padding: EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return imgContainer(

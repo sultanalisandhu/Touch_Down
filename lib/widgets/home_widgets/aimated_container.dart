@@ -15,8 +15,8 @@ class KAnimatedContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Obx(()=>AnimatedPositioned(
-      height: selected.value ? 27.0.h : 6.0.h,
-      width: selected.value ? 11.0.w : 6.0.w,
+      height: selected.value ? 25.0.h : 5.0.h,
+      width: selected.value ? 11.0.w : 5.0.w,
       top: selected.value ? 5.0.h : 10.h,
       right: 0,
       duration: const Duration(milliseconds: 500),
@@ -25,11 +25,12 @@ class KAnimatedContainer extends StatelessWidget {
             selected.value = !selected.value;
         },
         child: Container(
+          padding: EdgeInsets.only(top: 0.5.h),
           decoration: BoxDecoration(
             color: AppColor.primaryColor,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(selected.value ? 16 : 40),
-              bottomLeft: Radius.circular(selected.value ? 16 : 40),
+              topLeft: Radius.circular(selected.value ? 2.h : 4.h),
+              bottomLeft: Radius.circular(selected.value ? 2.h : 4.h),
             ),
           ),
           child: selected.value
@@ -37,7 +38,6 @@ class KAnimatedContainer extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.chat,size: 3.h,)),
                 showSvgIconWidget(onTap: (){}, iconPath: IconUtils.chatIcon,height: 3.h,width: 3.w),
                 2.height,
                 showSvgIconWidget(onTap: (){}, iconPath: IconUtils.shareIcon,height: 3.h,width: 3.w),
@@ -54,7 +54,7 @@ class KAnimatedContainer extends StatelessWidget {
               ],
             ),
           )
-              : Icon( Icons.arrow_back_ios_new_rounded,size: 2.5.h,),
+              : Icon( Icons.arrow_back_ios_new_rounded,size: 2.h,),
         ),
       ),
     ));

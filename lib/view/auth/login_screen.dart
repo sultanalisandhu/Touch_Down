@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:touch_down/controller/auth_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
@@ -28,24 +29,24 @@ class LoginScreen extends StatelessWidget {
               children: [
                 const Spacer(),
                 const Image(image: AssetImage(ImgUtils.logo),fit: BoxFit.cover,),
-                 20.height,
-                 Text('LOG IN!',style: primaryTextStyle(fontSize: 38,fontWeight: FontWeight.w700,color: AppColor.whiteColor),),
-                 Text('Happy To See You Again!',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: AppColor.whiteColor),),
-                 40.height,
+                 2.height,
+                 Text('LOG IN!',style: primaryTextStyle(fontSize: 20,fontWeight: FontWeight.w700,color: AppColor.whiteColor),),
+                 Text('Happy To See You Again!',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: AppColor.whiteColor),),
+                 4.height,
                  Align(
                      alignment: Alignment.topLeft,
-                     child: Text('User Name',style: primaryTextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),)),
+                     child: Text('User Name',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),)),
                 KTextField(
                   controller: controller.emailController,
                   obSecureText: false,
-                  hintText: 'Your User Name',
+                  hintText: 'Your user name',
                   context: context,
                   keyboardType: TextInputType.emailAddress,
                 ),
-                20.height,
+                2.height,
                 Align(
                     alignment: Alignment.topLeft,
-                    child: Text('Password:',style: primaryTextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),)),
+                    child: Text('Password:',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),)),
                KTextField(
                     controller: controller.passwordController,
                     hintText: '*********',
@@ -56,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                     },
                     context: context,
                   ),
-                60.height,
+                6.height,
                 kTextButton(
                   onPressed: (){
                     Get.to(()=> RegisterScreen());
@@ -64,24 +65,25 @@ class LoginScreen extends StatelessWidget {
                   btnText: 'SIGN IN',
                   textColor: AppColor.blackColor,
                   color: AppColor.primaryColor,
-                  width: 200,
+                  height: 5.h,
+                  width: 50.w,
                   borderRadius: 26,
 
                 ),
-                20.height,
+                2.height,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     showSvgIconWidget(onTap: (){}, iconPath: IconUtils.fbIcon,height: 40,width: 40),
-                    20.width,
+                    3.width,
                     showSvgIconWidget(onTap: (){}, iconPath: IconUtils.googleIcon,height: 40,width: 40),
                   ],
                 ),
                 const Spacer(),
-                Text('FORGOT PASSWORD ?',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
-                10.height,
-                Text('Don\'t have an account ? Sign up here',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
-                20.height,
+                Text('FORGOT PASSWORD ?',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
+                1.height,
+                Text('Don\'t have an account ? Sign up here',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
+                2.height,
               ],
             ).paddingSymmetric(horizontal: 20)
           )

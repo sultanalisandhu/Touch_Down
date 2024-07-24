@@ -26,10 +26,10 @@ class BookCoachDialog extends StatelessWidget {
 
     return AlertDialog(
       backgroundColor: Colors.grey[200],
-      contentPadding: EdgeInsets.all(10),
+      contentPadding: const EdgeInsets.all(10),
       content: Container(
         width: mQ.width,
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: Obx(() {
           final selectedDate = dateController.selectedDate.value;
           print('Selected Date: $selectedDate');
@@ -42,8 +42,8 @@ class BookCoachDialog extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      height: mQ.height * 0.2,
-                      width: mQ.width * 0.3,
+                      height: mQ.height * 0.15,
+                      width: mQ.width * 0.25,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.blue,
@@ -55,17 +55,17 @@ class BookCoachDialog extends StatelessWidget {
                         ),
                       ),
                     ),
-                    10.width,
+                    1.width,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Martin Desouza',
-                          style: primaryTextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                          style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                         ),
                         Text(
                           'Cricket Coach',
-                          style: primaryTextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                          style: primaryTextStyle(fontSize: 10, fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
@@ -74,11 +74,11 @@ class BookCoachDialog extends StatelessWidget {
                 Text(
                   DateFormat('MMMM yyyy').format(selectedDate),
                   style: primaryTextStyle(
-                    fontSize: 20,
+                    fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                16.height,
+                2.height,
                 DatePicker(
                   DateTime.now(),
                   width: 13.w,
@@ -86,12 +86,12 @@ class BookCoachDialog extends StatelessWidget {
                   selectionColor: AppColor.primaryColor,
                   selectedTextColor: Colors.white,
                   dateTextStyle: primaryTextStyle(
-                    fontSize: 18,
+                    fontSize: 10,
                     fontWeight: FontWeight.w400,
                     color: Colors.black,
                   ),
                   dayTextStyle: primaryTextStyle(
-                    fontSize: 14,
+                    fontSize: 10,
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
                   ),
@@ -103,20 +103,20 @@ class BookCoachDialog extends StatelessWidget {
                     dateController.selectedDate.value = date;
                   },
                 ),
-                10.height,
+                1.height,
                 Text(
                   'Select Location',
-                  style: primaryTextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: primaryTextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                 ),
-                10.height,
+                1.height,
                 TypeAhead(),
                 kTextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   borderRadius: 25,
-                  height: 45,
-                  width: 180,
+                  height: 5.h,
+                  width: 50.w,
                   btnText: 'BOOK A COACH',
                   textColor: AppColor.blackColor,
                 ),

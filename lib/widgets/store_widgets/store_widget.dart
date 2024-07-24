@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
 
 Widget storeItems ({
@@ -21,14 +22,14 @@ Widget storeItems ({
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+            margin:  EdgeInsets.symmetric(horizontal: 2.w,vertical: 1.h),
             padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
             decoration: BoxDecoration(
                 color: AppColor.primaryColor,
                 borderRadius: BorderRadius.circular(8)
             ),
             child: Text(itemName!,style: primaryTextStyle(
-                fontSize: 12,
+                fontSize: 7,
                 fontWeight: FontWeight.w400,
                 color: AppColor.whiteColor),))
       ],

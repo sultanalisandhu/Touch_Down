@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:touch_down/controller/auth_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/utils/asset_utils.dart';
-import 'package:touch_down/view/auth/otp_screen.dart';
 import 'package:touch_down/view/nav_bar/navigation_menu.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
@@ -36,21 +36,21 @@ class RegisterScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           const Image(image: AssetImage(ImgUtils.logo),fit: BoxFit.cover,),
-                          Text('REGISTER',style: primaryTextStyle(fontSize: 38,fontWeight: FontWeight.w700,color: AppColor.whiteColor),),
-                          Text('You And Your Friends Always Connected',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: AppColor.whiteColor),),
+                          Text('REGISTER',style: primaryTextStyle(fontSize: 20,fontWeight: FontWeight.w700,color: AppColor.whiteColor),),
+                          Text('You And Your Friends Always Connected',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: AppColor.whiteColor),),
                         ],
                       ),
                     ),
-                    60.height,
-                    Text('User Name',style: primaryTextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
+                    6.height,
+                    Text('User Name',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
                     KTextField(
                       hintText: 'Your User Name',
                       controller: controller.emailController,
                       obSecureText: false,
                       context: context,
                     ),
-                    20.height,
-                    Text('Enter Password',style: primaryTextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
+                    2.height,
+                    Text('Enter Password',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
                     KTextField(
                       controller: controller.passwordController,
                       hintText: '*******',
@@ -61,25 +61,25 @@ class RegisterScreen extends StatelessWidget {
                       },
                       context: context,
                     ),
-                    20.height,
-                    Text('Enter Your Phone Number',style: primaryTextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
+                    2.height,
+                    Text('Enter Your Phone Number',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
                     KTextField(
                       controller: controller.phoneNumberController,
                       hintText: '09876543211',
                       obSecureText: false,
                       context: context,
                     ),
-                    20.height,
-                    Text('Enter Your Location',style: primaryTextStyle(fontSize: 15,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
+                    2.height,
+                    Text('Enter Your Location',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
                     KTextField(
                       controller: controller.locationController,
                       hintText: 'Bengaluru',
                       obSecureText: false,
                       context: context,
                     ),
-                    10.height,
+                    1.height,
                     CustomCheckbox(),
-                    60.height,
+                    6.height,
                     Align(
                       alignment: Alignment.center,
                       child: kTextButton(
@@ -89,28 +89,29 @@ class RegisterScreen extends StatelessWidget {
                         btnText: 'SIGN UP',
                         textColor: AppColor.blackColor,
                         color: AppColor.primaryColor,
-                        width: 200,
-                        borderRadius: 26,
+                        height: 5.h,
+                        width: 50.w,
+                        borderRadius: 26.h,
 
                       ),
                     ),
-                    20.height,
+                    2.height,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         showSvgIconWidget(onTap: (){}, iconPath: IconUtils.fbIcon,height: 40,width: 40),
-                        20.width,
+                        4.width,
                         showSvgIconWidget(onTap: (){}, iconPath: IconUtils.googleIcon,height: 40,width: 40),
                       ],
                     ),
-                    60.height,
+                    4.height,
                     Align(
                         alignment: Alignment.center,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('FORGOT PASSWORD ?',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
-                            Text('Don\'t have an account ? Sign up here',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
+                            Text('FORGOT PASSWORD ?',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
+                            Text('Don\'t have an account ? Sign up here',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
                           ],
                         )),
 

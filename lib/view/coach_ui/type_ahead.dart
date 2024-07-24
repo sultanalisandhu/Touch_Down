@@ -25,7 +25,7 @@ class TypeAhead extends StatelessWidget {
           return TextFormField(
             controller: controller,
             focusNode: focusNode,
-            style: primaryTextStyle(fontSize: 16),
+            style: primaryTextStyle(fontSize: 12),
             decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -46,6 +46,7 @@ class TypeAhead extends StatelessWidget {
                 height: 5.h,
               ),
               hintStyle: primaryTextStyle(
+                fontSize: 10,
                   color: AppColor.blackColor),
               suffixIcon: const Icon(
                 Icons.keyboard_arrow_down_outlined,
@@ -72,16 +73,16 @@ class TypeAhead extends StatelessWidget {
   Widget _buildCityInfo(city) {
     return Column(
       children: [
-        20.height,
+        2.height,
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text('${city.name}, ',style: primaryTextStyle(),),
-            Text(city.country,style: primaryTextStyle(),),
+            Text('${city.name}, ',style: primaryTextStyle(fontSize: 10),),
+            Text(city.country,style: primaryTextStyle(fontSize: 10),),
           ],
         ),
-        Divider(
+        const Divider(
           height: 0,
           color: AppColor.primaryColor,
         ),

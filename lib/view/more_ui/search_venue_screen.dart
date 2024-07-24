@@ -1,6 +1,7 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/view/more_ui/book_venue_inner.dart';
@@ -25,7 +26,7 @@ class _SearchVenueScreenState extends State<SearchVenueScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: Text('Search Venue',style: primaryTextStyle(fontSize: 18,fontWeight: FontWeight.w600),),),
+          title: Text('Search Venue',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600),),),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,6 +36,21 @@ class _SearchVenueScreenState extends State<SearchVenueScreen> {
                 initialSelectedDate: DateTime.now(),
                 selectionColor: AppColor.primaryColor,
                 selectedTextColor: Colors.white,
+                width: 13.w,
+                dateTextStyle: primaryTextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+                dayTextStyle: primaryTextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
+                monthTextStyle: primaryTextStyle(
+                  fontSize: 10,
+                  color: Colors.black,fontWeight: FontWeight.w600
+                ),
                 onDateChange: (date) {
                   // New date selected
                   setState(() {
@@ -42,11 +58,11 @@ class _SearchVenueScreenState extends State<SearchVenueScreen> {
                   });
                 },
               ),
-              const Divider(color: AppColor.primaryColor, height: 40,),
+              Divider(color: AppColor.primaryColor, height: 5.h,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Bengaluru',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                  Text('Bengaluru',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600),),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -57,7 +73,7 @@ class _SearchVenueScreenState extends State<SearchVenueScreen> {
                         },
                         title: 'Select Sports'
                     ),
-                    20.width,
+                    2.width,
                     addMatchContainer(
                         isSelected: selectedIndex.value==1,
                         onTap: (){
@@ -68,9 +84,9 @@ class _SearchVenueScreenState extends State<SearchVenueScreen> {
                         ],),
                 ],
               ),
-              const Divider(color: AppColor.primaryColor,height: 40,),
-              Text('Search Location',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-              10.height,
+              Divider(color: AppColor.primaryColor,height: 5.h,),
+              Text('Search Location',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600),),
+              1.height,
               GetTextField(context: context,
                 hintText: 'select current location/enter location',
                 obSecureText: false,
@@ -89,7 +105,7 @@ class _SearchVenueScreenState extends State<SearchVenueScreen> {
                     height: mQ.height*0.23,
                     width: mQ.width,
                     padding: const EdgeInsets.all(12),
-                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    margin:  EdgeInsets.symmetric(vertical: 1.h),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         border: const Border(top: BorderSide(color: AppColor.primaryColor,width: 5),),
@@ -104,25 +120,25 @@ class _SearchVenueScreenState extends State<SearchVenueScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text('Cricket Stadium',style: primaryTextStyle(fontSize: 18,fontWeight: FontWeight.w600,color: AppColor.whiteColor),),
+                        Text('Cricket Stadium',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600,color: AppColor.whiteColor),),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(child: Row(
                               children: [
                                 const Icon(Icons.location_on_sharp,color: AppColor.primaryColor,),
-                                Text('1.5 KM',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: AppColor.whiteColor),),
+                                Text('1.5 KM',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w600,color: AppColor.whiteColor),),
                               ],
                             )),
                             Row(
                               children: [
                                 Container(
-                                  padding: const EdgeInsets.all(12),
+                                  padding: EdgeInsets.symmetric(horizontal: 3.w,vertical: 1.h),
                                   decoration: BoxDecoration(
                                     color: AppColor.primaryColor,
-                                    borderRadius: BorderRadius.circular(22),
+                                    borderRadius: BorderRadius.circular(20),
                                   ),
-                                  child: Text('View More',style: primaryTextStyle(fontSize: 14,fontWeight: FontWeight.w500),),
+                                  child: Text('View More',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
                                 )
                               ],
                             )

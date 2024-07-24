@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 
@@ -31,8 +32,9 @@ class KTextField extends StatelessWidget {
       validator: validator,
       controller: controller,
       cursorColor: AppColor.greyColor,
+      cursorHeight: 2.h,
       maxLines: 1,
-      style: primaryTextStyle(color: AppColor.lightGreyColor, fontSize: 20.0),
+      style: primaryTextStyle(color: AppColor.lightGreyColor, fontSize: 11.0),
       keyboardType: keyboardType ?? TextInputType.text,
       textInputAction: TextInputAction.next,
       obscureText: obSecureText??true,
@@ -51,8 +53,8 @@ class KTextField extends StatelessWidget {
           onPressed: suffixOnTap,
         )
             : null,
-        contentPadding: const EdgeInsets.only(bottom: 10.0,top: 5),
-        hintStyle: primaryTextStyle(color: AppColor.greyColor, fontSize: 16.0),
+        contentPadding:  EdgeInsets.only(bottom: 0.2.h,top: 1.h),
+        hintStyle: primaryTextStyle(color: AppColor.greyColor, fontSize: 10.0),
         filled: true,
         isDense: true,
         fillColor: Colors.transparent,
@@ -102,10 +104,11 @@ class GetTextField extends StatelessWidget {
       controller: controller,
       cursorColor: AppColor.primaryColor,
       maxLines: 1,
-      style: primaryTextStyle(color: AppColor.blackColor, fontSize: 20.0),
+      style: primaryTextStyle(color: AppColor.blackColor, fontSize: 10.0),
       keyboardType: keyboardType ?? TextInputType.text,
       textInputAction: TextInputAction.next,
       obscureText: obSecureText??true,
+
       onTapOutside: (event) {
         context.dismissKeyBoard();
       },
@@ -122,7 +125,7 @@ class GetTextField extends StatelessWidget {
         )
             : null,
         contentPadding: const EdgeInsets.all(12.0),
-        hintStyle: primaryTextStyle(color: AppColor.greyColor, fontSize: 16.0),
+        hintStyle: primaryTextStyle(color: AppColor.greyColor, fontSize: 10.0),
         filled: true,
         isDense: true,
         fillColor: Colors.transparent,

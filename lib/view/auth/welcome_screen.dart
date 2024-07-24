@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/view/auth/login_screen.dart';
@@ -12,10 +13,10 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+        height: mQ.height,
+        width: mQ.width,
         decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage(ImgUtils.bgImg))
+          image: DecorationImage(image: AssetImage(ImgUtils.bgImg),fit: BoxFit.cover)
         ),
         child:  Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,14 +31,16 @@ class WelcomeScreen extends StatelessWidget {
               btnText: 'SIGN IN',
               color: AppColor.primaryColor,
               textColor: AppColor.blackColor,
-              width: 150,
-              borderRadius: 26,
+              fontSize: 10,
+              height: 5.h,
+              width: 50.w,
+              borderRadius: 26.h,
             ),
-             const Divider(
-              indent: 80,
-              endIndent: 80,
+             Divider(
+              indent: 8.h,
+              endIndent: 8.h,
               color: AppColor.greyColor,
-              height: 60,
+              height: 8.h,
             ),
             kTextButton(
               onPressed: (){
@@ -46,8 +49,10 @@ class WelcomeScreen extends StatelessWidget {
               textColor: AppColor.blackColor,
               btnText: 'NEW ACCOUNT',
               color: AppColor.primaryColor,
-              width: 150,
-              borderRadius: 26,
+              fontSize: 10,
+              height: 5.h,
+              width: 50.w,
+              borderRadius: 26.h,
             ),
             const Spacer(),
           ],

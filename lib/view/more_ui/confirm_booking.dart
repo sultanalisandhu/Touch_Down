@@ -1,6 +1,7 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
@@ -26,39 +27,39 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
         scrolledUnderElevation: 0.0,
         elevation: 0,
         centerTitle: true,
-        title: Text('Book a Venue',style: primaryTextStyle(fontSize: 18,fontWeight: FontWeight.w600),),),
+        title: Text('Book a Venue',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600),),),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-            Text('Name',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-            5.height,
+            Text('Name',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w600),),
+            1.height,
             GetTextField(
               context: context,
               hintText: 'Your Name',
               keyboardType: TextInputType.name,
               obSecureText: false,
             ),
-            15.height,
-            Text('Email ID',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-            5.height,
+            1.height,
+            Text('Email ID',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w600),),
+            1.height,
             GetTextField(
               context: context,
               hintText: 'Your Email',
               keyboardType: TextInputType.emailAddress,
               obSecureText: false,
             ),
-            15.height,
-            Text('Phone Number',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-            5.height,
+            1.height,
+            Text('Phone Number',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w600),),
+            1.height,
             GetTextField(
               context: context,
               hintText: 'Enter Your Phone Number',
               keyboardType: TextInputType.number,
               obSecureText: false,
             ),
-            20.height,
+            2.height,
             Align(
               alignment: Alignment.center,
               child: kTextButton(
@@ -69,15 +70,15 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                   color: AppColor.primaryColor,
                   textColor: AppColor.blackColor,
                   borderRadius: 22,
-                  width: 180,
-                  height: 40
+                  width: 60.w,
+                  height: 5.h
               ),
             ),
-            Text('News Updates',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+            Text('News Updates',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600),),
             ListView.builder(
               itemCount: 5,
               shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(vertical: 15),
+              padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return imgContainer(
@@ -108,28 +109,29 @@ void successDialog(BuildContext context) {
         children: [
           Text(
             'Booking',
-            style: primaryTextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+            style: primaryTextStyle(fontWeight: FontWeight.w800, fontSize: 12),
           ),
           Text(
             'Successful !',
             textAlign: TextAlign.center,
-            style: primaryTextStyle(fontWeight: FontWeight.w800, fontSize: 18),
+            style: primaryTextStyle(fontWeight: FontWeight.w800, fontSize: 12),
           ),
-          15.height,
+          1.height,
           Text(
             'We will confirm your booking in sometime',
             textAlign: TextAlign.center,
-            style: primaryTextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+            style: primaryTextStyle(fontWeight: FontWeight.w400, fontSize: 10),
           ),
-          15.height,
+          2.height,
           kTextButton(
               onPressed: () {
                 Get.to(()=> PickDropScreen());
               },
               color: AppColor.primaryColor,
-            width: 100,
+            width: 55.w,
             borderRadius: 20,
-            height: 45,
+            height: 5.h,
+
               btnText: 'Okay !',
               textColor: AppColor.blackColor,
           ),

@@ -37,18 +37,18 @@ class UserProfileScreen extends StatelessWidget {
                     child: ListView(
                       padding: EdgeInsets.all(16),
                       children: [
-                        SizedBox(height: mQ.width * 0.15), // Space for the overlapping profile picture
+                        SizedBox(height: mQ.width * 0.15),
                         Text(
                           'User Name',
                           textAlign: TextAlign.center,
-                          style: primaryTextStyle(fontSize: 24, fontWeight: FontWeight.w700,),
+                          style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w700,),
                         ),
                         Text(
                           'Cricket Coach',
                           textAlign: TextAlign.center,
-                          style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w400),
+                          style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400),
                         ),
-                        16.height,
+                        1.height,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -82,7 +82,7 @@ class UserProfileScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        15.height,
+                        1.height,
                         Container(
                           height: mQ.height*0.15,
                           width: mQ.width*0.15,
@@ -93,12 +93,12 @@ class UserProfileScreen extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('10',style: primaryTextStyle(fontSize: 50,fontWeight: FontWeight.w400),),
+                              Text('10',style: primaryTextStyle(fontSize: 20,fontWeight: FontWeight.w400),),
                               Text('Matches Played',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
                             ],
                           ),
                         ),
-                        15.height,
+                        1.height,
                         ListView.builder(
                             itemCount: 6,
                             shrinkWrap: true,

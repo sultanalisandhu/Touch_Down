@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
@@ -46,76 +47,76 @@ class _StoreScreenState extends State<StoreScreen> {
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding:  EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    10.height,
+                    1.height,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text('Categories', style: primaryTextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+                        Text('Categories', style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text('View More', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
-                            5.width,
-                            const Icon(Icons.arrow_forward_ios,color: AppColor.primaryColor,size: 15,)
+                            Text('View More', style: primaryTextStyle(fontSize: 10, fontWeight: FontWeight.w400)),
+                            1.width,
+                             Icon(Icons.arrow_forward_ios,color: AppColor.primaryColor,size: 2.h,)
                           ],
                         ),
                       ],
                     ),
-                    10.height,
+                    1.height,
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         storeItems(
-                          height: 200,
-                            width: 200,
+                          height: 20.h,
+                            width: 20.w,
                             imgPath: 'https://img.freepik.com/free-photo/shirt-with-colorful-stripe-it-is-displayed-field_1340-37529.jpg?t=st=1721154299~exp=1721157899~hmac=f22'
                                 '04a8c2d30cf0baed9627b112888bf935a8b30becb8a2fbab0bc66d8a76551&w=740',
                             itemName: 'Sports T-Shirts'
                         ),
-                      10.width,
+                      1.width,
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                           storeItems(
-                            height: 100,
+                            height: 10.h,
                             imgPath: 'https://img.freepik.com/premium-photo/3d-rendered-photo-cap-design_916107-30582.jpg?w=826',
                             itemName: 'Caps'
                           ),
-                          10.height,
+                          1.height,
                           storeItems(
-                            height: 100,
+                            height: 10.h,
                               imgPath: 'https://img.freepik.com/premium-photo/workout-soccer-sport-equipment-background-top-view-set-fitness-male-outfit-active-lifestyle-body-care-concept_116547-13231.jpg?w=740',
                               itemName: 'Accessories'
                           ),
                         ],),
                       )
                     ],),
-                    20.height,
+                    2.height,
                     const ImageMover(),
-                    20.height,
+                    2.height,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('New Arrivals', style: primaryTextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+                        Text('New Arrivals', style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
                         Row(
                           children: [
-                            Text('View More', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
+                            Text('View More', style: primaryTextStyle(fontSize: 10, fontWeight: FontWeight.w400)),
                             5.width,
-                            const Icon(Icons.arrow_forward_ios,color: AppColor.primaryColor,size: 15,)
+                             Icon(Icons.arrow_forward_ios,color: AppColor.primaryColor,size: 2.h,)
                           ],
                         ),
                       ],
                     ),
-                10.height,
+                1.height,
                 SizedBox(
                   width: mQ.width,
-                  height: 280,
+                  height: 25.h,
                   child: ListView.builder(
                       itemCount: 4,
                       scrollDirection: Axis.horizontal,

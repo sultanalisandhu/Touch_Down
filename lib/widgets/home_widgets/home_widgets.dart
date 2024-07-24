@@ -86,13 +86,13 @@ Widget addMatchContainer({
   return GestureDetector(
     onTap: onTap,
     child: Container(
-    padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10) ,
+    padding: EdgeInsets.symmetric(horizontal: 2.w,vertical: 1.h) ,
     decoration: BoxDecoration(
       color: isSelected? AppColor.primaryColor:Colors.transparent,
     borderRadius: BorderRadius.circular(18),
     border: Border.all(color: AppColor.primaryColor)
     ),
-    child: Text(title!,style: primaryTextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: isSelected? AppColor.whiteColor:AppColor.blackColor),),
+    child: Text(title!,style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: isSelected? AppColor.whiteColor:AppColor.blackColor),),
     ),
   );
 }
@@ -103,7 +103,7 @@ Widget imgContainer({
   return Container(
     height: mQ.height*0.15,
     width: mQ.width,
-    margin: EdgeInsets.symmetric(vertical: 10),
+    margin: const  EdgeInsets.symmetric(vertical: 10),
     decoration:  BoxDecoration(
         image: DecorationImage(image: AssetImage(imgPath!),fit: BoxFit.cover)
     ),

@@ -1,6 +1,7 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
@@ -24,7 +25,7 @@ class _BookVenueScreenState extends State<BookVenueScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text('Book a Venue',style: primaryTextStyle(fontSize: 18,fontWeight: FontWeight.w600),),),
+        title: Text('Book a Venue',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600,color: AppColor.blackColor),),),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,6 +35,22 @@ class _BookVenueScreenState extends State<BookVenueScreen> {
               initialSelectedDate: DateTime.now(),
               selectionColor: AppColor.primaryColor,
               selectedTextColor: Colors.white,
+              width: 13.w,
+              dateTextStyle: primaryTextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w400,
+                color: Colors.black,
+              ),
+              dayTextStyle: primaryTextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+              monthTextStyle: primaryTextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
               onDateChange: (date) {
                 // New date selected
                 setState(() {
@@ -41,8 +58,8 @@ class _BookVenueScreenState extends State<BookVenueScreen> {
                 });
               },
             ),
-            Text('Search Time Slots',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
-            30.height,
+            Text('Search Time Slots',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600),),
+            3.height,
             Align(
               alignment: Alignment.center,
               child: kTextButton(
@@ -53,15 +70,15 @@ class _BookVenueScreenState extends State<BookVenueScreen> {
                   color: AppColor.primaryColor,
                   textColor: AppColor.blackColor,
                   borderRadius: 22,
-                  width: 120,
-                  height: 40
+                  width: 50.w,
+                  height: 5.h
               ),
             ),
-            Text('News Updates',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+            Text('News Updates',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w600),),
             ListView.builder(
               itemCount: 3,
               shrinkWrap: true,
-              padding: EdgeInsets.symmetric(vertical: 15),
+              padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return imgContainer(

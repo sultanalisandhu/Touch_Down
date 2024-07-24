@@ -28,7 +28,7 @@ Widget kTextButton( {
         border: Border.all(width: 1, color: borderColor??Colors.transparent),
         borderRadius: BorderRadius.circular(borderRadius??12),
       ),
-      child: widget?? Text(textAlign: TextAlign.center, btnText!,style: TextStyle(fontSize: fontSize??14,
+      child: widget?? Text(textAlign: TextAlign.center, btnText!,style: primaryTextStyle(fontSize: fontSize??12,
           fontWeight: FontWeight.w600,
           color: textColor??Colors.white),),
     ),

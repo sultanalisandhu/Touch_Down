@@ -7,13 +7,11 @@ class CustomCheckbox extends StatelessWidget {
    CustomCheckbox({super.key});
 
   RxBool isChecked = false.obs;
-   // snoxid
-   // proxil
   @override
   Widget build(BuildContext context) {
     return Obx(()=> Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Checkbox(
           value: isChecked.value,
@@ -36,7 +34,7 @@ class CustomCheckbox extends StatelessWidget {
           child: Text(
             "I agree with the Terms and Condition and the Privacy Policy",
             maxLines: 2,
-            style: primaryTextStyle(fontSize: 16.0,color: AppColor.lightGreyColor),
+            style: primaryTextStyle(fontSize: 10.0,color: AppColor.lightGreyColor),
           ),
         ),
       ],

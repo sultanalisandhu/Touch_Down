@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
@@ -65,11 +66,11 @@ class _BookVenueInnerScreenState extends State<BookVenueInnerScreen> {
                     return Icon(
                       index < 3 ? Icons.star : Icons.star_border,
                       color: Colors.yellow,
-                      size: 20,
+                      size: 2.h,
                     );
                   }),
                 ),
-                Text('4.1 (5 Reviews)', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400,color: AppColor.whiteColor)),
+                Text('4.1 (5 Reviews)', style: primaryTextStyle(fontSize: 8, fontWeight: FontWeight.w400,color: AppColor.whiteColor)),
               ],),
           ),
           Expanded(
@@ -77,43 +78,43 @@ class _BookVenueInnerScreenState extends State<BookVenueInnerScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Cricket Stadium - KanakaPura Road', style: primaryTextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-                  15.height,
+                  Text('Cricket Stadium - KanakaPura Road', style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+                  1.height,
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const Icon(Icons.location_on_sharp,color: AppColor.blackColor,),
-                      10.width,
+                      1.width,
                       ///location text
                       Expanded(
                         child: Text('VG8R+ 6MG,judical layout second phase, jyotipuram, Bengalaru, Karnatka 56002',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                          style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w600),),
                       ),
                     ],
                   ),
-                  5.height,
+                  1.height,
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const Icon(Icons.access_time,color: AppColor.blackColor,),
-                      10.width,
-                      Text('8:00 Am - 5:00 Pm', style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w600),),
+                      1.width,
+                      Text('8:00 Am - 5:00 Pm', style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w600),),
                     ],
                   ),
-                  5.height,
+                  1.height,
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 3.w,vertical: 1.h),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(22),
                       border: Border.all(color: AppColor.primaryColor)
                     ),
-                    child:  Text('View Location',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w400),),
+                    child:  Text('View Location',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400),),
                   ),
-                  20.height,
+                  2.height,
                   Container(
                     decoration: BoxDecoration(
                       color: AppColor.containerGreyColor,
@@ -121,11 +122,11 @@ class _BookVenueInnerScreenState extends State<BookVenueInnerScreen> {
                       border: Border(top: BorderSide(color: AppColor.primaryColor,width: 5))
                     ),
                     child: ExpansionTile(
-                        title: Text('About the Venue',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
+                        title: Text('About the Venue',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
                       children: [
                          Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit,'
                             ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
-                          style: primaryTextStyle(fontSize: 13,fontWeight: FontWeight.w400),)
+                          style: primaryTextStyle(fontSize: 8,fontWeight: FontWeight.w400),)
                       ],
                       expandedAlignment: Alignment.topLeft,
 
@@ -136,7 +137,7 @@ class _BookVenueInnerScreenState extends State<BookVenueInnerScreen> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     ),
                   ),
-                  15.height,
+                  1.height,
                   Container(
                     decoration: BoxDecoration(
                       color: AppColor.containerGreyColor,
@@ -144,11 +145,11 @@ class _BookVenueInnerScreenState extends State<BookVenueInnerScreen> {
                       border: const Border(top: BorderSide(color: AppColor.primaryColor,width: 5))
                     ),
                     child: ExpansionTile(
-                        title: Text('Amenities available',style: primaryTextStyle(fontSize: 16,fontWeight: FontWeight.w500),),
+                        title: Text('Amenities available',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
                       children: [
                          Text(' The amenities can provide a better experience for guests by increasing comfort,'
                              ' making things easier, and generally providing a more restful and convenient stay.',
-                          style: primaryTextStyle(fontSize: 13,fontWeight: FontWeight.w400),)
+                          style: primaryTextStyle(fontSize: 8,fontWeight: FontWeight.w400),)
                       ],
                       expandedAlignment: Alignment.topLeft,
                       expandedCrossAxisAlignment: CrossAxisAlignment.start,
@@ -170,8 +171,8 @@ class _BookVenueInnerScreenState extends State<BookVenueInnerScreen> {
                       color: AppColor.primaryColor,
                         textColor: AppColor.blackColor,
                       borderRadius: 22,
-                      width: 120,
-                      height: 40
+                      width: 50.w,
+                      height: 5.h
                     ),
                   )
                 ],

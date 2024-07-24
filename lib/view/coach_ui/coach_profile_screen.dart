@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/widgets/coach_profile_widget/coach_widgets.dart';
@@ -17,20 +18,21 @@ import 'package:touch_down/widgets/k_buttons.dart';
 class CoachProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final mQ = MediaQuery.of(context).size;
-
     return Scaffold(
       backgroundColor: AppColor.primaryColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColor.primaryColor,
         elevation: 0,
+        scrolledUnderElevation: 0.0,
+        title: Text('Book a Coach/Trainer',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w800),),
+        centerTitle: true,
       ),
       body: Stack(
         children: [
           Column(
             children: [
-              /// Red container
+              /// primary container
               Container(
                 color: AppColor.primaryColor,
                 height: mQ.width * 0.15 + 50,
@@ -46,14 +48,14 @@ class CoachProfileScreen extends StatelessWidget {
                     ),
                   ),
                   child: ListView(
-                    padding: EdgeInsets.all(16),
+                    padding: EdgeInsets.all(2.h),
                     children: [
-                      SizedBox(height: mQ.width * 0.15), // Space for the overlapping profile picture
+                      SizedBox(height: mQ.width * 0.25 * 0.7),
                       Text(
                         'Martin Desouza',
                         textAlign: TextAlign.center,
                         style: primaryTextStyle(
-                          fontSize: 24,
+                          fontSize: 15,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -61,11 +63,11 @@ class CoachProfileScreen extends StatelessWidget {
                         'Cricket Coach',
                         textAlign: TextAlign.center,
                         style: primaryTextStyle(
-                          fontSize: 16,
+                          fontSize: 12,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      16.height,
+                      2.height,
                       Column(
                         children: [
                           Row(
@@ -79,7 +81,7 @@ class CoachProfileScreen extends StatelessWidget {
                                     Text(
                                       'About Coach',
                                       style: primaryTextStyle(
-                                        fontSize: 18,
+                                        fontSize: 12,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
@@ -87,7 +89,7 @@ class CoachProfileScreen extends StatelessWidget {
                                       '"Martin is a highly experienced Cricket Coach with over 10 years of expertise in the field." '
                                           'He is dedicated to helping players improve their skills and achieve their full potential.',
                                       style: primaryTextStyle(
-                                        fontSize: 14,
+                                        fontSize: 10,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
@@ -116,14 +118,14 @@ class CoachProfileScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          10.height,
+                          1.height,
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 'Reviews',
                                 style: primaryTextStyle(
-                                  fontSize: 18,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -132,8 +134,8 @@ class CoachProfileScreen extends StatelessWidget {
                                   BookCoach(context);
                                 },
                                 borderRadius: 25,
-                                height: 45,
-                                width: 180,
+                                height: 5.h,
+                                width: 45.w,
                                 btnText: 'BOOK A COACH',
                                 textColor: AppColor.blackColor,
                               ),
@@ -141,13 +143,13 @@ class CoachProfileScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      15.height,
+                      2.height,
                       ListView.builder(
                         itemCount: 6,
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
-                          return ReviewCard(
+                          return const ReviewCard(
                             name: 'Jane Doe',
                             date: '29/08/2023',
                             review:
@@ -164,14 +166,14 @@ class CoachProfileScreen extends StatelessWidget {
           ),
           /// Profile picture container
           Positioned(
-            top: mQ.width * 0.15 * 0.9,
-            left: (mQ.width / 2) - mQ.width * 0.15,
+            top: mQ.width * 0.18 * 0.9,
+            left: (mQ.width / 2) - mQ.width * 0.13,
 
             child: CircleAvatar(
-              radius: mQ.width * 0.15,
+              radius: mQ.width * 0.13,
               backgroundColor: AppColor.greyColor,
               child: CircleAvatar(
-                radius: mQ.width * 0.15 * 0.9,
+                radius: mQ.width * 0.13 * 0.9,
                 backgroundColor: AppColor.whiteColor,
                 backgroundImage: const NetworkImage(
                   'https://img.freepik.com/free-psd/portrait-bearded-man-white-sweatshirt-3d-rendering_1142-53186.jpg?t=st=1720678505~exp='

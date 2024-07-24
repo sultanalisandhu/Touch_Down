@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
@@ -90,10 +91,10 @@ class _ImageSliderState extends State<ImageSlider> {
               left: 10.0,
               top: mQ.height / 6.5,
               child: IconButton(
-                icon: const Icon(
+                icon:  Icon(
                   Icons.arrow_back_ios_new_rounded,
                   color: AppColor.primaryColor,
-                  size: 30,
+                  size: 3.h,
                 ),
                 onPressed: () {
                   if (currentIndex > 0) {
@@ -111,10 +112,10 @@ class _ImageSliderState extends State<ImageSlider> {
               right: 10.0,
               top: mQ.height / 6.5,
               child: IconButton(
-                icon: const Icon(
+                icon:  Icon(
                   Icons.arrow_forward_ios_outlined,
                   color: AppColor.primaryColor,
-                  size: 30,
+                  size: 3.h,
                 ),
                 onPressed: () {
                   if (currentIndex < carouselPictures.length - 1) {
