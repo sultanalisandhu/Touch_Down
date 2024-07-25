@@ -5,7 +5,6 @@ import 'package:touch_down/controller/auth_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/utils/asset_utils.dart';
-import 'package:touch_down/view/nav_bar/navigation_menu.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 import 'package:touch_down/widgets/k_check_box.dart';
@@ -14,7 +13,7 @@ import 'package:touch_down/widgets/k_textfields.dart';
 
 class RegisterScreen extends StatelessWidget {
    RegisterScreen({super.key});
-   final controller=Get.put(AuthController());
+   final AuthController controller=Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +85,7 @@ class RegisterScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       child: kTextButton(
                         onPressed: (){
-                          Get.to(()=> CustomBottomBar());
+                          controller.register();
                         },
                         btnText: 'SIGN UP',
                         textColor: AppColor.blackColor,

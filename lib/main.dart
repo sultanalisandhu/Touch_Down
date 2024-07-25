@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:touch_down/view/auth/login_screen.dart';
+import 'package:touch_down/view/auth/register_screen.dart';
 import 'package:touch_down/view/auth/welcome_screen.dart';
 import 'package:touch_down/view/more_ui/book_venue_inner.dart';
 import 'package:touch_down/view/more_ui/pick_drop_screen.dart';
@@ -14,8 +15,8 @@ import 'view/profile_ui/user_profile_screen.dart';
 
 
 void main() {
-  // runApp(DevicePreview(builder: (BuildContext context)=> const MyApp()));
-  runApp(const MyApp());
+  runApp(DevicePreview(builder: (BuildContext context)=> const MyApp()));
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home:  WelcomeScreen(),
+            home:  RegisterScreen(),
             useInheritedMediaQuery: true,
             locale: DevicePreview.locale(context),
           );
