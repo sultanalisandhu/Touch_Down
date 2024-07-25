@@ -15,10 +15,16 @@ class AuthController extends GetxController{
  TextEditingController phoneNumberController= TextEditingController();
  RxBool showPassword=true.obs;
  RxBool confirmPassword=false.obs;
+  final RxBool _isLoading = false.obs;
+  /// getters
+  bool get isLoading => _isLoading.value;
 
+  ///setter
+  set setLoading(v) => _isLoading.value = v;
 
 
  void register() async{
+   setLoading=true;
 final response= await baseServices.apiCall('put',ApiRoutes.register,data: {
  'email' : emailController.text.trim(),
  'password': passwordController.text.trim(),
@@ -35,6 +41,7 @@ final response= await baseServices.apiCall('put',ApiRoutes.register,data: {
      var data = jsonDecode(response.body);
      showSnackBar('Error', data['message'].toString());
    }
+   setLoading=false;
  }
 
  bool isValidPassword(String password) {

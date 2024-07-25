@@ -8,13 +8,14 @@ import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 import 'package:touch_down/widgets/k_check_box.dart';
+import 'package:touch_down/widgets/k_snack_bar.dart';
 import 'package:touch_down/widgets/k_svg_icon.dart';
 import 'package:touch_down/widgets/k_textfields.dart';
 
 class RegisterScreen extends StatelessWidget {
    RegisterScreen({super.key});
    final AuthController controller=Get.put(AuthController());
-
+   final RxBool isTermsAccepted = false.obs;
   @override
   Widget build(BuildContext context) {
     return Obx(()=> Stack(
@@ -79,13 +80,19 @@ class RegisterScreen extends StatelessWidget {
                       context: context,
                     ),
                     1.height,
-                    CustomCheckbox(),
+                    CustomCheckbox(onChanged: (bool value) {
+                      isTermsAccepted.value = value;
+                    },),
                     6.height,
                     Align(
                       alignment: Alignment.center,
                       child: kTextButton(
                         onPressed: (){
-                          controller.register();
+                          if (isTermsAccepted.value) {
+                            controller.register();
+                          } else {
+                            showSnackBar('Error', 'You must accept the terms and conditions to sign up',isError: true);
+                          }
                         },
                         btnText: 'SIGN UP',
                         textColor: AppColor.blackColor,
