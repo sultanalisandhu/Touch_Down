@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart' as getx;
@@ -14,11 +15,7 @@ class BaseServices {
     ),
   );
 
-   Future<Response?> apiCall(
-      String method,
-      String endpoint, {
-        dynamic data,
-      }) async {
+   Future<Response?> apiCall(String method, String endpoint, {dynamic data,}) async {
     final headers = await _buildHeaders();
     final url = ApiRoutes.baseUrl + endpoint + (method.toUpperCase() == 'GET' ? _buildQueryString(data) : '');
 

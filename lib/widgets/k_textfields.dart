@@ -7,7 +7,7 @@ import 'package:touch_down/utils/extensions.dart';
 class KTextField extends StatelessWidget {
   final BuildContext context;
   final String? hintText;
-  final Icon? prefixIcon;
+  final Widget? prefixIcon;
   final IconData? suffixIcon;
   final String? Function(String?)? validator;
   final Function()? suffixOnTap;
@@ -54,7 +54,7 @@ class KTextField extends StatelessWidget {
         )
             : null,
         contentPadding:  EdgeInsets.only(bottom: 0.2.h,top: 1.h),
-        hintStyle: primaryTextStyle(color: AppColor.greyColor, fontSize: 10.0),
+        hintStyle: primaryTextStyle(color: AppColor.greyColor, fontSize: 11.0),
         filled: true,
         isDense: true,
         fillColor: Colors.transparent,

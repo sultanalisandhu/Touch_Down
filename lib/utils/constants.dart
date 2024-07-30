@@ -29,10 +29,10 @@ void printError(String text) {
 }
 
 
-TextStyle primaryTextStyle({double? fontSize, FontWeight? fontWeight,Color? color}){
+TextStyle primaryTextStyle({double? fontSize, FontWeight? fontWeight,Color? color,TextDecoration? textDecoration}){
   return GoogleFonts.inter(
       textStyle: TextStyle(
-        decoration:TextDecoration.none,
+        decoration:textDecoration?? TextDecoration.none,
         fontSize: fontSize !=null ?fontSize.sp: 20.sp,
         fontWeight: fontWeight??FontWeight.w300,
         color: color,

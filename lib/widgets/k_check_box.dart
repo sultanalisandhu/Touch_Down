@@ -44,9 +44,9 @@ import 'package:touch_down/utils/extensions.dart';
 // }
 
 class CustomCheckbox extends StatelessWidget {
-  CustomCheckbox({super.key, required this.onChanged});
+  CustomCheckbox({super.key, required this.isChecked, required this.onChanged});
 
-  final RxBool isChecked = false.obs;
+  final RxBool isChecked;
   final ValueChanged<bool> onChanged;
 
   @override
@@ -87,8 +87,4 @@ class CustomCheckbox extends StatelessWidget {
   }
 }
 
-// CircularProgressIndicator(
-// color: primaryColor,
-// strokeCap: StrokeCap.round,
-// backgroundColor: Colors.white,
-// )
+

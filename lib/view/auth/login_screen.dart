@@ -5,7 +5,9 @@ import 'package:touch_down/controller/auth_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/utils/asset_utils.dart';
+import 'package:touch_down/view/auth/forget_password.dart';
 import 'package:touch_down/view/auth/register_screen.dart';
+import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 import 'package:touch_down/widgets/k_snack_bar.dart';
@@ -15,14 +17,14 @@ import 'package:touch_down/widgets/k_textfields.dart';
 class LoginScreen extends StatelessWidget {
    LoginScreen({super.key});
 
-  final controller= Get.put(AuthController());
+  final AuthController controller= Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
     return Obx(()=> Stack(
         alignment: Alignment.center,
         children: [
-         const BackgroundImage(),
+          const BackgroundImage(imgPath: ImgUtils.bgImg,),
           Scaffold(
             backgroundColor: Colors.transparent,
             body: Column(
@@ -59,7 +61,9 @@ class LoginScreen extends StatelessWidget {
                     context: context,
                   ),
                 6.height,
-                kTextButton(
+                controller.isLoading
+                    ?kCircularLoading()
+                    :kTextButton(
                   onPressed: (){
                     if(controller.emailController.text.isEmpty){
                       showSnackBar('Error', 'Enter email address',isError: true);
@@ -68,11 +72,10 @@ class LoginScreen extends StatelessWidget {
                     }else if(!controller.isValidEmail(controller.emailController.text)){
                       showSnackBar('Error', 'Enter a valid email address',isError: true);
                     }else if(!controller.isValidPassword(controller.passwordController.text)){
-                      showSnackBar('Error', 'Password must be at least 8 characters long and include a special character',isError: true);
+                      showSnackBar('Error', 'Password must be at least 8 characters long.',isError: true);
                     }else{
-                      Get.to(()=> RegisterScreen());
+                      controller.logIn();
                     }
-
                   },
                   btnText: 'SIGN IN',
                   textColor: AppColor.blackColor,
@@ -92,9 +95,23 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                Text('FORGOT PASSWORD ?',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
+                GestureDetector(
+                    onTap: (){
+                      Get.to(()=> ForgotPasswordScreen());
+                    },
+                    child: Text('FORGOT PASSWORD ?',style: primaryTextStyle(fontSize: 11,fontWeight: FontWeight.w600,color: AppColor.lightGreyColor),)),
                 1.height,
-                Text('Don\'t have an account ? Sign up here',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Don\'t have an account? ',style: primaryTextStyle(fontSize: 9.0,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
+                    GestureDetector(
+                        onTap: (){
+                          Get.offAll(()=> RegisterScreen());
+                        },
+                        child: Text('Sign up here',style: primaryTextStyle(fontSize: 11,fontWeight: FontWeight.w600,color: AppColor.lightGreyColor),)),
+                  ],
+                ),
                 2.height,
               ],
             ).paddingSymmetric(horizontal: 4.w)

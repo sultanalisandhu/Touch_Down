@@ -1,8 +1,12 @@
 
 
-class DrawerContent{
+import 'package:flutter/material.dart';
+
+class DrawerContent {
   String? title;
-  DrawerContent({this.title});
+  IconData? icon; // Add an icon property
+
+  DrawerContent({this.title, this.icon});
 }
 List<DrawerContent> drawerList=[
   DrawerContent(title: 'My Stats'),
@@ -12,7 +16,7 @@ List<DrawerContent> drawerList=[
   DrawerContent(title: 'Start Match'),
   DrawerContent(title: 'Start Tournament'),
   DrawerContent(title: 'Touchdown Store '),
-  DrawerContent(title: 'Live'),
+  DrawerContent(title: 'Live', icon: Icons.live_tv),
   DrawerContent(title: 'Pick up & Drop'),
   DrawerContent(title: 'All Sports'),
   DrawerContent(title: 'Add Tournament'),

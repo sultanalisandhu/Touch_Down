@@ -3,6 +3,7 @@ import 'package:get_storage/get_storage.dart';
 class LocalStorage{
   final GetStorage _storage= GetStorage();
   final String _bearerToken = 'bearerToken';
+  final String _loginUserId = 'loginUserId';
   static LocalStorage? _instance;
 
   /// getters
@@ -17,8 +18,13 @@ class LocalStorage{
     await _storage.write(_bearerToken, token);
     print('tokenIS: $token: readToken: $bearerToken');
   }
-  
-  String get bearerToken=> _storage.read(_bearerToken)??'';
 
+  Future<void> setUserId(id) async {
+    await _storage.write(_loginUserId, id);
+    print('Id: $id: currentUserId: $currentUserId');
+  }
+  int get currentUserId => _storage.read(_loginUserId);
+
+  String get bearerToken=> _storage.read(_bearerToken)??'';
 
 }

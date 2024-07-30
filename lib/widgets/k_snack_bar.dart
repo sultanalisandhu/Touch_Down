@@ -7,8 +7,22 @@ import 'package:touch_down/utils/constants.dart';
 void showSnackBar(String title, String message,{isError = false}) {
   Get.showSnackbar(
     GetSnackBar(
-      title: title,
-      message: message,
+      titleText: Text(
+        title,
+        style: primaryTextStyle(
+          color: isError ? Colors.white : Colors.black,
+          fontWeight: FontWeight.w600,
+          fontSize: 12
+        ),
+      ),
+      messageText: Text(
+        message,
+        style: primaryTextStyle(
+          color: isError ? Colors.white : Colors.black,
+            fontWeight: FontWeight.w400,
+            fontSize: 10
+        ),
+      ),
       animationDuration: const Duration(milliseconds: 500),
       backgroundColor: isError? Colors.red : AppColor.primaryColor,
       duration: const Duration(seconds: 2),

@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -5,6 +6,9 @@ import 'package:touch_down/controller/auth_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/utils/asset_utils.dart';
+import 'package:touch_down/view/auth/login_screen.dart';
+import 'package:touch_down/view/auth/toggle_button.dart';
+import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 import 'package:touch_down/widgets/k_check_box.dart';
@@ -14,14 +18,14 @@ import 'package:touch_down/widgets/k_textfields.dart';
 
 class RegisterScreen extends StatelessWidget {
    RegisterScreen({super.key});
-   final AuthController controller=Get.put(AuthController());
+   final AuthController controller=Get.put(AuthController(),tag: 'Auth Controller');
    final RxBool isTermsAccepted = false.obs;
-  @override
+   @override
   Widget build(BuildContext context) {
     return Obx(()=> Stack(
         alignment: Alignment.center,
         children: [
-          const BackgroundImage(),
+          const BackgroundImage(imgPath: ImgUtils.bgImg,),
           Scaffold(
               backgroundColor: Colors.transparent,
               body: SingleChildScrollView(
@@ -43,7 +47,9 @@ class RegisterScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    6.height,
+                    1.height,
+                    ToggleButtonsWidget(controller: controller,),
+                    4.height,
                     Text('User Name',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
                     KTextField(
                       hintText: 'Your User Name',
@@ -58,6 +64,7 @@ class RegisterScreen extends StatelessWidget {
                       hintText: 'email',
                       obSecureText: false,
                       context: context,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                     2.height,
                     Text('Enter Password',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
@@ -75,18 +82,50 @@ class RegisterScreen extends StatelessWidget {
                     Text('Enter Your Phone Number',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
                     KTextField(
                       controller: controller.phoneNumberController,
-                      hintText: '09876543211',
+                      hintText: '3117654321',
+                      keyboardType: TextInputType.phone,
+                      prefixIcon: CountryCodePicker(
+                        onChanged: (cc) => controller.setSelectedPhone(cc.dialCode!),
+                        initialSelection: 'IN',
+                        showCountryOnly: true,
+                        showDropDownButton: true,
+                        showFlag: true,
+                        showOnlyCountryWhenClosed: true,
+                        favorite: const ['+49', '+92'],
+                        builder: (countryCode) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 12),
+                            child: Text(
+                              countryCode.toString(),
+                              style:  primaryTextStyle(
+                                fontSize: 11,
+                                color: AppColor.whiteColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                       obSecureText: false,
                       context: context,
                     ),
                     1.height,
-                    CustomCheckbox(onChanged: (bool value) {
+                    CustomCheckbox(
+                      isChecked: isTermsAccepted,
+                      onChanged: (bool value) {
                       isTermsAccepted.value = value;
                     },),
                     6.height,
-                    Align(
+                    controller.isLoading
+                        ? const Center(child:  CircularProgressIndicator(
+                            color: AppColor.whiteColor,
+                            strokeCap: StrokeCap.round,
+                            backgroundColor: Colors.black,),)
+                        : Align(
                       alignment: Alignment.center,
-                      child: kTextButton(
+                      child: controller.isLoading
+                          ? kCircularLoading()
+                          : kTextButton(
                         onPressed: (){
                           if (isTermsAccepted.value) {
                             controller.register();
@@ -113,15 +152,17 @@ class RegisterScreen extends StatelessWidget {
                       ],
                     ),
                     4.height,
-                    Align(
-                        alignment: Alignment.center,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('FORGOT PASSWORD ?',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
-                            Text('Don\'t have an account ? Sign up here',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
-                          ],
-                        )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Already have an account? ',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
+                        GestureDetector(
+                            onTap: (){
+                              Get.offAll(()=> LoginScreen());
+                            },
+                            child: Text('LogIn',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600,color: AppColor.lightGreyColor),)),
+                      ],
+                    ),
 
                   ],
                 ).paddingSymmetric(horizontal: 30,vertical: 20),

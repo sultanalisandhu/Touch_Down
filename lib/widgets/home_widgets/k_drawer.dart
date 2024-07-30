@@ -10,56 +10,85 @@ import 'package:touch_down/widgets/home_widgets/drawer_content.dart';
 import 'package:touch_down/widgets/k_svg_icon.dart';
 Widget kDrawer({
   String? headingName,
-}){
-  return  Drawer(
+}) {
+  return Drawer(
     backgroundColor: AppColor.whiteColor,
     child: Container(
       color: AppColor.whiteColor,
-            child: ListView(
+      child: Column(
         children: [
-          DrawerHeader(child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 5.h,
-                backgroundColor: Colors.blue,
-                child: showSvgIconWidget(iconPath: IconUtils.profileIcon),
-              ),
-              1.width,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Sanketh S',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w700),),
-                  Text('+0923129999980',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400),),
-                  Text('Bengaluru',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400),),
-                ],
-              ),
-            ],
-          ),),
-          SizedBox(
-           height: mQ.height,
-            child: ListView.builder(
-                itemCount: drawerList.length,
-                itemBuilder: (context,index){
-              return ListTile(
-                onTap: (){
-                  switch(drawerList[index].title)
-                  {
-                    case 'Pick up & Drop':Get.to(() => const PickDropScreen());
-                    break;
-                  }
-                },
-                titleTextStyle: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: AppColor.blackColor),
-                contentPadding: EdgeInsets.only(left: 10),
-                title: Text(drawerList[index].title.toString()),
-                shape: Border(bottom: BorderSide(color: Colors.green)),
-              );
-            }),
+          // Fixed Drawer Header
+          DrawerHeader(
+            // decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.transparent))),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 5.h,
+                  backgroundColor: AppColor.primaryColor,
+                  backgroundImage: const NetworkImage(
+                    'https://img.freepik.com/free-psd/portrait-bearded-man-white-sweatshirt-3d-rendering_1142-53186.jpg?t=st=1720678505~exp='
+                        '1720682105~hmac=033bb8536ff19635e6b47aba507d9b1d51d115e5ffbc0cb7cb3565a45be6a384&w=900',
+                  ),
+                ),
+                1.width,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Sanketh S',
+                      style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+                    ),
+                    Text(
+                      '+092312-9999980',
+                      style: primaryTextStyle(fontSize: 10, fontWeight: FontWeight.w400),
+                    ),
+                    Text(
+                      'Bengaluru',
+                      style: primaryTextStyle(fontSize: 10, fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              physics: const ScrollPhysics(),
+              padding: EdgeInsets.zero,
+              itemCount: drawerList.length,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    ListTile(
+                      onTap: () {
+                        switch (drawerList[index].title) {
+                          case 'Pick up & Drop':
+                            Get.to(() => const PickDropScreen());
+                            break;
+                        }
+                      },
+                      trailing: drawerList[index].icon != null
+                          ? Icon(drawerList[index].icon)
+                          : null,
+                      titleTextStyle: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColor.blackColor),
+                      contentPadding: const EdgeInsets.only(left: 10,right: 10),
+                      title: Text(drawerList[index].title.toString()),
+                    ),
+                    Divider(
+                      color: AppColor.primaryColor,
+                     height: 0,
+                      indent: 1.h,
+                    ),
+                  ],
+                );
 
-
+              },
+            ),
+          ),
         ],
       ),
     ),

@@ -1,6 +1,7 @@
 
 class ImgUtils {
   static const String bgImg='assets/photos/login_bgimg.png';
+  static const String bgImg2='assets/photos/bgImg2.png';
   static const String welcomeImage='assets/photos/welcomeImage.png';
   static const String tableTennisImg='assets/photos/table_tennis.png';
   static const String badmintonImg='assets/photos/badmintonImg.png';

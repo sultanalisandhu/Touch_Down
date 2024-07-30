@@ -8,10 +8,12 @@ import 'package:touch_down/view/auth/register_screen.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 
 class WelcomeScreen extends StatelessWidget {
+
   const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(AssetImage(ImgUtils.bgImg), context);
     return Scaffold(
       body: Container(
         height: mQ.height,

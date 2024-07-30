@@ -49,7 +49,7 @@ Widget newsContainer ({
           borderRadius: BorderRadius.circular(1.h)
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Column(
@@ -57,13 +57,13 @@ Widget newsContainer ({
               children: [
                 Text(updateName!,style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w600),),
                 Text(newsDetails!,
-                  style: primaryTextStyle(fontSize: 7,fontWeight: FontWeight.w400),),
+                  style: primaryTextStyle(fontSize: 8,fontWeight: FontWeight.w400),),
 
               ],),
           ),
           Container(
-            height: 5.h,
-            width: 5.w,
+            height: 7.h,
+            width: 6.5.w,
             alignment: Alignment.center,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
