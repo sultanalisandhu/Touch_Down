@@ -20,6 +20,7 @@ List<DrawerContent> drawerList=[
   DrawerContent(title: 'Pick up & Drop'),
   DrawerContent(title: 'All Sports'),
   DrawerContent(title: 'Add Tournament'),
+  DrawerContent(title: 'Become a Coach'),
   DrawerContent(title: 'Sports Installation'),
   DrawerContent(title: 'Community Connect'),
   DrawerContent(title: 'Help'),

@@ -31,8 +31,3 @@ class AppData {
         .toList();
   }
 }
-// City(name: 'Cricket Academy A', country: 'jp Nagar'),
-// City(name: 'Cricket Academy B', country: 'jp Nagar'),
-// City(name: 'Cricket Academy C', country: 'jp Nagar'),
-// City(name: 'Cricket Academy D', country: 'jp Nagar'),
-// City(name: 'Cricket Academy D', country: 'jp Nagar'),

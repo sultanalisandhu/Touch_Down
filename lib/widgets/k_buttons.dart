@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
 
 Widget kTextButton( {
@@ -20,17 +21,17 @@ Widget kTextButton( {
     },
     child: Container(
       alignment: Alignment.center,
-      height: height??50,
-      width: width??80,
+      height: height??5.h,
+      width: width??80.w,
       padding:  EdgeInsets.symmetric(horizontal: padding??15),
       decoration: BoxDecoration(
         color: color?? AppColor.primaryColor,
         border: Border.all(width: 1, color: borderColor??Colors.transparent),
-        borderRadius: BorderRadius.circular(borderRadius??12),
+        borderRadius: BorderRadius.circular(borderRadius??26.w),
       ),
       child: widget?? Text(textAlign: TextAlign.center, btnText!,style: primaryTextStyle(fontSize: fontSize??12,
           fontWeight: FontWeight.w600,
-          color: textColor??Colors.white),),
+          color: textColor??AppColor.blackColor),),
     ),
   );
 }

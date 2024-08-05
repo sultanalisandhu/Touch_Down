@@ -131,7 +131,6 @@ void successDialog(BuildContext context) {
             width: 55.w,
             borderRadius: 20,
             height: 5.h,
-
               btnText: 'Okay !',
               textColor: AppColor.blackColor,
           ),

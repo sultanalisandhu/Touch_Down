@@ -7,6 +7,7 @@ import 'package:touch_down/controller/coach_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/view/coach_ui/type_ahead.dart';
+import 'package:touch_down/view/profile_ui/coach_profile_ui/book_payment_methods.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 
 import 'package:flutter/material.dart';
@@ -33,7 +34,6 @@ class BookCoachDialog extends StatelessWidget {
         child: Obx(() {
           final selectedDate = dateController.selectedDate.value;
           print('Selected Date: $selectedDate');
-
           return SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -103,16 +103,22 @@ class BookCoachDialog extends StatelessWidget {
                     dateController.selectedDate.value = date;
                   },
                 ),
-                1.height,
+                Divider(
+                  color: AppColor.primaryColor,
+                  height: 2.h,
+                ),
                 Text(
-                  'Select Location',
+                  'Available Time',
                   style: primaryTextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                 ),
-                1.height,
-                TypeAhead(),
+                Divider(
+                  color: AppColor.primaryColor,
+                  height: 2.h,
+                ),
+                5.height,
                 kTextButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                   Get.to(()=> BookingMethods());
                   },
                   borderRadius: 25,
                   height: 5.h,
@@ -128,65 +134,4 @@ class BookCoachDialog extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// class BookCoachDialog extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final CoachController dateController = Get.put(CoachController());
-//
-//     return AlertDialog(
-//       backgroundColor: Colors.grey[200],
-//       contentPadding: EdgeInsets.all(10),
-//       content: SingleChildScrollView(
-//         child: Obx(() => Column(
-//           mainAxisSize: MainAxisSize.min,
-//           children: [
-//             Text(
-//               DateFormat('MMMM yyyy').format(dateController.selectedDate.value),
-//               style: primaryTextStyle(
-//                 fontSize: 24,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//             16.height,
-//             DatePicker(
-//               DateTime.now(),
-//               initialSelectedDate: DateTime.now(),
-//               selectionColor: AppColor.primaryColor,
-//               selectedTextColor: Colors.white,
-//               dateTextStyle: primaryTextStyle(
-//                 fontSize: 18,
-//                 fontWeight: FontWeight.bold,
-//                 color: Colors.black,
-//               ),
-//               dayTextStyle: primaryTextStyle(
-//                 fontSize: 14,
-//                 fontWeight: FontWeight.w600,
-//                 color: Colors.black,
-//               ),
-//               monthTextStyle: primaryTextStyle(
-//                 fontSize: 0,
-//                 color: Colors.transparent,
-//               ),
-//               onDateChange: (date) {
-//                 dateController.selectedDate.value = date;
-//               },
-//             ),
-//           ],
-//         )),
-//       ),
-//     );
-//   }
-// }
 

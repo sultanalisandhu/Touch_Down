@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
-import 'package:touch_down/widgets/coach_profile_widget/coach_widgets.dart';
-import 'package:touch_down/widgets/coach_profile_widget/k_book_coach_dialogue.dart';
-import 'package:touch_down/widgets/k_buttons.dart';
-
-
-
-import 'package:flutter/material.dart';
-import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/view/profile_ui/coach_profile_ui/edit_coach_profile1.dart';
 import 'package:touch_down/widgets/coach_profile_widget/coach_widgets.dart';
 import 'package:touch_down/widgets/coach_profile_widget/k_book_coach_dialogue.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
@@ -50,23 +43,19 @@ class CoachProfileScreen extends StatelessWidget {
                   child: ListView(
                     padding: EdgeInsets.all(2.h),
                     children: [
+                      Align(
+                          alignment: Alignment.topRight,
+                          child: kTextButton(
+                            onPressed: (){
+                              Get.to(()=> EditCoachProfile1());
+                            },
+                            btnText: 'Edit Profile',
+                            height: 4.h,
+                            width: 30.w,
+                            borderRadius: 26
+                          )),
                       SizedBox(height: mQ.width * 0.25 * 0.7),
-                      Text(
-                        'Martin Desouza',
-                        textAlign: TextAlign.center,
-                        style: primaryTextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        'Cricket Coach',
-                        textAlign: TextAlign.center,
-                        style: primaryTextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
+
                       2.height,
                       Column(
                         children: [
@@ -167,19 +156,39 @@ class CoachProfileScreen extends StatelessWidget {
           /// Profile picture container
           Positioned(
             top: mQ.width * 0.18 * 0.9,
-            left: (mQ.width / 2) - mQ.width * 0.13,
+            left: (mQ.width / 4) - mQ.width * 0.13,
 
-            child: CircleAvatar(
-              radius: mQ.width * 0.13,
-              backgroundColor: AppColor.greyColor,
-              child: CircleAvatar(
-                radius: mQ.width * 0.13 * 0.9,
-                backgroundColor: AppColor.whiteColor,
-                backgroundImage: const NetworkImage(
-                  'https://img.freepik.com/free-psd/portrait-bearded-man-white-sweatshirt-3d-rendering_1142-53186.jpg?t=st=1720678505~exp='
-                      '1720682105~hmac=033bb8536ff19635e6b47aba507d9b1d51d115e5ffbc0cb7cb3565a45be6a384&w=900',
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: mQ.width * 0.13,
+                  backgroundColor: AppColor.greyColor,
+                  child: CircleAvatar(
+                    radius: mQ.width * 0.13 * 0.9,
+                    backgroundColor: AppColor.whiteColor,
+                    backgroundImage: const NetworkImage(
+                      'https://img.freepik.com/free-psd/portrait-bearded-man-white-sweatshirt-3d-rendering_1142-53186.jpg?t=st=1720678505~exp='
+                          '1720682105~hmac=033bb8536ff19635e6b47aba507d9b1d51d115e5ffbc0cb7cb3565a45be6a384&w=900',
+                    ),
+                  ),
                 ),
-              ),
+                Text(
+                  'Martin Desouza',
+                  textAlign: TextAlign.center,
+                  style: primaryTextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                Text(
+                  'Cricket Coach',
+                  textAlign: TextAlign.center,
+                  style: primaryTextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

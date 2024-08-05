@@ -37,7 +37,7 @@ class BaseServices {
         queryParameters: method.toUpperCase() == 'GET' ? data : null,
         options: Options(method: method, headers: headers),
       );
-
+      debugPrint('Response${response.data}');
       return response;
     } on DioException catch (e) {
       debugPrint('''

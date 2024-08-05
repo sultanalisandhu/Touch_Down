@@ -45,12 +45,6 @@ class AuthController extends GetxController {
 
 
 
-
-
-
-
-
-
   void register() async {
     setLoading = true;
     try {
@@ -73,9 +67,10 @@ class AuthController extends GetxController {
       printWarning('Response: ${response?.data}');
       printWarning('Scode: ${response?.statusCode}');
       var data = response!.data;
-
       if (response.statusCode == 201) {
         showSnackBar('Success', data['result']['message'].toString());
+        LocalStorage.instance.setUserId(data['result']['user']['id']);
+        printWarning('UserId: ${data['result']['user']['id']}');
         await Future.delayed(const Duration(seconds: 2));
         Get.offAll(() => OtpScreen(email: emailController.text.trim()));
       } else if (response.statusCode == 409) {

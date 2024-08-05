@@ -29,7 +29,7 @@ class IconUtils{
   static const String fbIcon= 'assets/icons/fb_icon.svg';
   static const String googleIcon= 'assets/icons/google_icon.svg';
   static const String homeIcon= 'assets/icons/homeIcon.svg';
-  static const String coachIcon= 'assets/icons/coachIcon.svg';
+  static const String searchIcon= 'assets/icons/searchIcon.svg';
   static const String menuIcon= 'assets/icons/menuIcon.svg';
   static const String storeIcon= 'assets/icons/storeIcon.svg';
   static const String profileIcon= 'assets/icons/profileIcon.svg';
@@ -39,4 +39,6 @@ class IconUtils{
   static const String shareIcon= 'assets/icons/shareIcon.svg';
   static const String rateIcon= 'assets/icons/rateIcon.svg';
   static const String bellIcon= 'assets/icons/bellIcon.svg';
+  static const String filterIconb= 'assets/icons/filterIconb.svg';
+  static const String badgeIcon= 'assets/icons/badgeIcon.svg';
 }

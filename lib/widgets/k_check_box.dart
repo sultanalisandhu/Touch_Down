@@ -3,48 +3,10 @@ import 'package:get/get.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 
-// class CustomCheckbox extends StatelessWidget {
-//    CustomCheckbox({super.key});
-//
-//   final RxBool isChecked = false.obs;
-//   @override
-//   Widget build(BuildContext context) {
-//     return Obx(()=> Row(
-//       mainAxisAlignment: MainAxisAlignment.start,
-//       crossAxisAlignment: CrossAxisAlignment.center,
-//       children: [
-//         Checkbox(
-//           value: isChecked.value,
-//           onChanged: (bool? value) {
-//               isChecked.value = value!;
-//           },
-//           checkColor: Colors.white,
-//           activeColor: AppColor.primaryColor,
-//           side: MaterialStateBorderSide.resolveWith(
-//                 (states) => BorderSide(
-//               color: states.contains(MaterialState.selected) ? AppColor.primaryColor : AppColor.lightGreyColor,
-//               width: 1.5,
-//             ),
-//           ),
-//           shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.circular(4)
-//           ),
-//         ),
-//         Flexible(
-//           child: Text(
-//             "I agree with the Terms and Condition and the Privacy Policy.",
-//             maxLines: 2,
-//             style: primaryTextStyle(fontSize: 10.0,color: AppColor.lightGreyColor),
-//           ),
-//         ),
-//       ],
-//     ),
-//     );
-//   }
-// }
-
 class CustomCheckbox extends StatelessWidget {
-  CustomCheckbox({super.key, required this.isChecked, required this.onChanged});
+  Color? textColor;
+  Color? chkBrderColor;
+  CustomCheckbox({super.key, required this.isChecked, required this.onChanged,this.textColor,this.chkBrderColor});
 
   final RxBool isChecked;
   final ValueChanged<bool> onChanged;
@@ -67,7 +29,7 @@ class CustomCheckbox extends StatelessWidget {
                 (states) => BorderSide(
               color: states.contains(MaterialState.selected)
                   ? AppColor.primaryColor
-                  : AppColor.lightGreyColor,
+                  : chkBrderColor?? AppColor.lightGreyColor,
               width: 1.5,
             ),
           ),
@@ -79,7 +41,7 @@ class CustomCheckbox extends StatelessWidget {
             "I agree with the Terms and Condition and the Privacy Policy.",
             maxLines: 2,
             style: primaryTextStyle(
-                fontSize: 10.0, color: AppColor.lightGreyColor),
+                fontSize: 10.0, color: textColor?? AppColor.lightGreyColor),
           ),
         ),
       ],

@@ -9,25 +9,30 @@ class GameContainer extends StatelessWidget {
   final String? iconPath;
   final String? sportName;
   final Function()? onTap;
-  const GameContainer({super.key, this.iconPath, this.sportName,this.onTap});
+  final double? radius;
+  final double? imgRadius;
+  const GameContainer({super.key, this.iconPath, this.sportName,this.onTap, this.radius, this.imgRadius});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-         CircleAvatar(
-              radius: 4.h,
-              backgroundColor: Colors.grey.shade300,
-              backgroundImage: const AssetImage( ImgUtils.containerBorderImg,),
-            child: CircleAvatar(
-              radius: 3.h,
-                backgroundColor: Colors.white,
-                child: Center(child: Image(image: AssetImage(iconPath!,),fit: BoxFit.contain,height: 5.h,width: 5.w,))
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+           CircleAvatar(
+                radius: radius?? 4.h,
+                backgroundColor: Colors.grey.shade300,
+                backgroundImage: const AssetImage( ImgUtils.containerBorderImg,),
+              child: CircleAvatar(
+                radius: imgRadius?? 3.h,
+                  backgroundColor: Colors.white,
+                  child: Center(child: Image(image: NetworkImage(iconPath!,),fit: BoxFit.contain,height: 5.h,width: 5.w,))
+              ),
             ),
-          ),
-        1.height,
-        Text(sportName!,style: primaryTextStyle(fontSize: 8,fontWeight: FontWeight.w400),)
-      ],
+          1.height,
+          Text(sportName!,style: primaryTextStyle(fontSize: 8,fontWeight: FontWeight.w400),)
+        ],
+      ),
     );
   }
 }

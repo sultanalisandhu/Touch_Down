@@ -4,10 +4,10 @@ import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/view/coach_ui/coach_search.dart';
 import 'package:touch_down/view/more_ui/search_venue_screen.dart';
-import 'package:touch_down/view/coach_ui/coach_profile_screen.dart';
 import 'package:touch_down/view/home_ui/home_screen.dart';
-import 'package:touch_down/view/profile_ui/user_profile_screen.dart';
+import 'package:touch_down/view/profile_ui/coach_profile_ui/coach_profile_screen.dart';
 import 'package:touch_down/view/store_ui/store_screen.dart';
 import 'package:touch_down/widgets/k_svg_icon.dart';
 
@@ -16,11 +16,11 @@ class CustomBottomBar extends StatelessWidget {
    CustomBottomBar({super.key});
   final RxInt _currentIndex = 0.obs;
   final List<Widget> _pages = [
-     HomeScreen(),
-     CoachProfileScreen(),
+    HomeScreen(),
+    CoachSearch(),
     const SearchVenueScreen(),
     StoreScreen(),
-    UserProfileScreen(),
+    CoachProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,7 @@ class CustomBottomBar extends StatelessWidget {
   }
   List listOfIcons = [
     IconUtils.homeIcon,
-    IconUtils.coachIcon,
+    IconUtils.searchIcon,
     IconUtils.menuIcon,
     IconUtils.storeIcon,
     IconUtils.profileIcon,

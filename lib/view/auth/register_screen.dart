@@ -20,6 +20,8 @@ class RegisterScreen extends StatelessWidget {
    RegisterScreen({super.key});
    final AuthController controller=Get.put(AuthController(),tag: 'Auth Controller');
    final RxBool isTermsAccepted = false.obs;
+   RxBool isAvailable = false.obs;
+   RxBool isBooked = false.obs;
    @override
   Widget build(BuildContext context) {
     return Obx(()=> Stack(
@@ -139,7 +141,6 @@ class RegisterScreen extends StatelessWidget {
                         height: 5.h,
                         width: 50.w,
                         borderRadius: 26.h,
-
                       ),
                     ),
                     2.height,

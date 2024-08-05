@@ -10,9 +10,9 @@ import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/view/home_ui/cricket_home_screen.dart';
 import 'package:touch_down/view/more_ui/book_venue_screen.dart';
-import 'package:touch_down/widgets/home_widgets/drawer_content.dart';
+import 'package:touch_down/widgets/home_widgets/k_drawer/drawer_content.dart';
 import 'package:touch_down/widgets/home_widgets/home_widgets.dart';
-import 'package:touch_down/widgets/home_widgets/k_drawer.dart';
+import 'package:touch_down/widgets/home_widgets/k_drawer/k_drawer.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 
 class BookVenueInnerScreen extends StatefulWidget {
