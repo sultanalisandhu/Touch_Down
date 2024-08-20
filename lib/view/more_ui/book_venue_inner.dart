@@ -10,6 +10,7 @@ import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/view/home_ui/cricket_home_screen.dart';
 import 'package:touch_down/view/more_ui/book_venue_screen.dart';
+import 'package:touch_down/widgets/coach_profile_widget/coach_widgets.dart';
 import 'package:touch_down/widgets/home_widgets/k_drawer/drawer_content.dart';
 import 'package:touch_down/widgets/home_widgets/home_widgets.dart';
 import 'package:touch_down/widgets/home_widgets/k_drawer/k_drawer.dart';
@@ -106,13 +107,22 @@ class _BookVenueInnerScreenState extends State<BookVenueInnerScreen> {
                     ],
                   ),
                   1.height,
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 3.w,vertical: 1.h),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(22),
-                      border: Border.all(color: AppColor.primaryColor)
-                    ),
-                    child:  Text('View Location',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400),),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      coachDetailContainer(
+                        title: ' 500/- per Slot ',
+                        iconPath1: IconUtils.iRupeeIcon,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 3.w,vertical: 1.h),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(22),
+                          border: Border.all(color: AppColor.primaryColor)
+                        ),
+                        child:  Text('View Location',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400),),
+                      ),
+                    ],
                   ),
                   2.height,
                   Container(

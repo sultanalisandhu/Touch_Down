@@ -9,7 +9,7 @@ import 'package:touch_down/view/more_ui/book_venue_inner.dart';
 import 'package:touch_down/view/more_ui/pick_drop_screen.dart';
 import 'package:touch_down/widgets/home_widgets/home_widgets.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
-import 'package:touch_down/widgets/k_textfields.dart';
+import 'package:touch_down/widgets/custom_text_fields/k_textfields.dart';
 
 class ConfirmBookingScreen extends StatefulWidget {
   const ConfirmBookingScreen({super.key});

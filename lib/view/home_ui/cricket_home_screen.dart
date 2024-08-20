@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
@@ -125,9 +126,9 @@ class _CricketHomeScreenState extends State<CricketHomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    10.height,
+                    2.height,
                     Text('Match Score', style: primaryTextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                    10.height,
+                    1.height,
                     Container(
                       width: mQ.width,
                       padding: const EdgeInsets.all(12),
@@ -140,41 +141,41 @@ class _CricketHomeScreenState extends State<CricketHomeScreen> {
                         children: [
                           Row(
                            children: [
-                             Text('Semi Final Match', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
-                             Text('(Cricket grounds, Jp Nagar,Bangaluru)', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400,)),
+                             Text('Semi Final Match', style: primaryTextStyle(fontSize: 10, fontWeight: FontWeight.w400)),
+                             Text('(Cricket grounds, Jp Nagar,Bangaluru)', style: primaryTextStyle(fontSize: 9, fontWeight: FontWeight.w400,)),
                            ],
                           ),
-                          15.height,
+                          2.height,
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children: [
-                             Text('Team A', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
-                             Text('128/2 (10.2)', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400,)),
+                             Text('Team A', style: primaryTextStyle(fontSize: 10, fontWeight: FontWeight.w400)),
+                             Text('128/2 (10.2)', style: primaryTextStyle(fontSize: 10, fontWeight: FontWeight.w400,)),
                            ],
                           ),
-                          const Divider(
+                          Divider(
                             color: AppColor.primaryColor,
-                            height: 20,
+                            height: 2.h,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Team B', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
-                              Text('Yet to Bat', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
+                              Text('Team B', style: primaryTextStyle(fontSize: 10, fontWeight: FontWeight.w400)),
+                              Text('Yet to Bat', style: primaryTextStyle(fontSize: 10, fontWeight: FontWeight.w400)),
                             ],
                           ),
-                          15.height,
-                          Text('Team A won the TOSS and Choose to Bat', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400,)),
+                          2.height,
+                          Text('Team A won the TOSS and Choose to Bat', style: primaryTextStyle(fontSize: 10, fontWeight: FontWeight.w400,)),
                         ],
                       ),
                     ),
-                    20.height,
-                    Text('News Updates', style: primaryTextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
-                    10.height,
+                    2.height,
+                    Text('News Updates', style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w400)),
+                    1.height,
                     imgContainer(
                       imgPath: ImgUtils.cricketUpdateImg
                     ),
-                    10.height,
+                    1.height,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [

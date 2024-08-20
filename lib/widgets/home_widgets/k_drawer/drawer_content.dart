@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class DrawerContent {
   String? title;
-  IconData? icon; // Add an icon property
+  IconData? icon;
 
   DrawerContent({this.title, this.icon});
 }
@@ -25,4 +25,10 @@ List<DrawerContent> drawerList=[
   DrawerContent(title: 'Community Connect'),
   DrawerContent(title: 'Help'),
   DrawerContent(title: 'Logout'),
+];
+
+List<DrawerContent> coachDrawerList=[
+  DrawerContent(
+    title: 'Add Availability',icon: Icons.event_available
+  )
 ];

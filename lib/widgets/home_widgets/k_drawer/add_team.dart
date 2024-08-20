@@ -5,7 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
-import 'package:touch_down/widgets/k_textfields.dart';
+import 'package:touch_down/widgets/custom_text_fields/k_textfields.dart';
 
 class AddTeam extends StatefulWidget {
    AddTeam({super.key});

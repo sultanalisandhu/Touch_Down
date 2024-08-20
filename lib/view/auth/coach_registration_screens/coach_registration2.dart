@@ -8,19 +8,24 @@ import 'package:sizer/sizer.dart';
 import 'package:touch_down/controller/coach_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
-import 'package:touch_down/widgets/k_check_box.dart';
+import 'package:touch_down/widgets/auth_widgets/k_check_box.dart';
 import 'package:touch_down/widgets/k_snack_bar.dart';
-import 'package:touch_down/widgets/k_textfields.dart';
+import 'package:touch_down/widgets/custom_text_fields/k_textfields.dart';
 
-class CoachRegistration extends StatelessWidget {
+class CoachRegistration2 extends StatelessWidget {
   final String sportId;
-  CoachRegistration({Key? key}):sportId = Get.arguments['sportId'],
+  CoachRegistration2({Key? key}):sportId = Get.arguments['sportId'],
         super(key: key);
 
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve the arguments
+    final args = Get.arguments;
+    final String sportId = args['sportId'];
+    final String role = args['role'];
     final CoachController coachController = Get.put(CoachController());
     return Obx(()=>Scaffold(
         backgroundColor: AppColor.primaryColor,
@@ -94,6 +99,21 @@ class CoachRegistration extends StatelessWidget {
                               hintTextColor: AppColor.blackColor,
                               borderColor: AppColor.blackColor,
                               textColor: AppColor.blackColor,
+                            ),
+                            2.height,
+                            Text('Enter Password',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
+                            KTextField(
+                              controller: coachController.cPasswordController,
+                              hintText: '*******',
+                              hintTextColor: AppColor.blackColor,
+                              borderColor: AppColor.blackColor,
+                              textColor: AppColor.blackColor,
+                              obSecureText: coachController.showPassword.value,
+                              suffixIcon: coachController.showPassword.value?Icons.visibility:Icons.visibility_off,
+                              suffixOnTap: (){
+                                coachController.togglePassword();
+                              },
+                              context: context,
                             ),
                             2.height,
                             Text(
@@ -180,12 +200,14 @@ class CoachRegistration extends StatelessWidget {
                               },
                             ),
                             5.height,
-                            Align(
+                            coachController.isLoading
+                                ?kCircularLoading()
+                                :Align(
                               alignment: Alignment.center,
                               child: kTextButton(
                                 onPressed: () {
                                   if (coachController.isTermsAccepted.value) {
-                                    coachController.coachRegister(sportId);
+                                    coachController.coachRegister(sportId,role);
                                   } else {
                                     showSnackBar('Error', 'You must accept the terms and conditions to sign up', isError: true);
                                   }
@@ -222,7 +244,7 @@ class CoachRegistration extends StatelessWidget {
                         backgroundColor: AppColor.whiteColor,
                         backgroundImage: coachController.selectedImagePath.value.isEmpty
                             ? const NetworkImage(
-                            'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg')
+                            'https://img.freepik.com/premium-vector/blue-circle-with-white-user-vector_941526-5784.jpg?w=900')
                             : FileImage(File(coachController.selectedImagePath.value)) as ImageProvider,
                       ),
                     ),

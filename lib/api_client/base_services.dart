@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart' as getx;
 import 'package:touch_down/api_client/api_routes.dart';
+import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/local_storage.dart';
 
 class BaseServices {
@@ -62,16 +63,25 @@ class BaseServices {
       return null;
     }
   }
-
   Future<Map<String, String>> _buildHeaders() async {
     final headers = {'Accept': 'application/json'};
-    final bearerToken = LocalStorage.instance.bearerToken;
+    final bearerToken = await LocalStorage.read(LocalStorage.bearerToken);
 
-    if (bearerToken.isNotEmpty) {
+    if (bearerToken != null && bearerToken.isNotEmpty) {
       headers['Authorization'] = 'Bearer $bearerToken';
     }
     return headers;
   }
+
+
+  // Future<Map<String, String>> _buildHeaders() async {
+  //   final headers = {'Accept': 'application/json'};
+  //   final bearerToken =  LocalStorage.read(LocalStorage.bearerToken);
+  //   if (bearerToken.isNotEmpty) {
+  //     headers['Authorization'] = 'Bearer $bearerToken';
+  //   }
+  //   return headers;
+  // }
 
   String _buildQueryString(Map<String, dynamic>? params) {
     if (params == null || params.isEmpty) return '';

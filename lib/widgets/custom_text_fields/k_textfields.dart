@@ -45,23 +45,31 @@ class KTextField extends StatelessWidget {
     return TextFormField(
       validator: validator,
       controller: controller,
-      cursorColor: borderColor ?? AppColor.greyColor,
+      cursorColor: AppColor.greyColor,
       maxLines: 1,
-      style: primaryTextStyle(color: textColor ?? AppColor.lightGreyColor, fontSize: 11.0),
+      style: primaryTextStyle(color: textColor ?? AppColor.lightGreyColor, fontSize: 12.0,fontWeight: FontWeight.w500),
       keyboardType: keyboardType ?? TextInputType.text,
       textInputAction: TextInputAction.next,
       obscureText: obSecureText ?? false,
-      onTapOutside: (event) {FocusScope.of(context).unfocus();},
+      onTapOutside: (event) {context.dismissKeyBoard();},
       inputFormatters: maxLength != null
           ? [LengthLimitingTextInputFormatter(maxLength)]
           : null,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: prefixIcon,
+        prefixIconConstraints: const BoxConstraints(
+            maxHeight: 25.0,
+            maxWidth: 36.0
+        ),
+        suffixIconConstraints: const BoxConstraints(
+            maxHeight: 25.0,
+            maxWidth: 30.0
+        ),
         suffixIcon: suffixIcon != null
             ? IconButton(icon: Icon(suffixIcon, color: borderColor ?? AppColor.greyColor,),onPressed: suffixOnTap,)
             : null,
-        contentPadding: EdgeInsets.only(bottom: 0.2.h, top: 1.h),
+        contentPadding: const EdgeInsets.symmetric(vertical: 2),
         hintStyle: primaryTextStyle(color: hintTextColor ?? AppColor.greyColor, fontSize: 11.0),
         filled: true,
         isDense: true,

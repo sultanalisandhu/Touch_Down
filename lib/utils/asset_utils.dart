@@ -33,6 +33,7 @@ class IconUtils{
   static const String menuIcon= 'assets/icons/menuIcon.svg';
   static const String storeIcon= 'assets/icons/storeIcon.svg';
   static const String profileIcon= 'assets/icons/profileIcon.svg';
+  static const String coachIcon= 'assets/icons/coachIcon.svg';
   static const String nextIcon= 'assets/icons/nextIcon.svg';
   static const String checkIcon= 'assets/icons/checkIcon.svg';
   static const String chatIcon= 'assets/icons/chatIcon.svg';
@@ -41,4 +42,7 @@ class IconUtils{
   static const String bellIcon= 'assets/icons/bellIcon.svg';
   static const String filterIconb= 'assets/icons/filterIconb.svg';
   static const String badgeIcon= 'assets/icons/badgeIcon.svg';
+  static const String arrowUpRight= 'assets/icons/arrowUpRight.svg';
+  static const String agencyIcon= 'assets/icons/agencyIcon.svg';
+  static const String iRupeeIcon= 'assets/icons/iRupeeIcon.svg';
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:touch_down/controller/auth_controller.dart';
@@ -7,11 +8,12 @@ import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
-import 'package:touch_down/widgets/k_otp_textfield.dart';
+import 'package:touch_down/widgets/custom_text_fields/k_otp_textfield.dart';
 
 class OtpScreen extends StatelessWidget {
   final String email;
    OtpScreen({super.key, required this.email});
+  // final AuthController controller= Get.find<AuthController>(tag: 'loginController');
   final AuthController controller= Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
@@ -36,17 +38,19 @@ class OtpScreen extends StatelessWidget {
                     1.height,
                      PinCodeFields(controller: controller,),
                     2.height,
-                    Row(
-                      children: [
-                        Text('Didn’t receive OTP? ',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
-                        GestureDetector(
-                            onTap: (){
-                              controller.resendOtp();
-                            },
-                            child: Text('Resend OTP',style: primaryTextStyle(textDecoration: TextDecoration.underline, fontSize: 14,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),)),
-                      ],
-                        // 2bd3bp812p@hellomailo.net
-                        // 2bd3bp812@hellomailo.net
+                    RichText(
+                      text:  TextSpan(
+                        text: 'Did\'nt receive OTP? ',
+                        style: primaryTextStyle(fontSize: 10.0,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),
+                        children: <TextSpan>[
+                          TextSpan(text: 'Resend OTP',style: primaryTextStyle(fontSize: 11,fontWeight: FontWeight.w600,
+                              color: AppColor.lightGreyColor),
+                              recognizer: TapGestureRecognizer()..onTap=(){
+                                controller.resendOtp(email);
+                              }
+                          )
+                        ],
+                      ),
                     ),
                     6.height,
                     Align(
@@ -54,7 +58,7 @@ class OtpScreen extends StatelessWidget {
                       child: controller.isLoading
                           ? kCircularLoading()
                           : kTextButton(
-                        onPressed: (){
+                        onPressed: () async {
                           controller.verifyOtp(email);
                           debugPrint('otp email ${controller.emailController.text.trim()}');
                           debugPrint('otp email received ${email}');

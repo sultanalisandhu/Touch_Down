@@ -30,7 +30,7 @@ Widget kTextButton( {
         borderRadius: BorderRadius.circular(borderRadius??26.w),
       ),
       child: widget?? Text(textAlign: TextAlign.center, btnText!,style: primaryTextStyle(fontSize: fontSize??12,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
           color: textColor??AppColor.blackColor),),
     ),
   );

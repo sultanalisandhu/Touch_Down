@@ -1,4 +1,5 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -6,22 +7,23 @@ import 'package:touch_down/controller/auth_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/utils/asset_utils.dart';
+import 'package:touch_down/utils/local_storage.dart';
 import 'package:touch_down/view/auth/login_screen.dart';
-import 'package:touch_down/view/auth/toggle_button.dart';
+import 'package:touch_down/extras/toggle_button.dart';
+import 'package:touch_down/widgets/auth_widgets/auth_widget.dart';
 import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
-import 'package:touch_down/widgets/k_check_box.dart';
+import 'package:touch_down/widgets/auth_widgets/k_check_box.dart';
 import 'package:touch_down/widgets/k_snack_bar.dart';
 import 'package:touch_down/widgets/k_svg_icon.dart';
-import 'package:touch_down/widgets/k_textfields.dart';
+import 'package:touch_down/widgets/custom_text_fields/k_textfields.dart';
 
 class RegisterScreen extends StatelessWidget {
-   RegisterScreen({super.key});
+  final String userRole;
+   RegisterScreen({super.key, this.userRole = ''});
    final AuthController controller=Get.put(AuthController(),tag: 'Auth Controller');
-   final RxBool isTermsAccepted = false.obs;
-   RxBool isAvailable = false.obs;
-   RxBool isBooked = false.obs;
+
    @override
   Widget build(BuildContext context) {
     return Obx(()=> Stack(
@@ -49,8 +51,6 @@ class RegisterScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    1.height,
-                    ToggleButtonsWidget(controller: controller,),
                     4.height,
                     Text('User Name',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
                     KTextField(
@@ -58,6 +58,7 @@ class RegisterScreen extends StatelessWidget {
                       controller: controller.nameController,
                       obSecureText: false,
                       context: context,
+                      keyboardType: TextInputType.text,
                     ),
                     2.height,
                     Text('Enter Your Email',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
@@ -86,61 +87,31 @@ class RegisterScreen extends StatelessWidget {
                       controller: controller.phoneNumberController,
                       hintText: '3117654321',
                       keyboardType: TextInputType.phone,
-                      prefixIcon: CountryCodePicker(
-                        onChanged: (cc) => controller.setSelectedPhone(cc.dialCode!),
-                        initialSelection: 'IN',
-                        showCountryOnly: true,
-                        showDropDownButton: true,
-                        showFlag: true,
-                        showOnlyCountryWhenClosed: true,
-                        favorite: const ['+49', '+92'],
-                        builder: (countryCode) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 12),
-                            child: Text(
-                              countryCode.toString(),
-                              style:  primaryTextStyle(
-                                fontSize: 11,
-                                color: AppColor.whiteColor,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                      prefixIcon: CountryCodePickerWidget(controller: controller,),
                       obSecureText: false,
                       context: context,
                     ),
                     1.height,
                     CustomCheckbox(
-                      isChecked: isTermsAccepted,
+                      isChecked: controller.isTermsAccepted,
                       onChanged: (bool value) {
-                      isTermsAccepted.value = value;
+                      controller.isTermsAccepted.value = value;
                     },),
                     6.height,
                     controller.isLoading
-                        ? const Center(child:  CircularProgressIndicator(
-                            color: AppColor.whiteColor,
-                            strokeCap: StrokeCap.round,
-                            backgroundColor: Colors.black,),)
+                        ?kCircularLoading()
                         : Align(
                       alignment: Alignment.center,
-                      child: controller.isLoading
-                          ? kCircularLoading()
-                          : kTextButton(
+                      child: kTextButton(
                         onPressed: (){
-                          if (isTermsAccepted.value) {
-                            controller.register();
+                          if (controller.isTermsAccepted.value) {
+                            controller.register(userRole);
                           } else {
                             showSnackBar('Error', 'You must accept the terms and conditions to sign up',isError: true);
                           }
                         },
                         btnText: 'SIGN UP',
-                        textColor: AppColor.blackColor,
-                        color: AppColor.primaryColor,
-                        height: 5.h,
                         width: 50.w,
-                        borderRadius: 26.h,
                       ),
                     ),
                     2.height,
@@ -153,16 +124,21 @@ class RegisterScreen extends StatelessWidget {
                       ],
                     ),
                     4.height,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Already have an account? ',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400,color: AppColor.lightGreyColor),),
-                        GestureDetector(
-                            onTap: (){
-                              Get.offAll(()=> LoginScreen());
-                            },
-                            child: Text('LogIn',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600,color: AppColor.lightGreyColor),)),
-                      ],
+                    Center(
+                      child: RichText(
+                        text:  TextSpan(
+                          text: 'Already have an account? ',
+                          style: primaryTextStyle(fontSize: 10.0,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),
+                          children: <TextSpan>[
+                            TextSpan(text: 'Login',style: primaryTextStyle(fontSize: 11,fontWeight: FontWeight.w600,
+                                color: AppColor.lightGreyColor),
+                                recognizer: TapGestureRecognizer()..onTap=(){
+                                  Get.offAll(()=> LoginScreen());
+                                }
+                            )
+                          ],
+                        ),
+                      ),
                     ),
 
                   ],

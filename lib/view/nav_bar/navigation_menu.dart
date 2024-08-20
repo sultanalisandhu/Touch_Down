@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:touch_down/services/user_profile_services.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
-import 'package:touch_down/view/coach_ui/coach_search.dart';
+import 'package:touch_down/view/coach_ui/coach_index_page.dart';
 import 'package:touch_down/view/more_ui/search_venue_screen.dart';
 import 'package:touch_down/view/home_ui/home_screen.dart';
 import 'package:touch_down/view/profile_ui/coach_profile_ui/coach_profile_screen.dart';
@@ -17,10 +18,10 @@ class CustomBottomBar extends StatelessWidget {
   final RxInt _currentIndex = 0.obs;
   final List<Widget> _pages = [
     HomeScreen(),
-    CoachSearch(),
+    CoachIndexPage(),
     const SearchVenueScreen(),
     StoreScreen(),
-    CoachProfileScreen(),
+    UserProfileService.getProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {

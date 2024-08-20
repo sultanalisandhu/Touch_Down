@@ -4,9 +4,11 @@ import 'package:sizer/sizer.dart';
 import 'package:touch_down/controller/coach_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/widgets/circular_loading.dart';
+import 'package:touch_down/widgets/custom_text_fields/chip_tag_textfield.dart';
 import 'package:touch_down/widgets/k_app_bar/k_app_bar.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
-import 'package:touch_down/widgets/k_textfields.dart';
+import 'package:touch_down/widgets/custom_text_fields/k_textfields.dart';
 
 class EditCoachProfile2 extends StatelessWidget {
   EditCoachProfile2({Key? key,}) :super(key: key);
@@ -14,7 +16,7 @@ class EditCoachProfile2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CoachController coachController = Get.put(CoachController());
+    final CoachController coachController = Get.find<CoachController>(tag:'coachController');
     return Scaffold(
       backgroundColor: AppColor.primaryColor,
       appBar: kAppBar(
@@ -50,7 +52,7 @@ class EditCoachProfile2 extends StatelessWidget {
                         ),
                       ),
                       KTextField(
-                        controller: coachController.cMobileController,
+                        controller: coachController.cFeeController,
                         hintText: 'Enter the fee',
                         keyboardType: TextInputType.phone,
                         obSecureText: false,
@@ -68,7 +70,7 @@ class EditCoachProfile2 extends StatelessWidget {
                         ),
                       ),
                       KTextField(
-                        controller: coachController.cMobileController,
+                        controller: coachController.cGroupFeeController,
                         hintText: 'Enter the fee',
                         keyboardType: TextInputType.phone,
                         obSecureText: false,
@@ -86,7 +88,7 @@ class EditCoachProfile2 extends StatelessWidget {
                         ),
                       ),
                       KTextField(
-                        controller: coachController.cAddressController,
+                        controller: coachController.cAdharCardController,
                         hintText: 'File Upload',
                         keyboardType: TextInputType.streetAddress,
                         obSecureText: false,
@@ -99,29 +101,22 @@ class EditCoachProfile2 extends StatelessWidget {
                       ),
                       2.height,
                       Text(
-                        'Upload Certificates',
+                        'Upload Certificates(only pdf)',
                         style: primaryTextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      KTextField(
-                        controller: coachController.cLocationController,
-                        hintText: 'File Upload',
-                        keyboardType: TextInputType.text,
-                        obSecureText: false,
-                        context: context,
-                        hintTextColor: AppColor.blackColor,
-                        borderColor: AppColor.blackColor,
-                        textColor: AppColor.blackColor,
-                        suffixIcon: Icons.file_upload_outlined,
-                      ),
+                     1.height,
+                     const TagInputField(),
                       5.height,
-                      Align(
+                      coachController.isLoading
+                          ? kCircularLoading()
+                          : Align(
                         alignment: Alignment.center,
                         child: kTextButton(
                           onPressed: () {
-                            Navigator.pop(context);
+                            coachController.updateCoachDetails(context);
                           },
                           btnText: 'Update Profile',
                           width: 40.w,

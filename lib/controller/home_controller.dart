@@ -9,18 +9,18 @@ import 'package:touch_down/widgets/k_snack_bar.dart';
 
 class HomeController extends GetxController {
   BaseServices baseServices= BaseServices();
-  Rx<AllSportsModel> _allSportsModel= AllSportsModel().obs;
-  RxBool _allSportsLoading=false.obs;
+  final Rx<AllSportsModel> _allSportsModel= AllSportsModel().obs;
+  final RxBool _isLoading=false.obs;
   late PageController pageController;
   RxInt currentIndex = 0.obs;
   Timer? timer;
   /// getters
   AllSportsModel get allSportsModel=> _allSportsModel.value;
-  bool get isSportsLoading=> _allSportsLoading.value;
+  bool get isSportsLoading=> _isLoading.value;
 
   /// setters
   set setAllSportsModel(v)=> _allSportsModel.value=v;
-  set setSportLoading(v)=> _allSportsLoading.value=v;
+  set setSportLoading(v)=> _isLoading.value=v;
 
   getAllSports() async{
     setSportLoading=true;

@@ -9,7 +9,7 @@ import 'package:touch_down/view/nav_bar/navigation_menu.dart';
 import 'package:touch_down/widgets/k_app_bar/k_app_bar.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 import 'package:touch_down/widgets/k_svg_icon.dart';
-import 'package:touch_down/widgets/k_textfields.dart';
+import 'package:touch_down/widgets/custom_text_fields/k_textfields.dart';
 
 class BookingMethods extends StatelessWidget {
   BookingMethods({Key? key}) : super(key: key);
@@ -170,14 +170,10 @@ class BookingMethods extends StatelessWidget {
                 2.height,
                 kTextButton(
                   onPressed: () {
-                   Get.to(()=> CustomBottomBar());
+                 Navigator.pop(context);
                   },
                   color: AppColor.primaryColor,
-                  width: 55.w,
-                  borderRadius: 20,
-                  height: 5.h,
                   btnText: 'Okay !',
-                  textColor: AppColor.blackColor,
                 ),
               ],
             ),

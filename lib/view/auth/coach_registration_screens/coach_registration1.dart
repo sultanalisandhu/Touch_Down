@@ -4,31 +4,27 @@ import 'package:sizer/sizer.dart';
 import 'package:touch_down/api_client/api_routes.dart';
 import 'package:touch_down/controller/home_controller.dart';
 import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/widgets/home_widgets/k_drawer/coach_registration.dart';
+import 'package:touch_down/widgets/circular_loading.dart';
+import 'package:touch_down/view/auth/coach_registration_screens/coach_registration2.dart';
 import 'package:touch_down/widgets/home_widgets/home_widgets.dart';
+import 'package:touch_down/widgets/k_app_bar/k_app_bar.dart';
 
-class CoachSportSelect extends StatelessWidget {
-  CoachSportSelect({super.key});
+class CoachRegistration1 extends StatelessWidget {
+  final String selectedRole;
+  const CoachRegistration1({super.key, required this.selectedRole});
 
   @override
   Widget build(BuildContext context) {
     final HomeController homeController = Get.find<HomeController>(tag: 'homeController');
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Select Sports',
-          style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-        ),
-        centerTitle: true,
-      ),
+      appBar: kAppBar(titleText: 'Select Sport'),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.symmetric(horizontal: 3.w),
         child: Obx(() {
           if (homeController.allSportsModel.result == null) {
-            return Center(child: CircularProgressIndicator());
+            return kCircularLoading();
           }
-
           List<Widget> sportWidgets = [];
           for (int i = 0; i < homeController.allSportsModel.result!.data!.length; i++) {
             sportWidgets.add(
@@ -38,12 +34,15 @@ class CoachSportSelect extends StatelessWidget {
                 sportName: homeController.allSportsModel.result!.data![i].name!,
                 iconPath: ApiRoutes.baseUrl+homeController.allSportsModel.result!.data![i].avatar!,
                 onTap: () {
-                  Get.to(() => CoachRegistration(), arguments: {'sportId': homeController.allSportsModel.result!.data![i].id});
+                  Get.to(() => CoachRegistration2(), arguments: {
+                    'sportId': homeController.allSportsModel.result!.data![i].id,
+                    'role': selectedRole,
+                  },);
                 },
               ),
             );
             if (i % 2 == 1 && i != homeController.allSportsModel.result!.data!.length - 1) {
-              sportWidgets.add(Divider(color: Colors.green));
+              sportWidgets.add(const Divider(color: AppColor.primaryColor));
             }
           }
 

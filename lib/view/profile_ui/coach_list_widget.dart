@@ -7,13 +7,20 @@ import 'package:touch_down/widgets/k_buttons.dart';
 import 'package:touch_down/widgets/k_svg_icon.dart';
 
 class CoachProfileCard extends StatelessWidget {
+  final String? coachName;
+  final String? coachLocation;
+  final String? coachImg;
+  final String? coachSportImg;
+  final int? rating;
+  const CoachProfileCard({super.key,this.rating, this.coachName, this.coachLocation, this.coachImg, this.coachSportImg});
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          padding: EdgeInsets.all(16),
-          margin: EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 10),
+          margin: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: AppColor.primaryColor),
@@ -27,38 +34,40 @@ class CoachProfileCard extends StatelessWidget {
                   CircleAvatar(
                     radius: 5.h,
                     backgroundColor: Colors.green.shade100,
-                    child: Icon(Icons.person, size: 24, color: Colors.green),
+                    backgroundImage: NetworkImage(coachImg!),
                   ),
-                  SizedBox(width: 8),
+                  2.width,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(
+                        coachName!,
+                        style: primaryTextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
+                      2.height,
                       Row(
                         children: [
+                          const Icon(Icons.location_pin, size: 14),
                           Text(
-                            'Chirag Kumar',
+                            coachLocation!,
                             style: primaryTextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w500
-                            ),
-                          ),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400
+                            ),),
                         ],
                       ),
-                      const Icon(Icons.location_pin, size: 14),
-                      Text(
-                          'BTM Layout, Bangalore',
-                        style: primaryTextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500
-                        ),),
+
                       Row(
-                        children: [
-                          Icon(Icons.star, color: Colors.yellow.shade900, size: 2.h),
-                          Icon(Icons.star, color: Colors.yellow.shade900, size: 2.h),
-                          Icon(Icons.star, color: Colors.yellow.shade900, size: 2.h),
-                          Icon(Icons.star, color: Colors.yellow.shade900, size: 2.h),
-                          Icon(Icons.star_border, color: Colors.yellow.shade900, size: 2.h),
-                        ],
+                        children: List.generate(5, (index) {
+                          return Icon(
+                            index < rating! ? Icons.star : Icons.star_border,
+                            color: index < rating! ?Colors.yellow:AppColor.greyColor,
+                            size: 2.2.h,
+                          );
+                        }),
                       ),
                     ],
                   ),

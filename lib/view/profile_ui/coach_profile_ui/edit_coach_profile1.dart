@@ -9,14 +9,14 @@ import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/view/profile_ui/coach_profile_ui/edit_coach_profile2.dart';
 import 'package:touch_down/widgets/k_app_bar/k_app_bar.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
-import 'package:touch_down/widgets/k_textfields.dart';
+import 'package:touch_down/widgets/custom_text_fields/k_textfields.dart';
 
 class EditCoachProfile1 extends StatelessWidget {
   EditCoachProfile1({Key? key,}) :super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final CoachController coachController = Get.put(CoachController());
+    final CoachController coachController = Get.find<CoachController>(tag: 'coachController');
     return Obx(()=>Scaffold(
       backgroundColor: AppColor.primaryColor,
       appBar: kAppBar(
@@ -126,7 +126,7 @@ class EditCoachProfile1 extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Academy Location',
+                                      'Academy Address',
                                       style: primaryTextStyle(
                                         fontSize: 10,
                                         fontWeight: FontWeight.w500,
@@ -180,7 +180,7 @@ class EditCoachProfile1 extends StatelessWidget {
                             alignment: Alignment.center,
                             child: kTextButton(
                               onPressed: () {
-                                Get.off(()=> EditCoachProfile2());
+                                Get.to(()=> EditCoachProfile2());
                               },
                               btnText: 'NEXT',
                               width: 40.w,

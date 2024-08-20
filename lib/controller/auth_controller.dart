@@ -1,15 +1,14 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:touch_down/api_client/api_routes.dart';
 import 'package:touch_down/api_client/base_services.dart';
+import 'package:touch_down/services/user_profile_services.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/local_storage.dart';
 import 'package:touch_down/view/auth/login_screen.dart';
 import 'package:touch_down/view/auth/otp_screen.dart';
 import 'package:touch_down/view/auth/update_password_screen.dart';
+import 'package:touch_down/view/auth/welcome_screen.dart';
 import 'package:touch_down/view/nav_bar/navigation_menu.dart';
 import 'package:touch_down/widgets/k_snack_bar.dart';
 
@@ -22,77 +21,87 @@ class AuthController extends GetxController {
   TextEditingController pinController = TextEditingController();
   TextEditingController updatedPinController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  RxBool showPassword = true.obs;
-  RxBool confirmPassword = false.obs;
+
+  ///variables
+  final RxBool showPassword = true.obs;
+  final RxBool isTermsAccepted = false.obs;
   final RxBool _isLoading = false.obs;
   final RxString selectedCode = '+91'.obs;
   RxInt sliding = 0.obs;
-  // String get selectedCode => _selectedCode.value;
+
   /// getters
   bool get isLoading => _isLoading.value;
 
   ///setter
   set setLoading(v) => _isLoading.value = v;
-  void setSelectedPhone(String value) {
-    selectedCode.value = value;
-  }
 
-  var isCustomerSelected = true.obs;
-
-  void toggleSelection() {
-    isCustomerSelected.value = !isCustomerSelected.value;
-  }
-
-
-
-  void register() async {
+  logIn() async {
     setLoading = true;
     try {
-      printWarning('Current country code: ${selectedCode.toString()}');
-      printWarning('Phone number before concatenation: ${phoneNumberController.text.trim()}');
-      String fullPhoneNumber = '${selectedCode.value}${phoneNumberController.text.trim()}';
-      printWarning('Full Phone Number: ${fullPhoneNumber}');
+      final response = await baseServices.apiCall('post', ApiRoutes.logIn, data: {
+        'email': emailController.text.trim(),
+        'password': passwordController.text.trim(),
+      });
+      var data = response!.data;
+      if (response.statusCode == 200) {
+        UserProfileService.saveUserProfileData(data);
+        showSnackBar('Success', data['result']['message'].toString());
+        Get.offAll(() => CustomBottomBar());
+      }  else if(response.statusCode==403) {
+        Get.to(() => OtpScreen(email: emailController.text));
+        resendOtp(emailController.text);
+        showSnackBar('Error', data['result']['message'].toString(),isError: true);
+      }else{
+        showSnackBar('Error', data['result']['message'].toString(),isError: true);
+      }
+    } catch (e) {
+      showSnackBar('Caught Error', e.toString(),isError: true);
+      printWarning('Caught Error: ${e.toString()}');
+    }
+    setLoading = false;
+  }
 
+  Future register(String userRole) async {
+    setLoading = true;
+    try {
+      String fullPhoneNumber = '${selectedCode.value}${phoneNumberController.text.trim()}';
       final response = await baseServices.apiCall(
         'post',
-        ApiRoutes.register,
+        ApiRoutes.registerUser,
         data: {
           'email': emailController.text.trim(),
           'password': passwordController.text.trim(),
           'name': nameController.text.trim(),
           'phone': fullPhoneNumber,
+          'userRole': userRole
         },
       );
-
-      printWarning('Response: ${response?.data}');
-      printWarning('Scode: ${response?.statusCode}');
       var data = response!.data;
       if (response.statusCode == 201) {
+        UserProfileService.saveUserProfileData(data);
         showSnackBar('Success', data['result']['message'].toString());
-        LocalStorage.instance.setUserId(data['result']['user']['id']);
-        printWarning('UserId: ${data['result']['user']['id']}');
-        await Future.delayed(const Duration(seconds: 2));
         Get.offAll(() => OtpScreen(email: emailController.text.trim()));
-      } else if (response.statusCode == 409) {
-        showSnackBar('Error', data['result']['message']);
+      }
+      else if (response.statusCode == 409) {
+        showSnackBar('Error', data['result']['message'],isError: true);
         Get.offAll(() => LoginScreen());
       } else {
         showSnackBar('Error', data['result']['message'].toString(), isError: true);
       }
     } catch (e) {
-      showSnackBar('catch Error', e.toString());
+      showSnackBar('caught Error', e.toString());
       debugPrint('catch Error Response : ${e.toString()}');
     }
     setLoading = false;
   }
 
 
-  void resendOtp() async {
+  void resendOtp(String? email) async {
     setLoading = true;
     try {
       final response =
           await baseServices.apiCall('post', ApiRoutes.reSendOtp, data: {
-        'email': emailController.text.trim(),
+        'email': email,
       });
       debugPrint('Resend OTP Response: $response');
       debugPrint('Resend OTP Response code: ${response?.statusCode}');
@@ -119,21 +128,19 @@ class AuthController extends GetxController {
             'email': email,
             'verificationCode': pinController.text.trim()
       });
-      debugPrint('Verify OTP Response: $response');
       debugPrint('email: ${emailController.text}');
       debugPrint('verificationCode: ${pinController.text}');
-      if (response!.statusCode == 200) {
-        var data = response.data;
+      var data = response!.data;
+      if (response.statusCode == 200) {
         debugPrint('Verify OTP 200 Response code: ${response.statusCode}');
         showSnackBar('Success', data['message'].toString());
       } else if (response.statusCode == 201) {
         var data = response.data;
         debugPrint('Verify OTP 201 Response code: ${response.statusCode}');
         showSnackBar('Success', data['result']['message'].toString());
-        await Future.delayed(const Duration(seconds: 2));
         Get.offAll(() => LoginScreen());
       } else {
-        showSnackBar('Error', 'Failed to verify OTP. Please try again.');
+        showSnackBar('Error', data['message'],isError: true);
       }
     } catch (e) {
       showSnackBar('Error', e.toString());
@@ -142,32 +149,12 @@ class AuthController extends GetxController {
     setLoading = false;
   }
 
-  void logIn() async {
-    setLoading = true;
-    try {
-      final response = await baseServices.apiCall('post', ApiRoutes.logIn, data: {
-        'email': emailController.text.trim(), 'password': passwordController.text.trim(),
-      });
-      var data = response!.data;
-      if (response.statusCode == 200) {
-        showSnackBar('Success', data['result']['message'].toString());
-        Get.offAll(() => CustomBottomBar());
-      }  else if(response.statusCode==403) {
-        Get.offAll(() => OtpScreen(email: emailController.text.trim()));
-        showSnackBar('Error', data['result']['message'].toString(),isError: true);
-      }else{
-        showSnackBar('Error', data['result']['message'].toString(),isError: true);
-      }
-    } catch (e) {
-      showSnackBar('Error', e.toString(),isError: true);
-    }
-    setLoading = false;
-  }
 
   void forgotPassword() async {
     setLoading = true;
     try {
-      final response = await baseServices.apiCall('post', ApiRoutes.forgotPassword, data: {'email': emailController.text.trim(),
+      final response = await baseServices.apiCall('post', ApiRoutes.forgotPassword, data: {
+        'email': emailController.text.trim(),
       });
       debugPrint('Forgot Password Response: $response');
       debugPrint('Forgot Password Response code: ${response!.statusCode}');
@@ -186,6 +173,7 @@ class AuthController extends GetxController {
   }
 
   void updatePassword() async {
+    setLoading=true;
     try {
       final response = await baseServices.apiCall('post', ApiRoutes.updatePassword, data: {
           'email': emailController.text.trim(),
@@ -205,6 +193,17 @@ class AuthController extends GetxController {
       showSnackBar('Error', e.toString(),isError: true);
       debugPrint('Catch update password error: ${e.toString()}');
     }
+    setLoading=false;
+  }
+
+
+  logOut() async {
+    await LocalStorage.eraseAllLocalStorage();
+    Get.offAll(() => const WelcomeScreen());
+  }
+
+  void setSelectedPhone(String value) {
+    selectedCode.value = value;
   }
 
   bool isValidPassword(String password) {
@@ -222,23 +221,4 @@ class AuthController extends GetxController {
     update();
   }
 
-  void confirmTogglePassword() {
-    confirmPassword.value = !confirmPassword.value;
-    update();
-  }
-
-// demoApiCall() async {
-//   try {
-//     final response = await baseServices.apiCall('GET', 'https://jsonplaceholder.typicode.com/posts');
-//     debugPrint('Demo API Response: ${response?.statusCode} ${response?.data}');
-//     final data = response!.data;
-//     if (response.statusCode == 200) {
-//       showSnackBar('Success', data['message']);
-//     } else {
-//       showSnackBar('Error', data['errorMessage'], isError: true);
-//     }
-//   } catch (e) {
-//     showSnackBar('Error', e.toString(), isError: true);
-//   }
-// }
 }

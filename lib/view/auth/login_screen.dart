@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -7,17 +8,18 @@ import 'package:touch_down/utils/extensions.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/view/auth/forget_password.dart';
 import 'package:touch_down/view/auth/register_screen.dart';
+import 'package:touch_down/view/auth/select_role.dart';
 import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 import 'package:touch_down/widgets/k_snack_bar.dart';
 import 'package:touch_down/widgets/k_svg_icon.dart';
-import 'package:touch_down/widgets/k_textfields.dart';
+import 'package:touch_down/widgets/custom_text_fields/k_textfields.dart';
 
 class LoginScreen extends StatelessWidget {
    LoginScreen({super.key});
 
-  final AuthController controller= Get.put(AuthController());
+  final AuthController loginController= Get.put(AuthController(),tag: 'loginController');
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +40,9 @@ class LoginScreen extends StatelessWidget {
                  4.height,
                  Align(
                      alignment: Alignment.topLeft,
-                     child: Text('Email',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),)),
+                     child: Text('Email',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),)),
                 KTextField(
-                  controller: controller.emailController,
+                  controller: loginController.emailController,
                   obSecureText: false,
                   hintText: 'Your email',
                   context: context,
@@ -49,41 +51,34 @@ class LoginScreen extends StatelessWidget {
                 2.height,
                 Align(
                     alignment: Alignment.topLeft,
-                    child: Text('Password:',style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),)),
+                    child: Text('Password',style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),)),
                KTextField(
-                    controller: controller.passwordController,
+                    controller: loginController.passwordController,
                     hintText: '*********',
-                    suffixIcon: controller.showPassword.value? Icons.visibility: Icons.visibility_off,
-                    obSecureText: controller.showPassword.value,
+                    suffixIcon: loginController.showPassword.value? Icons.visibility: Icons.visibility_off,
+                    obSecureText: loginController.showPassword.value,
                     suffixOnTap: (){
-                      controller.togglePassword();
+                      loginController.togglePassword();
                     },
                     context: context,
                   ),
                 6.height,
-                controller.isLoading
+                loginController.isLoading
                     ?kCircularLoading()
                     :kTextButton(
                   onPressed: (){
-                    if(controller.emailController.text.isEmpty){
+                    if(loginController.emailController.text.isEmpty){
                       showSnackBar('Error', 'Enter email address',isError: true);
-                    }else if(controller.passwordController.text.isEmpty){
+                    }else if(loginController.passwordController.text.isEmpty){
                       showSnackBar('Error', 'Enter password',isError: true);
-                    }else if(!controller.isValidEmail(controller.emailController.text)){
-                      showSnackBar('Error', 'Enter a valid email address',isError: true);
-                    }else if(!controller.isValidPassword(controller.passwordController.text)){
+                    } else if(!loginController.isValidPassword(loginController.passwordController.text)){
                       showSnackBar('Error', 'Password must be at least 8 characters long.',isError: true);
                     }else{
-                      controller.logIn();
+                      loginController.logIn();
                     }
                   },
                   btnText: 'SIGN IN',
-                  textColor: AppColor.blackColor,
-                  color: AppColor.primaryColor,
-                  height: 5.h,
                   width: 50.w,
-                  borderRadius: 26,
-
                 ),
                 2.height,
                 Row(
@@ -101,16 +96,19 @@ class LoginScreen extends StatelessWidget {
                     },
                     child: Text('FORGOT PASSWORD ?',style: primaryTextStyle(fontSize: 11,fontWeight: FontWeight.w600,color: AppColor.lightGreyColor),)),
                 1.height,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Don\'t have an account? ',style: primaryTextStyle(fontSize: 9.0,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),),
-                    GestureDetector(
-                        onTap: (){
-                          Get.offAll(()=> RegisterScreen());
-                        },
-                        child: Text('Sign up here',style: primaryTextStyle(fontSize: 11,fontWeight: FontWeight.w600,color: AppColor.lightGreyColor),)),
-                  ],
+                RichText(
+                  text:  TextSpan(
+                    text: 'Don\'t have an account? ',
+                    style: primaryTextStyle(fontSize: 10.0,fontWeight: FontWeight.w500,color: AppColor.lightGreyColor),
+                    children: <TextSpan>[
+                    TextSpan(text: 'Sign up here',style: primaryTextStyle(fontSize: 11,fontWeight: FontWeight.w600,
+                        color: AppColor.lightGreyColor),
+                      recognizer: TapGestureRecognizer()..onTap=(){
+                      Get.offAll(()=> SelectRole());
+                    }
+                    )
+                    ],
+                  ),
                 ),
                 2.height,
               ],

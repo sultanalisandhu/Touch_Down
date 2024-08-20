@@ -1,31 +1,55 @@
 import 'package:get_storage/get_storage.dart';
+import 'package:touch_down/utils/constants.dart';
 
 class LocalStorage{
-  final GetStorage _storage= GetStorage();
-  final String _bearerToken = 'bearerToken';
-  final String _loginUserId = 'id';
-  static LocalStorage? _instance;
+  static final GetStorage _storage= GetStorage();
+  static const String bearerToken = 'bearerToken';
+  static const String userId = 'userId';
+  static const String coachId = 'coachId';
+  static const String playerId = 'playerId';
 
-  /// getters
-  static LocalStorage get instance {
-    _instance ??= LocalStorage._init();
-    return _instance!;
+
+
+  static void write(String key, dynamic value){
+    _storage.write(key, value);
+    printWarning('key from method write: $key  value: $value');
   }
-  LocalStorage._init();
-
-  /// setters
-  Future<void> setBearerToken(String token) async {
-    await _storage.write(_bearerToken, token);
-    print('tokenIS: $token: readToken: $bearerToken');
-  }
-
-  Future<void> setUserId(id) async {
-    await _storage.write(_loginUserId, id);
-    print('Id: $id: currentUserId: $currentUserId');
+  static dynamic read(String key) {
+    dynamic value = _storage.read(key) ?? '';
+    printWarning('Read key: $key  value: $value');
+    return value;
   }
 
-  String get currentUserId => _storage.read(_loginUserId);
+  static void remove(String key){
+    _storage.remove(key);
+  }
 
-  String get bearerToken=> _storage.read(_bearerToken)??'';
+  static dynamic eraseAllLocalStorage(){
+    _storage.erase();
+  }
+
+  // /// setters
+  //  setBearerToken(String token) async {
+  //   await _storage.write(_bearerToken, token);
+  //   if (kDebugMode) {
+  //     print('tokenIS: $token: readToken: $bearerToken');
+  //   }
+  // }
+  //
+  // static  setUserId(id) async {
+  //   await _storage.write(_loginUserId, id);
+  //   if (kDebugMode) {
+  //     print('Id: $id: currentUserId: $currentUserId');
+  //   }
+  // }
+  // Future<void> setCoachId(String id) async {
+  //   await _storage.write(_coachIdKey, id);
+  //   if (kDebugMode) {
+  //     print('Coach ID: $id');
+  //   }
+  // }
+  // String get bearerToken=> _storage.read(_bearerToken)??'';
+  // String get currentUserId => _storage.read(_loginUserId) ?? '';
+  // String get currentCoachId => _storage.read(_coachIdKey)??'cfcc1add-6e22-44a1-9cbd-c0c15541a170';
 
 }

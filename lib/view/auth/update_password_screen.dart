@@ -8,14 +8,14 @@ import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
-import 'package:touch_down/widgets/k_otp_textfield.dart';
+import 'package:touch_down/widgets/custom_text_fields/k_otp_textfield.dart';
 import 'package:touch_down/widgets/k_snack_bar.dart';
-import 'package:touch_down/widgets/k_textfields.dart';
+import 'package:touch_down/widgets/custom_text_fields/k_textfields.dart';
 
 class UpdatePasswordScreen extends StatelessWidget {
   UpdatePasswordScreen({super.key});
 
-  final AuthController controller = Get.put(AuthController());
+  final AuthController controller = Get.find<AuthController>(tag: 'loginController');
 
   @override
   Widget build(BuildContext context) {
@@ -99,11 +99,7 @@ class UpdatePasswordScreen extends StatelessWidget {
                 ),
                 6.height,
                 controller.isLoading
-                    ?const CircularProgressIndicator(
-                    color: AppColor.whiteColor,
-                    strokeCap: StrokeCap.round,
-                    backgroundColor: Colors.black
-                )
+                    ?kCircularLoading()
                     :kTextButton(
                   onPressed: () {
                     if (controller.emailController.text.isEmpty) {

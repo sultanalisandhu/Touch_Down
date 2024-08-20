@@ -30,7 +30,7 @@ void printError(String text) {
 
 
 TextStyle primaryTextStyle({double? fontSize, FontWeight? fontWeight,Color? color,TextDecoration? textDecoration}){
-  return GoogleFonts.inter(
+  return GoogleFonts.poppins(
       textStyle: TextStyle(
         decoration:textDecoration?? TextDecoration.none,
         fontSize: fontSize !=null ?fontSize.sp: 20.sp,

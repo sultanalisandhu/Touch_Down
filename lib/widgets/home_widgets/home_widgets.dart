@@ -11,7 +11,8 @@ class GameContainer extends StatelessWidget {
   final Function()? onTap;
   final double? radius;
   final double? imgRadius;
-  const GameContainer({super.key, this.iconPath, this.sportName,this.onTap, this.radius, this.imgRadius});
+  final Color? textColor;
+  const GameContainer({super.key, this.iconPath, this.sportName,this.onTap, this.radius, this.imgRadius, this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +21,17 @@ class GameContainer extends StatelessWidget {
       child: Column(
         children: [
            CircleAvatar(
-                radius: radius?? 4.h,
+                radius: radius?? 5.h,
                 backgroundColor: Colors.grey.shade300,
                 backgroundImage: const AssetImage( ImgUtils.containerBorderImg,),
               child: CircleAvatar(
-                radius: imgRadius?? 3.h,
+                radius: imgRadius?? 4.h,
                   backgroundColor: Colors.white,
-                  child: Center(child: Image(image: NetworkImage(iconPath!,),fit: BoxFit.contain,height: 5.h,width: 5.w,))
+                  child: Center(child: Image(image: NetworkImage(iconPath!,),fit: BoxFit.cover,))
               ),
             ),
           1.height,
-          Text(sportName!,style: primaryTextStyle(fontSize: 8,fontWeight: FontWeight.w400),)
+          Text(sportName!,style: primaryTextStyle(fontSize: 8,fontWeight: FontWeight.w400,color: textColor),)
         ],
       ),
     );

@@ -12,6 +12,7 @@ AppBar kAppBar({
     leadingWidth: mQ.width,
     backgroundColor: backgroundColor?? AppColor.whiteColor,
     automaticallyImplyLeading: false,
-    title: Text(titleText!,style: primaryTextStyle(),),centerTitle: true,
+
+    title: Text(titleText!,style: primaryTextStyle(fontSize: 18),),centerTitle: true,
 
   );}

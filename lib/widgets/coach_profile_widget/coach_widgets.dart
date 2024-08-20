@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/widgets/k_svg_icon.dart';
 
 class ReviewCard extends StatelessWidget {
   final String name;
@@ -25,22 +26,23 @@ class ReviewCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
                   name,
-                  style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.bold,),
+                  style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w600),
                 ),
+                const Spacer(),
                 Text(
                   date,
-                  style: primaryTextStyle(fontSize: 8,),
+                  style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400),
                 ),
+                const Spacer(),
                 Row(
                   children: List.generate(5, (index) {
                     return Icon(
                       index < rating ? Icons.star : Icons.star_border,
                       color: Colors.yellow,
-                      size: 2.h,
+                      size: 2.2.h,
                     );
                   }),
                 ),
@@ -49,7 +51,7 @@ class ReviewCard extends StatelessWidget {
             1.height,
             Text(
               review,
-              style: primaryTextStyle(fontSize: 10,),
+              style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400),
             ),
           ],
         ),
@@ -57,6 +59,7 @@ class ReviewCard extends StatelessWidget {
     );
   }
 }
+
 class UserProfileContainer extends StatelessWidget {
   final String matchResult;
   final String matchScore;
@@ -111,16 +114,14 @@ class UserProfileContainer extends StatelessWidget {
   }
 }
 
-
-
-
 Widget coachDetailContainer({
   String? title,
 IconData? iconPath,
+  String? iconPath1,
 }){
   return Container(
-    margin: EdgeInsets.symmetric(vertical: 0.5.h),
-    padding: EdgeInsets.symmetric(horizontal: 3.w,vertical: 1.5.h),
+    margin: EdgeInsets.symmetric(vertical: 0.3.h),
+    padding: EdgeInsets.symmetric(horizontal: 3.w,vertical: 1.h),
     alignment: Alignment.center,
     decoration: BoxDecoration(
         color: AppColor.primaryColor,
@@ -129,8 +130,9 @@ IconData? iconPath,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        iconPath1 !=null?showSvgIconWidget(iconPath: iconPath1):
         Icon(iconPath,color: AppColor.blackColor,size: 4.w,),
-        Text(title!,style: primaryTextStyle(fontSize: 8,fontWeight: FontWeight.w400,color: AppColor.blackColor),),
+        Text(title!,style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
       ],
     ),
   );
