@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:touch_down/controller/coach_controller.dart';
@@ -7,8 +8,12 @@ import 'package:touch_down/controller/home_controller.dart';
 
 class DependencyInjection {
   static void init() async {
-    WidgetsFlutterBinding.ensureInitialized();
+
     await GetStorage.init();
+    // Lock orientation to portrait mode
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     Get.put<GetConnect>(GetConnect());
     Get.put(HomeController(),tag: 'homeController');
     Get.put(CoachController(),tag: 'coachController');

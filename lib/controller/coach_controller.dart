@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import 'package:touch_down/services/user_profile_services.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/local_storage.dart';
 import 'package:touch_down/view/auth/otp_screen.dart';
+import 'package:touch_down/view/coach_ui/coach_index_page.dart';
 import 'package:touch_down/widgets/k_snack_bar.dart';
 import 'package:intl/intl.dart';
 
@@ -80,6 +82,13 @@ class CoachController extends GetxController {
       var data= response!.data;
       if(response.statusCode==200){
         setGetCoachBySportIdModel= GetCoachBySportIdModel.fromJson(response.data);
+        // String userId= data['result']['coaches']['userId'];
+        // log('getCoachBySportId ${userId}');
+        // String savedUserId = LocalStorage.read(LocalStorage.userId);
+        // if (savedUserId == '' || savedUserId.isEmpty) {
+        //   LocalStorage.write(LocalStorage.userId, userId);
+        // }
+
       }else{
         showSnackBar('Error', data['message']);
       }
@@ -88,16 +97,48 @@ class CoachController extends GetxController {
       debugPrint('Caught Error ${e.toString()}');
     }
   }
-  getCoachByLocation(String sportId)async{
+
+
+  Future<void> getUserById([String? userId]) async {
+    setLoading = true;
+    try {
+
+      String? savedUserId = LocalStorage.read(LocalStorage.userId);
+      String? finalUserId = userId?.isNotEmpty == true ? userId : savedUserId;
+      if (finalUserId == null || finalUserId.isEmpty) {
+        throw Exception('No userId provided or found in local storage');
+      }
+      debugPrint('userId To End Point $finalUserId');
+      final response = await baseServices.apiCall(
+        'get', '${ApiRoutes.userDetailsByID}/$finalUserId',
+      );
+
+      var data = response!.data;
+      if (response.statusCode == 200) {
+        setUserDetailModel = UserDetailModel.fromJson(data);
+      } else {
+        showSnackBar('Error', data['status'], isError: true);
+      }
+    } catch (e) {
+      showSnackBar('Caught Error', e.toString(), isError: true);
+      printWarning('Caught Error ${e.toString()}');
+    } finally {
+      setLoading = false;
+    }
+  }
+
+
+
+  getCoachByLocation(String cityName)async{
     try{
       final response= await baseServices.apiCall('post', ApiRoutes.getCoachByLocation,data: {
-        'location' : '',
+        'location' : cityName,
       });
       var data= response!.data;
       if(response.statusCode==200){
         setGetCoachByLocationModel= GetCoachByLocationMOdel.fromJson(response.data);
       }else{
-        showSnackBar('Error', data['message']);
+        showSnackBar('Error', data['message'],isError: true);
       }
     }catch(e){
       showSnackBar('Caught Error', e.toString(),isError: true);
@@ -137,7 +178,7 @@ class CoachController extends GetxController {
     setLoading=false;
   }
 
-  void updateCoachDetails(BuildContext context) async {
+  void updateCoachDetails(context) async {
     final String coachId =  LocalStorage.read(LocalStorage.coachId);
     try {
       final requestData = {
@@ -157,7 +198,7 @@ class CoachController extends GetxController {
       final response = await baseServices.apiCall('patch', ApiRoutes.updateCoachDetails, data: requestData);
       var data = response!.data;
       if (response.statusCode == 201) {
-        // getUserDetails();
+        getUserById();
         Navigator.pop(context);
         Navigator.pop(context);
         showSnackBar('Success', data['result']['message']);
@@ -172,49 +213,31 @@ class CoachController extends GetxController {
   }
 
 
-  getUserDetails()async{
-    setLoading=true;
-    try{
-      String userId = LocalStorage.read(LocalStorage.userId);
-      debugPrint('userId To ENd Point $userId');
-      final response= await baseServices.apiCall('get', '${ApiRoutes.userDetailsByID}/$userId');
-      var data=response!.data;
-      if(response.statusCode==200){
-        setUserDetailModel= UserDetailModel.fromJson(response.data);
-      }else{
-        showSnackBar('Error', data['status'],isError: true);
-      }
-    }catch(e){
-      showSnackBar('Caught Error', e.toString(),isError: true);
-    }
-    setLoading=false;
-  }
 
-
-  getCoachMonthAvailability({required int month, required int year}) async {
+  getCoachMonthAvailability({required int month, required int year,required String coachId}) async {
     try {
-      String coachId = LocalStorage.read(LocalStorage.coachId);
       final response = await baseServices.apiCall('post', ApiRoutes.getCoachMonth, data: {
-        'coachId': coachId,
+        'coachId': coachId.toString(),
         'month': month.toString(),
         'year': year.toString(),
       });
       printWarning('Month Selected ${month.toString()}');
       printWarning('Year Selected ${year.toString()}');
-        var data= response!.data;
-        if (response.statusCode == 200) {
-          setCoachMonthlyAvailability = CoachMonthlyAvailability.fromJson(data);
-        } else {
-          showSnackBar('Error', data['message'], isError: true);
-        }
+      printWarning('coachId ${coachId.toString()}');
+      var data= response!.data;
+      if (response.statusCode == 200) {
+        setCoachMonthlyAvailability = CoachMonthlyAvailability.fromJson(data);
+      } else {
+        showSnackBar('Error', data['message'], isError: true);
+        print(response.statusCode);
+      }
     } catch (e) {
       showSnackBar('Caught Error', e.toString(), isError: true);
     }
   }
 
-  getCoachTimeAvailability(DateTime selectedDate) async {
+  getCoachTimeAvailability(DateTime selectedDate,String coachId) async {
     try {
-      String coachId = LocalStorage.read(LocalStorage.coachId);
       final response = await baseServices.apiCall('post', ApiRoutes.getCoachTime, data: {
         'coachId': coachId,
         'date': DateFormat('yyyy-MM-dd').format(selectedDate),
@@ -231,7 +254,7 @@ class CoachController extends GetxController {
     }
   }
 
-  createSession(BuildContext context) async {
+  createSession(context) async {
     try {
       String coachId = LocalStorage.read(LocalStorage.coachId);
       String userId = LocalStorage.read(LocalStorage.userId);
@@ -339,7 +362,8 @@ class CoachController extends GetxController {
 
 
   ///Functions
-  void incrementMonth() {
+
+  incrementMonth(String coachId) {
     DateTime currentDate = selectedDate.value;
     if (currentDate.month == 12) {
       selectedDate.value = DateTime(currentDate.year + 1, 1, currentDate.day);
@@ -347,12 +371,13 @@ class CoachController extends GetxController {
       selectedDate.value = DateTime(currentDate.year, currentDate.month + 1, currentDate.day);
     }
     getCoachMonthAvailability(
-      month: selectedDate.value.month,
-      year: selectedDate.value.year,
+        month: selectedDate.value.month,
+        year: selectedDate.value.year,
+        coachId: coachId
     );
   }
 
-  void decrementMonth() {
+  decrementMonth(String coachId) {
     DateTime currentDate = selectedDate.value;
     if (currentDate.month == 1) {
       selectedDate.value = DateTime(currentDate.year - 1, 12, currentDate.day);
@@ -360,10 +385,12 @@ class CoachController extends GetxController {
       selectedDate.value = DateTime(currentDate.year, currentDate.month - 1, currentDate.day);
     }
     getCoachMonthAvailability(
-      month: selectedDate.value.month,
-      year: selectedDate.value.year,
+        month: selectedDate.value.month,
+        year: selectedDate.value.year,
+        coachId: coachId
     );
   }
+
 
   Future<void> selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -400,6 +427,6 @@ class CoachController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getUserDetails();
+    getUserById();
   }
 }

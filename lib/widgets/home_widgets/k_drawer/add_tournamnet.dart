@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/widgets/home_widgets/k_drawer/add_team.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 import 'package:touch_down/widgets/custom_text_fields/k_textfields.dart';

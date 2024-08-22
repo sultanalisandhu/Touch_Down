@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/widgets/coach_profile_widget/coach_widgets.dart';
 import 'package:touch_down/widgets/home_widgets/home_widgets.dart';
 import 'package:touch_down/widgets/k_buttons.dart';

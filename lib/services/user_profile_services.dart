@@ -6,6 +6,7 @@ import 'package:touch_down/view/profile_ui/user_profile_ui/user_profile_screen.d
 class UserProfileService {
   static void saveUserProfileData(Map<String, dynamic> data) {
     String userId = data['result']['user']['id'];
+    print('UsrID: ${userId}');
     String bearerToken= data['result']['token'];
     LocalStorage.write(LocalStorage.userId, userId);
     LocalStorage.write(LocalStorage.bearerToken, bearerToken);
@@ -20,15 +21,20 @@ class UserProfileService {
       String playerId = data['result']['user']['player']['id'];
       LocalStorage.write(LocalStorage.playerId, playerId);
     }
+    if (data['result']['user']['agency'] != null && data['result']['user']['agency'].isNotEmpty) {
+      String playerId = data['result']['user']['agency']['id'];
+      LocalStorage.write(LocalStorage.playerId, playerId);
+    }
   }
 
   static Widget getProfileScreen() {
     String? coachId = LocalStorage.read(LocalStorage.coachId);
     String? playerId = LocalStorage.read(LocalStorage.playerId);
+    String? agencyId = LocalStorage.read(LocalStorage.agencyId);
 
-    if (coachId != null) {
+    if (coachId != '') {
       return CoachProfileScreen();
-    } else if (playerId != null) {
+    } else if (playerId != '') {
       return UserProfileScreen();
     } else {
       return UserProfileScreen();

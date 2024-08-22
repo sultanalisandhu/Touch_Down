@@ -54,8 +54,8 @@ class LocationController extends GetxController {
 
       Placemark place = placeMarks[0];
       currentAddress.value =
-      '${place.street}, ${place.subLocality}, ${place.locality}, ${place.country}';
-      log('Address: ${currentAddress.value}');
+      '${place.locality}';
+      log('Address In The Get Location: ${currentAddress.value}');
     } catch (e) {
       log('Error in getting address: $e');
     }

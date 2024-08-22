@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:touch_down/controller/coach_controller.dart';
 import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/k_app_bar/k_app_bar.dart';
 import 'package:touch_down/widgets/k_buttons.dart';

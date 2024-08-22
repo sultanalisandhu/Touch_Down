@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:touch_down/controller/auth_controller.dart';
+import 'package:touch_down/controller/coach_controller.dart';
 import 'package:touch_down/controller/home_controller.dart';
 import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/view/coach_ui/coach_index_page.dart';
 import 'package:touch_down/view/more_ui/pick_drop_screen.dart';
 import 'package:touch_down/view/auth/coach_registration_screens/coach_registration1.dart';
@@ -17,7 +18,7 @@ class kDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HomeController homeController=Get.put(HomeController(),tag: 'homeController');
+    final CoachController coachController=Get.put(CoachController(),tag: 'coachController');
 
     return Drawer(
       backgroundColor: AppColor.whiteColor,
@@ -80,6 +81,9 @@ class kDrawer extends StatelessWidget {
                              Get.put(AuthController().logOut());
                             case 'Book My Trainer/Coach':
                               Get.to(()=> CoachIndexPage());
+                              final sportId= coachController.homeController.allSportsModel.result!.data![0].id;
+                              coachController.getCoachBySportId(sportId!);
+
                               break;
                           }
                         },

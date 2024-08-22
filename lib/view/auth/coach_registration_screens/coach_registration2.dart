@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:touch_down/controller/coach_controller.dart';
 import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 import 'package:touch_down/widgets/auth_widgets/k_check_box.dart';
@@ -244,7 +244,7 @@ class CoachRegistration2 extends StatelessWidget {
                         backgroundColor: AppColor.whiteColor,
                         backgroundImage: coachController.selectedImagePath.value.isEmpty
                             ? const NetworkImage(
-                            'https://img.freepik.com/premium-vector/blue-circle-with-white-user-vector_941526-5784.jpg?w=900')
+                            'https://cdn-icons-png.flaticon.com/512/1077/1077114.png')
                             : FileImage(File(coachController.selectedImagePath.value)) as ImageProvider,
                       ),
                     ),

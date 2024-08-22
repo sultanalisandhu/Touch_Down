@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/asset_utils.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/view/auth/register_screen.dart';
 import 'package:touch_down/widgets/auth_widgets/auth_widget.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';
@@ -12,7 +12,6 @@ import 'coach_registration_screens/coach_registration1.dart';
 class SelectRole extends StatelessWidget {
   SelectRole({super.key});
 
-  // Variable to hold the selected role
   final RxString selectedRole = ''.obs;
 
   @override

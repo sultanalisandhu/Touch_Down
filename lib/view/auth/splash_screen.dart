@@ -5,7 +5,7 @@ import 'package:touch_down/controller/splash_controller.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 
-class SplashScreen extends GetView<LocationController> {
+class SplashScreen extends StatelessWidget {
   SplashScreen({super.key});
   final SplashController splashController=Get.put(SplashController());
 

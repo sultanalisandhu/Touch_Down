@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/view/more_ui/book_venue_inner.dart';
 import 'package:touch_down/view/more_ui/pick_drop_screen.dart';
 import 'package:touch_down/widgets/home_widgets/home_widgets.dart';

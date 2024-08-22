@@ -5,9 +5,12 @@ import 'package:sizer/sizer.dart';
 import 'package:touch_down/controller/coach_controller.dart';
 import 'package:touch_down/model/coach_time_availability.dart';
 import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/view/profile_ui/coach_profile_ui/book_payment_methods.dart';
+import 'package:touch_down/widgets/coach_profile_widget/book_coach_dialogue/select_time_container.dart';
+import 'package:touch_down/widgets/coach_profile_widget/coach_widgets.dart';
 import 'package:touch_down/widgets/coach_profile_widget/double_checkbox.dart';
+import 'package:touch_down/widgets/home_widgets/home_widgets.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 
 
@@ -15,8 +18,9 @@ class BookCoachDialog extends StatelessWidget {
   final String? imgUrl;
   final String? coachName;
   final String? coachSport;
+  final String? coachId;
 
-  const BookCoachDialog({super.key, this.imgUrl, this.coachName, this.coachSport});
+  const BookCoachDialog({super.key, this.imgUrl, this.coachName, this.coachSport, this.coachId});
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +39,10 @@ class BookCoachDialog extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.15,
-                      width: MediaQuery.of(context).size.width * 0.25,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.blue,
-                        border: Border.all(color: AppColor.primaryColor, width: 5),
-                        image: DecorationImage(
-                          image: NetworkImage(imgUrl!),
-                        ),
-                      ),
+                    imgContainerCoach(
+                      height: 13.h,
+                        width: 25.w,
+                        imgUrl: imgUrl,
                     ),
                     SizedBox(width: MediaQuery.of(context).size.width * 0.05),
                     Column(
@@ -53,7 +50,7 @@ class BookCoachDialog extends StatelessWidget {
                       children: [
                         Text(
                           coachName!,
-                          style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                          style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w500),
                         ),
                         Text(
                           coachSport!,
@@ -68,7 +65,7 @@ class BookCoachDialog extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: coachController.decrementMonth,
+                      onPressed:()=> coachController.decrementMonth(coachId!),
                       icon: Icon(Icons.arrow_back, size: 3.h),
                     ),
                     Text(
@@ -79,15 +76,15 @@ class BookCoachDialog extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: coachController.incrementMonth,
+                      onPressed: ()=> coachController.incrementMonth(coachId!),
                       icon: Icon(Icons.arrow_forward, size: 3.h),
                     ),
                   ],
                 ),
                 2.height,
-                availableDates.isNotEmpty
+                coachController.coachMonthlyAvailability.result!.availableDates!.isNotEmpty
                     ? SizedBox(
-                  height: 70,
+                  height: 10.h,
                   width: MediaQuery.of(context).size.width,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -97,27 +94,14 @@ class BookCoachDialog extends StatelessWidget {
                       String day = DateFormat('EEE').format(date);
                       String dateNum = DateFormat('d').format(date);
                       bool isSelected = coachController.selectedDate.value == date;
-                      return GestureDetector(
+                      return SelectDateContainer(
                         onTap: (){
                           coachController.selectedDate.value = date;
-                          coachController.getCoachTimeAvailability(date);
+                          coachController.getCoachTimeAvailability(date,coachId!);
                         },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                          margin: const EdgeInsets.symmetric(horizontal: 2),
-                          decoration: BoxDecoration(
-                            color: isSelected?AppColor.primaryColor: Colors.transparent,
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: isSelected?Colors.transparent:AppColor.primaryColor)
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(dateNum, style: primaryTextStyle(fontSize: 10)),
-                              Text(day, style: primaryTextStyle(fontSize: 10)),
-                            ],
-                          ),
-                        ),
+                        isSelected: isSelected,
+                        date: dateNum,
+                        day: day,
                       );
                     },
                   ),
@@ -161,31 +145,16 @@ class BookCoachDialog extends StatelessWidget {
                         return Obx(() {
                           String slotId = coachController.coachTimeAvailability.result!.slots![index].id.toString();
                           bool isSelected = coachController.selectedSlotId.value == slotId;
-                          return GestureDetector(
-                            onTap: () {
+                          return SelectTimeContainer(
+                            onTap: (){
                               print('Tapped...!');
                               coachController.selectedSlotId.value = slotId;
                               print('Slot ID: $slotId');
                               print('Selected Slot ID: ${coachController.selectedSlotId.value}');
                               print('Is Selected: $isSelected');
                             },
-                            child: Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: isSelected ? AppColor.primaryColor : Colors.transparent,
-                                border: Border.all(
-                                  color: isSelected ? AppColor.primaryColor : Colors.green,
-                                ),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Text(
-                                coachController.coachTimeAvailability.result!.slots![index].formattedStartTime.toString(),
-                                style: primaryTextStyle(
-                                  fontSize: 11,
-                                  color: isSelected ? Colors.white : Colors.black,
-                                ),
-                              ),
-                            ),
+                              isSelected: isSelected,
+                            time: coachController.coachTimeAvailability.result!.slots![index].formattedStartTime.toString(),
                           );
                         });
                       },

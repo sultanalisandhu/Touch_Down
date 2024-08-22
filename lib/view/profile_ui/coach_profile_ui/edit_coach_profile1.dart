@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:touch_down/controller/coach_controller.dart';
 import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/view/profile_ui/coach_profile_ui/edit_coach_profile2.dart';
 import 'package:touch_down/widgets/k_app_bar/k_app_bar.dart';
 import 'package:touch_down/widgets/k_buttons.dart';

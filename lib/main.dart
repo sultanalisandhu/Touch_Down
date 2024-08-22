@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
-import 'package:touch_down/services/dependency_services.dart';
+import 'package:touch_down/services/dependency_injection_services.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/view/auth/select_role.dart';
 import 'package:touch_down/view/auth/splash_screen.dart';
@@ -19,6 +19,7 @@ import 'view/profile_ui/coach_profile_ui/coach_profile_screen.dart';
 
 
 void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
   DependencyInjection.init();
   runApp(DevicePreview(
       enabled: false,

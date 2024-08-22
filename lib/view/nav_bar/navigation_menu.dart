@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:touch_down/services/user_profile_services.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/view/coach_ui/coach_index_page.dart';
 import 'package:touch_down/view/more_ui/search_venue_screen.dart';
 import 'package:touch_down/view/home_ui/home_screen.dart';
@@ -66,6 +66,9 @@ class CustomBottomBar extends StatelessWidget {
                         BlendMode.srcIn,
                       ),
                       child: showSvgIconWidget(
+                        onTap: (){
+                          _currentIndex.value = index;
+                        },
                         height:2.5.h,
                         iconPath: listOfIcons[index],
                       ),

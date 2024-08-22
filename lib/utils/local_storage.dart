@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get_storage/get_storage.dart';
 import 'package:touch_down/utils/constants.dart';
 
@@ -7,16 +9,17 @@ class LocalStorage{
   static const String userId = 'userId';
   static const String coachId = 'coachId';
   static const String playerId = 'playerId';
+  static const String agencyId = 'agencyId';
 
 
 
   static void write(String key, dynamic value){
     _storage.write(key, value);
-    printWarning('key from method write: $key  value: $value');
+    // printWarning('key from method write: $key  value: $value');
   }
   static dynamic read(String key) {
     dynamic value = _storage.read(key) ?? '';
-    printWarning('Read key: $key  value: $value');
+    // log('Read key: $key  value: $value');
     return value;
   }
 

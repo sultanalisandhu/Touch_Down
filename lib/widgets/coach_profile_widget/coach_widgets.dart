@@ -1,7 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/widgets/k_svg_icon.dart';
 
 class ReviewCard extends StatelessWidget {
@@ -66,7 +68,7 @@ class UserProfileContainer extends StatelessWidget {
   final String matchName;
   final String matchLocation;
 
-  UserProfileContainer({required this.matchResult, required this.matchScore, required this.matchName, required this.matchLocation,});
+  const UserProfileContainer({super.key, required this.matchResult, required this.matchScore, required this.matchName, required this.matchLocation,});
 
   @override
   Widget build(BuildContext context) {
@@ -130,10 +132,31 @@ IconData? iconPath,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        iconPath1 !=null?showSvgIconWidget(iconPath: iconPath1):
-        Icon(iconPath,color: AppColor.blackColor,size: 4.w,),
+        iconPath1 !=null
+            ? showSvgIconWidget(iconPath: iconPath1)
+            : Icon(iconPath,color: AppColor.blackColor,size: 4.w,),
         Text(title!,style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w500),),
       ],
+    ),
+  );
+}
+
+Widget imgContainerCoach({
+  final String? imgUrl,
+  final double? height,
+  final double? width,
+  final Color? borderColor
+}){
+  return Container(
+    height: height,
+    width: width,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+      color: Colors.blue,
+      border: Border.all(color: borderColor?? AppColor.primaryColor, width: 2),
+      image: DecorationImage(
+        image: NetworkImage(imgUrl!),
+      ),
     ),
   );
 }

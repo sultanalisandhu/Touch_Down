@@ -70,8 +70,8 @@ class User {
     role = json['role'];
     avatar = json['avatar'];
     phone = json['phone'];
-    coach = json['coach'] != null ? new Coach.fromJson(json['coach']) : null;
-    player = json['player'];
+    coach = json['coach'] != null ?  Coach.fromJson(json['coach']) : null;
+    player = json['player'] != null ?  Player.fromJson(json['player']) : null;
     agency = json['agency'];
   }
 
@@ -104,6 +104,7 @@ class Player {
   int? rating;
   String? createdAt;
   String? updatedAt;
+  Sport? sport;
 
   Player(
       {this.id,
@@ -116,7 +117,9 @@ class Player {
         this.draw,
         this.rating,
         this.createdAt,
-        this.updatedAt});
+        this.updatedAt,
+        this.sport
+      });
 
   Player.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -130,23 +133,9 @@ class Player {
     rating = json['rating'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
+    sport = json['sport'] != null ?  Sport.fromJson(json['sport']) : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['userId'] = this.userId;
-    data['sportId'] = this.sportId;
-    data['matches'] = this.matches;
-    data['won'] = this.won;
-    data['location'] = this.location;
-    data['lost'] = this.lost;
-    data['draw'] = this.draw;
-    data['rating'] = this.rating;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    return data;
-  }
 }
 
 class Coach {
@@ -249,14 +238,17 @@ class Sport {
   String? name;
   String? avatar;
   String? attributes;
+  int? playerLimit;
 
-  Sport({this.id, this.name, this.avatar, this.attributes});
+  Sport({this.id, this.name, this.avatar, this.attributes, this.playerLimit});
 
   Sport.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     avatar = json['avatar'];
     attributes = json['attributes'];
+    playerLimit = json['playerLimit'];
+
   }
 
   Map<String, dynamic> toJson() {

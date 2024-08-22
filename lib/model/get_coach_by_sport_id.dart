@@ -65,6 +65,7 @@ class Coach {
   DateTime? createdAt;
   DateTime? updatedAt;
   User? user;
+  Sport? sport;
 
   Coach({
     this.id,
@@ -83,6 +84,7 @@ class Coach {
     this.createdAt,
     this.updatedAt,
     this.user,
+    this.sport,
   });
 
   factory Coach.fromJson(Map<String, dynamic> json) => Coach(
@@ -161,5 +163,36 @@ class User {
     "id": id,
     "isActive": isActive,
     "phone": phone,
+  };
+}
+class Sport {
+  String? id;
+  String? name;
+  String? avatar;
+  dynamic attributes;
+  int? playerLimit;
+
+  Sport({
+    this.id,
+    this.name,
+    this.avatar,
+    this.attributes,
+    this.playerLimit,
+  });
+
+  factory Sport.fromJson(Map<String, dynamic> json) => Sport(
+    id: json["id"],
+    name: json["name"],
+    avatar: json["avatar"],
+    attributes: json["attributes"],
+    playerLimit: json["playerLimit"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "avatar": avatar,
+    "attributes": attributes,
+    "playerLimit": playerLimit,
   };
 }

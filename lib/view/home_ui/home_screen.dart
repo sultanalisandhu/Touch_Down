@@ -8,7 +8,7 @@ import 'package:touch_down/api_client/api_routes.dart';
 import 'package:touch_down/controller/home_controller.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/view/home_ui/cricket_home_screen.dart';
 import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/home_widgets/aimated_container.dart';

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/asset_utils.dart';
-import 'package:touch_down/utils/extensions.dart';
+import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/view/auth/login_screen.dart';
 import 'package:touch_down/view/auth/register_screen.dart';
 import 'package:touch_down/view/auth/select_role.dart';
