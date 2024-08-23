@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
 import 'package:touch_down/api_client/api_routes.dart';
 import 'package:touch_down/controller/coach_controller.dart';
-import 'package:touch_down/model/user_detail_model.dart';
+import 'package:touch_down/model/get_user_by_id_model.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions/extensions.dart';
@@ -18,17 +18,23 @@ import 'package:touch_down/widgets/home_widgets/k_drawer/k_drawer.dart';
 import 'package:touch_down/widgets/k_buttons.dart';
 
 class CoachProfileScreen extends StatelessWidget {
-  final String? userId;
-   CoachProfileScreen({super.key, this.userId});
+
+   CoachProfileScreen({super.key, });
    final CoachController coachController = Get.find<CoachController>(tag: 'coachController');
 
    @override
-   @override
    Widget build(BuildContext context) {
-     printWarning('UserId IN THE Coach profile page ${userId}');
-     coachController.getUserById(userId);
+     // final String userId= Get.arguments['userId'];
+     // coachController.getUserById(userId.toString());
+     // printWarning('coach profile user id received from the coach index page $userId');
      return Obx(() {
-       final userDetail = coachController.userDetailModel.result?.user;
+       if (coachController.isLoading) {
+         return Scaffold(
+           backgroundColor: AppColor.primaryColor,
+           body: kCircularLoading(),
+         );
+       }
+       final userDetail = coachController.userByIdModel.result?.user;
        final coach = userDetail?.coach;
 
        if (userDetail == null || coach == null) {
@@ -240,19 +246,18 @@ class CoachProfileScreen extends StatelessWidget {
 
 
   void bookCoach(BuildContext context) {
-    final userDetail = coachController.userDetailModel.result!.user;
+    final userDetail = coachController.userByIdModel.result!.user;
     final coach = userDetail!.coach;
-
     showDialog(
       context: context,
-      builder: (context) =>
-          BookCoachDialog(
+      builder: (context) => BookCoachDialog(
             imgUrl: userDetail.avatar != null
                 ? '${ApiRoutes.baseUrl}${userDetail.avatar}'
                 : 'https://img.freepik.com/free-psd/portrait-bearded-man-white-sweatshirt-3d-rendering_1142-53186.jpg?t=st=1720678505~exp=1720682105~hmac=033bb8536ff19635e6b47aba507d9b1d51d115e5ffbc0cb7cb3565a45be6a384&w=900',
             coachName: userDetail.name ?? '',
             coachSport: coach!.sport!.name,
             coachId: coach.id,
+            coachLocation: '${coach.address!},${coach.location}',
           ),
     );
   }

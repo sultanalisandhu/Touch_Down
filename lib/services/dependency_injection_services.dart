@@ -8,16 +8,15 @@ import 'package:touch_down/controller/home_controller.dart';
 
 class DependencyInjection {
   static void init() async {
-
+    WidgetsFlutterBinding.ensureInitialized();
     await GetStorage.init();
-    // Lock orientation to portrait mode
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
     Get.put<GetConnect>(GetConnect());
-    Get.put(HomeController(),tag: 'homeController');
-    Get.put(CoachController(),tag: 'coachController');
-    Get.put(LocationController(),tag: 'locationController');
+    Get.put(HomeController(), tag: 'homeController');
+    Get.put(CoachController(), tag: 'coachController');
+    Get.put(LocationController(), tag: 'locationController');
   }
 }
 

@@ -65,29 +65,3 @@ class SelectTimeContainer extends StatelessWidget {
     );
   }
 }
-// GestureDetector(
-// onTap: () {
-// print('Tapped...!');
-// coachController.selectedSlotId.value = slotId;
-// print('Slot ID: $slotId');
-// print('Selected Slot ID: ${coachController.selectedSlotId.value}');
-// print('Is Selected: $isSelected');
-// },
-// child: Container(
-// alignment: Alignment.center,
-// decoration: BoxDecoration(
-// color: isSelected ? AppColor.primaryColor : Colors.transparent,
-// border: Border.all(
-// color: isSelected ? AppColor.primaryColor : Colors.green,
-// ),
-// borderRadius: BorderRadius.circular(8.0),
-// ),
-// child: Text(
-// coachController.coachTimeAvailability.result!.slots![index].formattedStartTime.toString(),
-// style: primaryTextStyle(
-// fontSize: 11,
-// color: isSelected ? Colors.white : Colors.black,
-// ),
-// ),
-// ),
-// );

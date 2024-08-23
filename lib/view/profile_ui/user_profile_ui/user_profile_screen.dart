@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
+import 'package:touch_down/controller/coach_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions/extensions.dart';
+import 'package:touch_down/utils/extensions/text_capital_ext.dart';
 import 'package:touch_down/widgets/coach_profile_widget/coach_widgets.dart';
 import 'package:touch_down/widgets/home_widgets/home_widgets.dart';
-import 'package:touch_down/widgets/k_buttons.dart';
 
 class UserProfileScreen extends StatelessWidget {
+
+  UserProfileScreen({super.key});
+  final CoachController coachController = Get.find<CoachController>(tag: 'coachController');
+  final RxInt selectedIndex = 0.obs;
   @override
   Widget build(BuildContext context) {
-    RxInt selectedIndex = 0.obs;
-
     return Obx(()=> Scaffold(
         backgroundColor: AppColor.primaryColor,
         appBar: AppBar(
@@ -22,12 +26,12 @@ class UserProfileScreen extends StatelessWidget {
           children: [
             Column(
               children: [
-                /// green container
+                // green container
                 Container(
                   color:AppColor.primaryColor,
                   height: mQ.width * 0.15 + 50,
                 ),
-                /// White container
+                // White container
                 Expanded(
                   child: Container(
                     decoration: const BoxDecoration(
@@ -35,16 +39,16 @@ class UserProfileScreen extends StatelessWidget {
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
                     ),
                     child: ListView(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       children: [
                         SizedBox(height: mQ.width * 0.15),
                         Text(
-                          'User Name',
+                          coachController.userByIdModel.result!.user!.name!.toCapitalize,
                           textAlign: TextAlign.center,
                           style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w700,),
                         ),
                         Text(
-                          'Cricket Coach',
+                          coachController.userByIdModel.result!.user!.player!.sport!.name!.toCapitalize,
                           textAlign: TextAlign.center,
                           style: primaryTextStyle(fontSize: 10,fontWeight: FontWeight.w400),
                         ),
@@ -84,8 +88,8 @@ class UserProfileScreen extends StatelessWidget {
                         ),
                         1.height,
                         Container(
-                          height: mQ.height*0.15,
-                          width: mQ.width*0.15,
+                          height: 15.h,
+                          width: 15.w,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: AppColor.primaryColor)
@@ -99,18 +103,25 @@ class UserProfileScreen extends StatelessWidget {
                           ),
                         ),
                         1.height,
-                        ListView.builder(
-                            itemCount: 6,
+                        if (coachController.userByIdModel.result?.user?.player?.matches != null)
+                          ListView.builder(
+                            itemCount: coachController.userByIdModel.result!.user!.player!.matches!.length,
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (context,index){
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
                               return UserProfileContainer(
-                                  matchResult: 'Won the match ',
-                                  matchScore: '50 runs for  40 balls',
-                                  matchName: 'Match A',
-                                matchLocation: '( Cricket grounds, JP Nagar, Bengaluru)',
-                                  );
-                            })
+                                matchResult: coachController.userByIdModel.result!.user!.player!.matches![index].result.toString(),
+                                matchScore: '50 runs for 40 balls',
+                                matchName: 'Match ${index}',
+                                matchLocation: coachController.userByIdModel.result!.user!.player!.matches![index].location.toString(),
+                              );
+                            },
+                          )
+                        else
+                          Center(
+                            child: Text('No matches available',style: primaryTextStyle(fontWeight: FontWeight.w400,fontSize: 13),),
+                          ),
+
                       ],
                     ),
                   ),

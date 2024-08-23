@@ -21,6 +21,7 @@ class ApiRoutes{
   static const uploadImg= 'upload';
   static const getCoachMonth= 'api/availability/monthly';
   static const getCoachTime= 'api/availability/daily';
+  static const createSession= 'api/session/';
   static const getCoachBySportId = 'api/coach';
   static const getCoachByLocation = 'api/coach/location';
   static const addCoachAvailability = 'api/availability';

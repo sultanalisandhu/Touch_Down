@@ -155,6 +155,7 @@ Widget imgContainerCoach({
       color: Colors.blue,
       border: Border.all(color: borderColor?? AppColor.primaryColor, width: 2),
       image: DecorationImage(
+        fit: BoxFit.cover,
         image: NetworkImage(imgUrl!),
       ),
     ),

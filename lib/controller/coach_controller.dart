@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
@@ -11,12 +10,11 @@ import 'package:touch_down/model/coach_monthly_availability.dart';
 import 'package:touch_down/model/coach_time_availability.dart';
 import 'package:touch_down/model/get_coach_by_location.dart';
 import 'package:touch_down/model/get_coach_by_sport_id.dart';
-import 'package:touch_down/model/user_detail_model.dart';
+import 'package:touch_down/model/get_user_by_id_model.dart';
 import 'package:touch_down/services/user_profile_services.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/local_storage.dart';
 import 'package:touch_down/view/auth/otp_screen.dart';
-import 'package:touch_down/view/coach_ui/coach_index_page.dart';
 import 'package:touch_down/widgets/k_snack_bar.dart';
 import 'package:intl/intl.dart';
 
@@ -24,11 +22,11 @@ class CoachController extends GetxController {
   BaseServices baseServices = BaseServices();
   final HomeController homeController= Get.find<HomeController>(tag: 'homeController');
   ///Model Type Variable
-  final Rx<UserDetailModel> _userDetailModel= UserDetailModel().obs;
+  final Rx<UserByIdModel> _userByIdModel= UserByIdModel().obs;
   final Rx<CoachMonthlyAvailability> _coachMonthlyAvailability = CoachMonthlyAvailability().obs;
   final Rx<CoachTimeAvailability> _coachTimeAvailability = CoachTimeAvailability().obs;
   final Rx<GetCoachBySportIdModel> _getCoachBySportIdModel = GetCoachBySportIdModel().obs;
-  final Rx<GetCoachByLocationMOdel> _getCoachByLocationModel = GetCoachByLocationMOdel().obs;
+  final Rx<GetCoachByLocationModel> _getCoachByLocationModel = GetCoachByLocationModel().obs;
 
   ///Text Editing Controllers
   TextEditingController cNameController = TextEditingController();
@@ -60,49 +58,27 @@ class CoachController extends GetxController {
 
   ///getters
   bool get isLoading => _isLoading.value;
-  UserDetailModel get userDetailModel=> _userDetailModel.value;
+  UserByIdModel get userByIdModel=> _userByIdModel.value;
   CoachMonthlyAvailability get coachMonthlyAvailability=> _coachMonthlyAvailability.value;
   CoachTimeAvailability get coachTimeAvailability=> _coachTimeAvailability.value;
   GetCoachBySportIdModel get coachBySportId=> _getCoachBySportIdModel.value;
-  GetCoachByLocationMOdel get coachByLocation=> _getCoachByLocationModel.value;
+  GetCoachByLocationModel get coachByLocation=> _getCoachByLocationModel.value;
 
 
   ///setters
   set setLoading(v)=> _isLoading.value=v;
-  set setUserDetailModel(v)=> _userDetailModel.value=v;
+  set setUserByIdModel(v)=> _userByIdModel.value=v;
   set setCoachMonthlyAvailability(v)=> _coachMonthlyAvailability.value=v;
   set setCoachTimeAvailability(v)=> _coachTimeAvailability.value=v;
   set setGetCoachBySportIdModel(v)=> _getCoachBySportIdModel.value=v;
   set setGetCoachByLocationModel(v)=> _getCoachByLocationModel.value=v;
 
 
-  getCoachBySportId(String sportId)async{
-    try{
-      final response= await baseServices.apiCall('get', '${ApiRoutes.getCoachBySportId}/$sportId');
-      var data= response!.data;
-      if(response.statusCode==200){
-        setGetCoachBySportIdModel= GetCoachBySportIdModel.fromJson(response.data);
-        // String userId= data['result']['coaches']['userId'];
-        // log('getCoachBySportId ${userId}');
-        // String savedUserId = LocalStorage.read(LocalStorage.userId);
-        // if (savedUserId == '' || savedUserId.isEmpty) {
-        //   LocalStorage.write(LocalStorage.userId, userId);
-        // }
-
-      }else{
-        showSnackBar('Error', data['message']);
-      }
-    }catch(e){
-      showSnackBar('Caught Error', e.toString(),isError: true);
-      debugPrint('Caught Error ${e.toString()}');
-    }
-  }
 
 
-  Future<void> getUserById([String? userId]) async {
+  getUserById([String? userId]) async {
     setLoading = true;
     try {
-
       String? savedUserId = LocalStorage.read(LocalStorage.userId);
       String? finalUserId = userId?.isNotEmpty == true ? userId : savedUserId;
       if (finalUserId == null || finalUserId.isEmpty) {
@@ -115,7 +91,7 @@ class CoachController extends GetxController {
 
       var data = response!.data;
       if (response.statusCode == 200) {
-        setUserDetailModel = UserDetailModel.fromJson(data);
+        setUserByIdModel = UserByIdModel.fromJson(data);
       } else {
         showSnackBar('Error', data['status'], isError: true);
       }
@@ -127,24 +103,6 @@ class CoachController extends GetxController {
     }
   }
 
-
-
-  getCoachByLocation(String cityName)async{
-    try{
-      final response= await baseServices.apiCall('post', ApiRoutes.getCoachByLocation,data: {
-        'location' : cityName,
-      });
-      var data= response!.data;
-      if(response.statusCode==200){
-        setGetCoachByLocationModel= GetCoachByLocationMOdel.fromJson(response.data);
-      }else{
-        showSnackBar('Error', data['message'],isError: true);
-      }
-    }catch(e){
-      showSnackBar('Caught Error', e.toString(),isError: true);
-      debugPrint('Caught Error ${e.toString()}');
-    }
-  }
 
   void coachRegister(String sportId,String role) async {
     setLoading=true;
@@ -213,6 +171,45 @@ class CoachController extends GetxController {
   }
 
 
+  getCoachBySportId(String sportId)async{
+    setLoading=true;
+    try{
+      final response= await baseServices.apiCall('get', '${ApiRoutes.getCoachBySportId}/$sportId');
+      var data= response!.data;
+      if(response.statusCode==200){
+        setGetCoachBySportIdModel= GetCoachBySportIdModel.fromJson(response.data);
+      }else{
+        _getCoachBySportIdModel.value =GetCoachBySportIdModel();
+      }
+    }catch(e){
+      showSnackBar('Caught Error', e.toString(),isError: true);
+      debugPrint('Caught Error ${e.toString()}');
+    }finally{
+      setLoading=false;
+    }
+  }
+
+  getCoachByLocation(String cityName)async{
+    setLoading=true;
+    try{
+      final response= await baseServices.apiCall('post', ApiRoutes.getCoachByLocation,data: {
+        'location' : cityName,
+      });
+      printWarning(cityName);
+      var data= response!.data;
+      if(response.statusCode==200){
+        setGetCoachByLocationModel= GetCoachByLocationModel.fromJson(response.data);
+      }else{
+        showSnackBar('Error', data['message'],isError: true);
+      }
+    }catch(e){
+      showSnackBar('Caught Error', e.toString(),isError: true);
+      debugPrint('Caught Error ${e.toString()}');
+    }finally{
+      setLoading= false;
+    }
+  }
+
 
   getCoachMonthAvailability({required int month, required int year,required String coachId}) async {
     try {
@@ -254,18 +251,20 @@ class CoachController extends GetxController {
     }
   }
 
-  createSession(context) async {
+  createSession(context,String coachId, coachLocation) async {
     try {
-      String coachId = LocalStorage.read(LocalStorage.coachId);
       String userId = LocalStorage.read(LocalStorage.userId);
-      final response = await baseServices.apiCall('post', ApiRoutes.getCoachTime, data: {
+      printWarning(userId);
+      printWarning(coachId);
+      String formatedDate= DateFormat('yyyy-MM-dd').format(selectedDate.value);
+      final response = await baseServices.apiCall('post', ApiRoutes.createSession, data: {
         'coachId': coachId,
         'userId': userId,
         'slotId': selectedSlotId.value,
         'totalPaymentAmount': 100,
         'totalAmount': 100,
-        'date': selectedDate.value,
-        'location': cAddressController.text.trim(),
+        'date': formatedDate,
+        'location': coachLocation,
       });
       printWarning('Selected slotId ${selectedSlotId.value.toString()}');
       var data = response!.data;

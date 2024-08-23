@@ -2,11 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:touch_down/api_client/api_routes.dart';
 import 'package:touch_down/api_client/base_services.dart';
+import 'package:touch_down/controller/coach_controller.dart';
+import 'package:touch_down/controller/geo_location_controller.dart';
+import 'package:touch_down/controller/home_controller.dart';
+import 'package:touch_down/services/dependency_injection_services.dart';
 import 'package:touch_down/services/user_profile_services.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/local_storage.dart';
 import 'package:touch_down/view/auth/login_screen.dart';
 import 'package:touch_down/view/auth/otp_screen.dart';
+import 'package:touch_down/view/auth/splash_screen.dart';
 import 'package:touch_down/view/auth/update_password_screen.dart';
 import 'package:touch_down/view/auth/welcome_screen.dart';
 import 'package:touch_down/view/nav_bar/navigation_menu.dart';
@@ -34,32 +39,6 @@ class AuthController extends GetxController {
 
   ///setter
   set setLoading(v) => _isLoading.value = v;
-
-  logIn() async {
-    setLoading = true;
-    try {
-      final response = await baseServices.apiCall('post', ApiRoutes.logIn, data: {
-        'email': emailController.text.trim(),
-        'password': passwordController.text.trim(),
-      });
-      var data = response!.data;
-      if (response.statusCode == 200) {
-        UserProfileService.saveUserProfileData(data);
-        showSnackBar('Success', data['result']['message'].toString());
-        Get.offAll(() => CustomBottomBar());
-      }  else if(response.statusCode==403) {
-        Get.to(() => OtpScreen(email: emailController.text));
-        resendOtp(emailController.text);
-        showSnackBar('Error', data['result']['message'].toString(),isError: true);
-      }else{
-        showSnackBar('Error', data['result']['message'].toString(),isError: true);
-      }
-    } catch (e) {
-      showSnackBar('Caught Error', e.toString(),isError: true);
-      printWarning('Caught Error: ${e.toString()}');
-    }
-    setLoading = false;
-  }
 
   Future register(String userRole) async {
     setLoading = true;
@@ -94,6 +73,43 @@ class AuthController extends GetxController {
     }
     setLoading = false;
   }
+
+
+  logIn() async {
+    setLoading = true;
+    try {
+      final response = await baseServices.apiCall('post', ApiRoutes.logIn, data: {
+        'email': emailController.text.trim(),
+        'password': passwordController.text.trim(),
+      });
+      var data = response!.data;
+      if (response.statusCode == 200) {
+        UserProfileService.saveUserProfileData(data);
+        showSnackBar('Success', data['result']['message'].toString());
+        DependencyInjection.init();
+        Get.offAll(() => CustomBottomBar());
+      }  else if(response.statusCode==403) {
+        Get.to(() => OtpScreen(email: emailController.text));
+        resendOtp(emailController.text);
+        showSnackBar('Error', data['result']['message'].toString(),isError: true);
+      }else{
+        showSnackBar('Error', data['result']['message'].toString(),isError: true);
+      }
+    } catch (e) {
+      showSnackBar('Caught Error', e.toString(),isError: true);
+      printWarning('Caught Error: ${e.toString()}');
+    }
+    setLoading = false;
+  }
+  logOut() async {
+    Get.delete<HomeController>(tag: 'homeController');
+    Get.delete<CoachController>(tag: 'coachController');
+    Get.delete<LocationController>(tag: 'locationController');
+    await LocalStorage.eraseAllLocalStorage();
+    Get.offAll(() => const WelcomeScreen());
+  }
+
+
 
 
   void resendOtp(String? email) async {
@@ -197,10 +213,7 @@ class AuthController extends GetxController {
   }
 
 
-  logOut() async {
-    await LocalStorage.eraseAllLocalStorage();
-    Get.offAll(() => const WelcomeScreen());
-  }
+
 
   void setSelectedPhone(String value) {
     selectedCode.value = value;

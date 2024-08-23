@@ -1,10 +1,10 @@
-class UserDetailModel {
+class UserByIdModel {
   String? status;
   Result? result;
 
-  UserDetailModel({this.status, this.result});
+  UserByIdModel({this.status, this.result});
 
-  UserDetailModel.fromJson(Map<String, dynamic> json) {
+  UserByIdModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     result =
     json['result'] != null ?  Result.fromJson(json['result']) : null;
@@ -96,7 +96,7 @@ class Player {
   String? id;
   String? userId;
   String? sportId;
-  int? matches;
+  List<Matches>? matches;
   int? won;
   String? location;
   int? lost;
@@ -125,7 +125,12 @@ class Player {
     id = json['id'];
     userId = json['userId'];
     sportId = json['sportId'];
-    matches = json['matches'];
+    if (json['matches'] != null) {
+      matches = <Matches>[];
+      json['matches'].forEach((v) {
+        matches!.add(new Matches.fromJson(v));
+      });
+    }
     won = json['won'];
     location = json['location'];
     lost = json['lost'];
@@ -232,7 +237,54 @@ class Coach {
     return data;
   }
 }
+class Matches {
+  String? id;
+  String? tournamentId;
+  String? matchDate;
+  String? location;
+  bool? isDraw;
+  String? winnerTeamId;
+  String? createdAt;
+  String? updatedAt;
+  String? result;
 
+  Matches(
+      {this.id,
+        this.tournamentId,
+        this.matchDate,
+        this.location,
+        this.isDraw,
+        this.winnerTeamId,
+        this.createdAt,
+        this.updatedAt,
+        this.result});
+
+  Matches.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    tournamentId = json['tournamentId'];
+    matchDate = json['matchDate'];
+    location = json['location'];
+    isDraw = json['isDraw'];
+    winnerTeamId = json['winnerTeamId'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+    result = json['result'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['tournamentId'] = this.tournamentId;
+    data['matchDate'] = this.matchDate;
+    data['location'] = this.location;
+    data['isDraw'] = this.isDraw;
+    data['winnerTeamId'] = this.winnerTeamId;
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
+    data['result'] = this.result;
+    return data;
+  }
+}
 class Sport {
   String? id;
   String? name;

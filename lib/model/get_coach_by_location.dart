@@ -1,10 +1,10 @@
-class GetCoachByLocationMOdel {
+class GetCoachByLocationModel {
   String? status;
   Result? result;
 
-  GetCoachByLocationMOdel({this.status, this.result});
+  GetCoachByLocationModel({this.status, this.result});
 
-  GetCoachByLocationMOdel.fromJson(Map<String, dynamic> json) {
+  GetCoachByLocationModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     result =
     json['result'] != null ? new Result.fromJson(json['result']) : null;
@@ -55,7 +55,7 @@ class Coaches {
   String? fee;
   String? groupFee;
   int? rating;
-  Null? description;
+  String? description;
   int? sessions;
   String? status;
   String? createdAt;
@@ -127,7 +127,7 @@ class Sport {
   String? id;
   String? name;
   String? avatar;
-  Null? attributes;
+  String? attributes;
   int? playerLimit;
 
   Sport({this.id, this.name, this.avatar, this.attributes, this.playerLimit});

@@ -6,11 +6,10 @@ import 'package:touch_down/view/profile_ui/user_profile_ui/user_profile_screen.d
 class UserProfileService {
   static void saveUserProfileData(Map<String, dynamic> data) {
     String userId = data['result']['user']['id'];
-    print('UsrID: ${userId}');
-    String bearerToken= data['result']['token'];
+    print('UsrID: $userId');
+    String bearerToken = data['result']['token'];
     LocalStorage.write(LocalStorage.userId, userId);
     LocalStorage.write(LocalStorage.bearerToken, bearerToken);
-
 
     if (data['result']['user']['coach'] != null && data['result']['user']['coach'].isNotEmpty) {
       String coachId = data['result']['user']['coach']['id'];
@@ -21,9 +20,10 @@ class UserProfileService {
       String playerId = data['result']['user']['player']['id'];
       LocalStorage.write(LocalStorage.playerId, playerId);
     }
+
     if (data['result']['user']['agency'] != null && data['result']['user']['agency'].isNotEmpty) {
-      String playerId = data['result']['user']['agency']['id'];
-      LocalStorage.write(LocalStorage.playerId, playerId);
+      String agencyId = data['result']['user']['agency']['id'];
+      LocalStorage.write(LocalStorage.agencyId, agencyId);
     }
   }
 
@@ -32,12 +32,14 @@ class UserProfileService {
     String? playerId = LocalStorage.read(LocalStorage.playerId);
     String? agencyId = LocalStorage.read(LocalStorage.agencyId);
 
-    if (coachId != '') {
+    if (coachId != null && coachId.isNotEmpty) {
       return CoachProfileScreen();
-    } else if (playerId != '') {
+    } else if (playerId != null && playerId.isNotEmpty) {
       return UserProfileScreen();
+    } else if (agencyId != null && agencyId.isNotEmpty) {
+      return UserProfileScreen();  // You may want to return a different screen here
     } else {
-      return UserProfileScreen();
+      return UserProfileScreen();  // Default fallback
     }
   }
 }
