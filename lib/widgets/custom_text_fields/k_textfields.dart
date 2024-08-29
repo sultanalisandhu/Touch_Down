@@ -91,11 +91,14 @@ class GetTextField extends StatelessWidget {
   final IconData? suffixIcon;
   final String? Function(String?)? validator;
   final Function()? suffixOnTap;
+  final Function()? fieldOnTap;
   final TextInputType? keyboardType;
   final TextEditingController? controller;
   final bool? obSecureText;
+  final Function(String)? onChanged;
+  final FocusNode? focusNode;
 
-   GetTextField({super.key,
+   const GetTextField({super.key,
      required this.context,
      this.hintText,
      this.prefixIcon,
@@ -104,7 +107,10 @@ class GetTextField extends StatelessWidget {
      this.keyboardType,
      this.controller,
      this.obSecureText,
-     this.suffixOnTap});
+     this.suffixOnTap,
+     this.onChanged,
+     this.focusNode,
+     this.fieldOnTap});
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +124,9 @@ class GetTextField extends StatelessWidget {
       textInputAction: TextInputAction.next,
       obscureText: obSecureText??true,
       onTapOutside: (event) {context.dismissKeyBoard();},
+      onChanged: onChanged,
+      focusNode: focusNode,
+      onTap: fieldOnTap,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: prefixIcon,
@@ -125,7 +134,8 @@ class GetTextField extends StatelessWidget {
             ? IconButton(
           icon: Icon(
             suffixIcon,
-            color: AppColor.greyColor,
+            color: AppColor.primaryColor,
+            size: 30,
           ),
           onPressed: suffixOnTap,
         )
@@ -137,7 +147,7 @@ class GetTextField extends StatelessWidget {
         fillColor: Colors.transparent,
         enabledBorder:  OutlineInputBorder(
           borderRadius: BorderRadius.circular(22),
-          borderSide:  BorderSide(color:AppColor.primaryColor, width: 1.5),
+          borderSide:  const BorderSide(color:AppColor.primaryColor, width: 1.5),
         ),
         focusedBorder:  OutlineInputBorder(
           borderRadius: BorderRadius.circular(22),

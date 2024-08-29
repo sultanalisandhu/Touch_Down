@@ -25,9 +25,6 @@
 //     }
 //
 //     return _cities
-//         .where((city) =>
-//     city.name.toLowerCase().contains(query.toLowerCase()) ||
-//         city.country.toLowerCase().contains(query.toLowerCase()))
-//         .toList();
+//         .where((city) => city.name.toLowerCase().contains(query.toLowerCase()) || city.country.toLowerCase().contains(query.toLowerCase())).toList();
 //   }
 // }

@@ -73,7 +73,7 @@ class CoachIndexPage extends StatelessWidget {
                   );
                 }
                 final sportsData = sportsModel.result!.data!;
-                return coachController.homeController.isSportsLoading
+                return coachController.homeController.isLoading
                     ? kCircularLoading()
                     : SizedBox(
                   height: 13.h,

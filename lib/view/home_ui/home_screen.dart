@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                           effect: const WormEffect(
                             dotHeight: 8.0,
                             dotWidth: 8.0,
-                            activeDotColor: AppColor.primaryColor, // Change to your active color
+                            activeDotColor: AppColor.primaryColor,
                             dotColor: Colors.grey,
                           ),
                         ),
@@ -101,7 +101,7 @@ class HomeScreen extends StatelessWidget {
                     }
 
                     final sportsData = sportsModel.result!.data!;
-                    return homeController.isSportsLoading
+                    return homeController.isLoading
                         ? kCircularLoading()
                         : SizedBox(
                       height: 13.h,
@@ -109,7 +109,7 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Distribute space evenly
                         children: List.generate(sportsData.length, (index) {
                           final sport = sportsData[index];
-                          return Expanded( // Use Expanded to fill available space
+                          return Expanded(
                             child: GameContainer(
                               onTap: () {
                                 Get.to(() => CricketHomeScreen());

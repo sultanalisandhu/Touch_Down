@@ -6,7 +6,7 @@ import 'package:touch_down/services/dependency_injection_services.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/view/auth/splash_screen.dart';
 
-
+//@android:style/Theme.Light.NoTitleBar in styles.xml
 
 void main()async {
 

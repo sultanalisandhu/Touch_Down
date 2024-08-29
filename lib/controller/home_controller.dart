@@ -10,34 +10,61 @@ import 'package:touch_down/widgets/k_snack_bar.dart';
 class HomeController extends GetxController {
   BaseServices baseServices= BaseServices();
   final Rx<AllSportsModel> _allSportsModel= AllSportsModel().obs;
+
+  /// variables
   final RxBool _isLoading=false.obs;
   late PageController pageController;
   RxInt currentIndex = 0.obs;
+  final RxBool _isTextFieldTapped = false.obs;
   Timer? timer;
+  final RxList<Data> _filteredSports = <Data>[].obs;
+  final Rx<Data?> _selectedSport = Rx<Data?>(null);
+
+
   /// getters
   AllSportsModel get allSportsModel=> _allSportsModel.value;
-  bool get isSportsLoading=> _isLoading.value;
+  bool get isLoading=> _isLoading.value;
+  List<Data> get filteredSports => _filteredSports.toList();
+  Data? get selectedSport => _selectedSport.value;
+  bool get isTextFieldTapped => _isTextFieldTapped.value;
+
 
   /// setters
   set setAllSportsModel(v)=> _allSportsModel.value=v;
-  set setSportLoading(v)=> _isLoading.value=v;
+  set setLoading(v)=> _isLoading.value=v;
+  set setSelectedSport(v) => _selectedSport.value = v;
+  set setIsTextFieldTapped(v) => _isTextFieldTapped.value = v;
 
-  getAllSports() async{
-    setSportLoading=true;
-    try{
+
+
+  Future<void> getAllSports() async {
+    setLoading = true;
+    try {
       final response = await baseServices.apiCall('get', ApiRoutes.allSports);
-      if(response!.statusCode==200){
-       setAllSportsModel = AllSportsModel.fromJson(response.data);
-       setSportLoading = false;
-       update();
-      }else{
+      if (response!.statusCode == 200) {
+        setAllSportsModel = AllSportsModel.fromJson(response.data);
+        // Initialize _filteredSports with all sports data
+        _filteredSports.value = allSportsModel.result?.data ?? [];
+      } else {
         showSnackBar('Error', response.data['message'], isError: true);
-        setSportLoading = false;
-        update();
       }
-    }catch(e){
-      showSnackBar('Error', e.toString(),isError: true);
+    } catch (e) {
+      showSnackBar('Error', e.toString(), isError: true);
+    }finally{
+      setLoading=false;
     }
+  }
+
+  void filterSports(String query) {
+    if (query.isEmpty) {
+      _filteredSports.value = allSportsModel.result?.data ?? [];
+    } else {
+      _filteredSports.value = (allSportsModel.result?.data ?? [])
+          .where((sport) =>
+      sport.name?.toLowerCase().contains(query.toLowerCase()) ?? false)
+          .toList();
+    }
+    update();
   }
 
 
@@ -57,8 +84,8 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    pageController = PageController(initialPage: 0);
     getAllSports();
+    pageController = PageController(initialPage: 0);
     startTimer();
   }
 

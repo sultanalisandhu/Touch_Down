@@ -16,6 +16,9 @@ class AppColor {
   static const Color blackColor = Colors.black;
 }
 
+const String stripePublishableKey = '';
+const String stripeSecretKey = '';
+
 Size get mQ => MediaQuery.of(Get.context!).size;
 
 

@@ -15,7 +15,7 @@ class CoachRegistration1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HomeController homeController = Get.find<HomeController>(tag: 'homeController');
+    final HomeController homeController = Get.put(HomeController(),tag: 'homeController');
 
     return Scaffold(
       appBar: kAppBar(titleText: 'Select Sport'),

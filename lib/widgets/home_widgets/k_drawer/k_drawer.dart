@@ -9,6 +9,7 @@ import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/view/coach_ui/coach_index_page.dart';
 import 'package:touch_down/view/more_ui/pick_drop_screen.dart';
 import 'package:touch_down/view/auth/coach_registration_screens/coach_registration1.dart';
+import 'package:touch_down/view/tournament_ui/add_tournamnet.dart';
 import 'package:touch_down/widgets/home_widgets/k_drawer/coach_drawer/add_availability.dart';
 import 'package:touch_down/widgets/home_widgets/k_drawer/drawer_content.dart';
 
@@ -83,7 +84,8 @@ class kDrawer extends StatelessWidget {
                               Get.to(()=> CoachIndexPage());
                               final sportId= coachController.homeController.allSportsModel.result!.data![0].id;
                               coachController.getCoachBySportId(sportId!);
-
+                            case 'Start Tournament':
+                              Get.to(()=> AddTournamentScreen());
                               break;
                           }
                         },

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:touch_down/controller/coach_controller.dart';
+import 'package:touch_down/controller/home_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/widgets/circular_loading.dart';
@@ -18,7 +19,8 @@ class CoachRegistration2 extends StatelessWidget {
   final String sportId;
   CoachRegistration2({Key? key}):sportId = Get.arguments['sportId'],
         super(key: key);
-
+  final CoachController coachController = Get.put(CoachController());
+  final HomeController homeController = Get.find<HomeController>(tag: 'homeController');
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,6 @@ class CoachRegistration2 extends StatelessWidget {
     final args = Get.arguments;
     final String sportId = args['sportId'];
     final String role = args['role'];
-    final CoachController coachController = Get.put(CoachController());
     return Obx(()=>Scaffold(
         backgroundColor: AppColor.primaryColor,
         appBar: AppBar(

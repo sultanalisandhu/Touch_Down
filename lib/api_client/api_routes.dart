@@ -29,4 +29,8 @@ class ApiRoutes{
 
   ///user details profile
   static const userDetailsByID='api/user';
+
+  ///Tournament
+  static const addTournament='api/tournaments';
+  static const fetchGroundReservation='api/ground/reservation';
 }

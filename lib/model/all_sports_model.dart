@@ -50,7 +50,7 @@ class Data {
   String? id;
   String? name;
   String? avatar;
-  Null? attributes;
+  String? attributes;
 
   Data({this.id, this.name, this.avatar, this.attributes});
 
