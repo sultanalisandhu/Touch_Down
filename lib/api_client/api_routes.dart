@@ -2,7 +2,7 @@ class ApiRoutes{
   static const baseUrl= 'http://139.59.5.113:3000/';
   // static const baseUrl= 'http://192.168.100.57:3000/';
 
-  /// Auth Api Routes
+  /// AUTHENTICATION ...............................
   static const logIn = 'api/auth/login';
   static const registerUser = 'api/auth/signup';
   static const verifyOtp = 'api/auth/otp';
@@ -15,7 +15,7 @@ class ApiRoutes{
   static const allSports = 'api/sports/';
 
 
-  ///Coach routes
+  ///COACH ROUTES................................
   static const coachRegister= 'api/coach';
   static const updateCoachDetails= 'api/coach';
   static const uploadImg= 'upload';
@@ -27,10 +27,13 @@ class ApiRoutes{
   static const addCoachAvailability = 'api/availability';
 
 
-  ///user details profile
+  ///GET USER BY ID ..................................
   static const userDetailsByID='api/user';
 
-  ///Tournament
+  ///TOURNAMENT ......................................
   static const addTournament='api/tournaments';
   static const fetchGroundReservation='api/ground/reservation';
+  static const addTeam='api/teams';
+  static const getInviteLink='api/invite';
+  static const joinViaLink='api/invite/';
 }

@@ -7,6 +7,7 @@ import 'package:touch_down/controller/tournament_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/utils/extensions/text_capital_ext.dart';
+import 'package:touch_down/view/tournament_ui/add_team.dart';
 import 'package:touch_down/view/tournament_ui/select_sport_location_screen.dart';
 import 'package:touch_down/widgets/home_widgets/k_drawer/date_range_picker.dart';
 import 'package:touch_down/widgets/home_widgets/k_image_slider.dart';
@@ -16,7 +17,7 @@ import 'package:touch_down/widgets/custom_text_fields/k_textfields.dart';
 class AddTournamentScreen extends StatelessWidget {
   AddTournamentScreen({super.key});
   final HomeController homeController = Get.find<HomeController>(tag: 'homeController');
-  final TournamentController tournamentController = Get.put(TournamentController(),tag: 'tournamentController');
+  final TournamentController tournamentController = Get.find<TournamentController>();
   final TextEditingController sportController = TextEditingController();
 
   @override
@@ -37,11 +38,51 @@ class AddTournamentScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SelectSportWidget(
-                    homeController: homeController,
-                    tournamentController: tournamentController,
-                    sportController: sportController,
+                  Text(
+                    'Select Sports',
+                    style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w500),
                   ),
+                  GetTextField(
+                    context: context,
+                    obSecureText: false,
+                    hintText: 'Select Sport',
+                    controller: sportController,
+                    suffixIcon: Icons.keyboard_arrow_down_rounded,
+                    fieldOnTap: () {
+                      homeController.setIsTextFieldTapped = true;
+                    },
+                    onChanged: (value) {
+                      homeController.filterSports(value);
+                    },
+                  ),
+                  Obx(() {
+                    if (homeController.isTextFieldTapped) {
+                      if (homeController.filteredSports.isNotEmpty) {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: homeController.filteredSports.length,
+                          itemBuilder: (context, index) {
+                            final sport = homeController.filteredSports[index];
+                            return ListTile(
+                              contentPadding: EdgeInsets.symmetric(horizontal: 3.w),
+                              trailing: Image(image: NetworkImage(ApiRoutes.baseUrl + sport.avatar.toString())),
+                              title: Text(sport.name!.toCapitalize, style: primaryTextStyle(fontSize: 12)),
+                              onTap: () {
+                                sportController.text = sport.name ?? '';
+                                homeController.setSelectedSport = sport;
+                                tournamentController.selectedSportId.value = sport.id!;
+                                homeController.setIsTextFieldTapped = false;
+                              },
+                            );
+                          },
+                        );
+                      } else {
+                        return  Center(child: Text("No sports found",style: primaryTextStyle(fontSize: 12),));
+                      }
+                    }
+                    return const SizedBox.shrink();
+                  }),
                   2.height,
                   Text(
                     'Tournament Name',
@@ -71,7 +112,7 @@ class AddTournamentScreen extends StatelessWidget {
                         children: [
                           Text(
                             "Start Time",
-                            style: primaryTextStyle(fontSize: 14,fontWeight: FontWeight.w600),
+                            style: primaryTextStyle(fontSize: 12,fontWeight: FontWeight.w500),
                           ),
                           1.height,
                           Obx(()=> GestureDetector(
@@ -139,7 +180,7 @@ class AddTournamentScreen extends StatelessWidget {
                     alignment: Alignment.center,
                     child: kTextButton(
                       onPressed: () {
-                       tournamentController.addTournamentApi();
+                       tournamentController.addTournamentApi(tournamentController.selectedSportId.value);
                       },
                       btnText: 'Add Tournament',
                       textColor: AppColor.blackColor,

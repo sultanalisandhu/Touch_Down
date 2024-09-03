@@ -95,6 +95,7 @@ class GetTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextEditingController? controller;
   final bool? obSecureText;
+  final bool? readOnly;
   final Function(String)? onChanged;
   final FocusNode? focusNode;
 
@@ -110,11 +111,13 @@ class GetTextField extends StatelessWidget {
      this.suffixOnTap,
      this.onChanged,
      this.focusNode,
-     this.fieldOnTap});
+     this.fieldOnTap,
+     this.readOnly});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly !=null ?true:false,
       validator: validator,
       controller: controller,
       cursorColor: AppColor.primaryColor,

@@ -8,71 +8,71 @@ import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions/text_capital_ext.dart';
 import 'package:touch_down/widgets/custom_text_fields/k_textfields.dart';
 
-class SelectSportWidget extends StatelessWidget {
-  final HomeController homeController;
-  final TournamentController tournamentController;
-  final TextEditingController sportController;
-
-  const SelectSportWidget({
-    super.key,
-    required this.homeController,
-    required this.tournamentController,
-    required this.sportController,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Select Sports',
-          style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-        ),
-        GetTextField(
-          context: context,
-          obSecureText: false,
-          hintText: 'Select Sport',
-          controller: sportController,
-          fieldOnTap: () {
-            homeController.setIsTextFieldTapped = true;
-          },
-          onChanged: (value) {
-            homeController.filterSports(value);
-          },
-        ),
-        Obx(() {
-          if (homeController.isTextFieldTapped) {
-            if (homeController.filteredSports.isNotEmpty) {
-              return ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: homeController.filteredSports.length,
-                itemBuilder: (context, index) {
-                  final sport = homeController.filteredSports[index];
-                  return ListTile(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 3.w),
-                    trailing: Image(image: NetworkImage(ApiRoutes.baseUrl + sport.avatar.toString())),
-                    title: Text(sport.name!.toCapitalize, style: primaryTextStyle(fontSize: 12)),
-                    onTap: () {
-                      sportController.text = sport.name ?? '';
-                      homeController.setSelectedSport = sport;
-                      tournamentController.selectedSportId.value = sport.id!;
-                      homeController.setIsTextFieldTapped = false;
-                    },
-                  );
-                },
-              );
-            } else {
-              return  Center(child: Text("No sports found",style: primaryTextStyle(fontSize: 12),));
-            }
-          }
-          return const SizedBox.shrink();
-        }),
-      ],
-    );
-  }
-}
+// class SelectSportWidget extends StatelessWidget {
+//   final HomeController homeController;
+//   final TournamentController tournamentController;
+//   final TextEditingController sportController;
+//
+//   const SelectSportWidget({
+//     super.key,
+//     required this.homeController,
+//     required this.tournamentController,
+//     required this.sportController,
+//   });
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Text(
+//           'Select Sports',
+//           style: primaryTextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+//         ),
+//         GetTextField(
+//           context: context,
+//           obSecureText: false,
+//           hintText: 'Select Sport',
+//           controller: sportController,
+//           fieldOnTap: () {
+//             homeController.setIsTextFieldTapped = true;
+//           },
+//           onChanged: (value) {
+//             homeController.filterSports(value);
+//           },
+//         ),
+//         Obx(() {
+//           if (homeController.isTextFieldTapped) {
+//             if (homeController.filteredSports.isNotEmpty) {
+//               return ListView.builder(
+//                 shrinkWrap: true,
+//                 physics: const NeverScrollableScrollPhysics(),
+//                 itemCount: homeController.filteredSports.length,
+//                 itemBuilder: (context, index) {
+//                   final sport = homeController.filteredSports[index];
+//                   return ListTile(
+//                     contentPadding: EdgeInsets.symmetric(horizontal: 3.w),
+//                     trailing: Image(image: NetworkImage(ApiRoutes.baseUrl + sport.avatar.toString())),
+//                     title: Text(sport.name!.toCapitalize, style: primaryTextStyle(fontSize: 12)),
+//                     onTap: () {
+//                       sportController.text = sport.name ?? '';
+//                       homeController.setSelectedSport = sport;
+//                       tournamentController.selectedSportId.value = sport.id!;
+//                       homeController.setIsTextFieldTapped = false;
+//                     },
+//                   );
+//                 },
+//               );
+//             } else {
+//               return  Center(child: Text("No sports found",style: primaryTextStyle(fontSize: 12),));
+//             }
+//           }
+//           return const SizedBox.shrink();
+//         }),
+//       ],
+//     );
+//   }
+// }
 
 class SelectLocationWidget extends StatelessWidget {
   final TournamentController tournamentController;
@@ -118,7 +118,7 @@ class SelectLocationWidget extends StatelessWidget {
                       ListTile(
                         contentPadding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 0),
                         leading: CircleAvatar(
-                          backgroundImage: NetworkImage(ApiRoutes.baseUrl + ground.avatar.toString()),
+                          backgroundImage: NetworkImage(ApiRoutes.baseUrl + ground.avatar!),
                         ),
                         title: Text(ground.name!.toCapitalize, style: primaryTextStyle(fontSize: 12)),
                         subtitle: Text(ground.location!.toCapitalize, style: primaryTextStyle(fontSize: 10)),

@@ -10,6 +10,7 @@ class SplashController extends GetxController{
   Future<void> navigateTo() async {
     await Future.delayed(const Duration(seconds: 3), () {
       if (LocalStorage.bearerToken == ''|| LocalStorage.bearerToken.isEmpty) {
+        Get.delete<SplashController>();
         Get.offAll(() => const WelcomeScreen());
       } else {
         Get.offAll(() => CustomBottomBar());

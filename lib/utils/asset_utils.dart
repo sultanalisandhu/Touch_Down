@@ -45,4 +45,5 @@ class IconUtils{
   static const String arrowUpRight= 'assets/icons/arrowUpRight.svg';
   static const String agencyIcon= 'assets/icons/agencyIcon.svg';
   static const String iRupeeIcon= 'assets/icons/iRupeeIcon.svg';
+  static const String copyIcon= 'assets/icons/copyIcon.svg';
 }

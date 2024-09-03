@@ -132,14 +132,18 @@ class UserProfileScreen extends StatelessWidget {
             Positioned(
               top: mQ.width * 0.15 * 0.5, // Adjust top to fit the avatar
               left: (mQ.width / 2) - mQ.width * 0.15, // Center the avatar
-              child: CircleAvatar(
-                radius: mQ.width * 0.15,
-                backgroundColor: AppColor.greyColor,
+              child: GestureDetector(
+                onTap: (){
+                },
                 child: CircleAvatar(
-                  radius: mQ.width * 0.15 * 0.9,
-                  backgroundColor: AppColor.whiteColor,
-                  backgroundImage: const NetworkImage(
-                    'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?t=st=1721152706~exp=1721156306~hmac=2c807194b896fa519c27566ed79a328c3d4731ab06e5ee403ed9edaf32df7ac2&w=740'),
+                  radius: mQ.width * 0.15,
+                  backgroundColor: AppColor.greyColor,
+                  child: CircleAvatar(
+                    radius: mQ.width * 0.15 * 0.9,
+                    backgroundColor: AppColor.whiteColor,
+                    backgroundImage: const NetworkImage(
+                      'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?t=st=1721152706~exp=1721156306~hmac=2c807194b896fa519c27566ed79a328c3d4731ab06e5ee403ed9edaf32df7ac2&w=740'),
+                  ),
                 ),
               ),
             ),

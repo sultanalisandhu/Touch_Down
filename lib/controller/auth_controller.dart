@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:touch_down/api_client/api_routes.dart';
 import 'package:touch_down/api_client/base_services.dart';
 import 'package:touch_down/controller/coach_controller.dart';
+import 'package:touch_down/controller/deep_linking_controller.dart';
 import 'package:touch_down/controller/geo_location_controller.dart';
 import 'package:touch_down/controller/home_controller.dart';
 import 'package:touch_down/services/dependency_injection_services.dart';
@@ -11,7 +12,6 @@ import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/local_storage.dart';
 import 'package:touch_down/view/auth/login_screen.dart';
 import 'package:touch_down/view/auth/otp_screen.dart';
-import 'package:touch_down/view/auth/splash_screen.dart';
 import 'package:touch_down/view/auth/update_password_screen.dart';
 import 'package:touch_down/view/auth/welcome_screen.dart';
 import 'package:touch_down/view/nav_bar/navigation_menu.dart';
@@ -105,6 +105,7 @@ class AuthController extends GetxController {
     Get.delete<HomeController>(tag: 'homeController');
     Get.delete<CoachController>(tag: 'coachController');
     Get.delete<LocationController>(tag: 'locationController');
+    Get.delete<DeepLinkController>(tag: 'deepLinkingController');
     await LocalStorage.eraseAllLocalStorage();
     Get.offAll(() => const WelcomeScreen());
   }
