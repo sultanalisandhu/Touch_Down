@@ -7,7 +7,6 @@ import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/view/auth/forget_password.dart';
-import 'package:touch_down/view/auth/register_screen.dart';
 import 'package:touch_down/view/auth/select_role.dart';
 import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';

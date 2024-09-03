@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -7,20 +5,17 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:touch_down/api_client/api_routes.dart';
 import 'package:touch_down/controller/deep_linking_controller.dart';
 import 'package:touch_down/controller/home_controller.dart';
-import 'package:touch_down/utils/asset_utils.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/view/home_ui/cricket_home_screen.dart';
 import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/home_widgets/aimated_container.dart';
-import 'package:touch_down/widgets/home_widgets/k_drawer/drawer_content.dart';
 import 'package:touch_down/widgets/home_widgets/home_widgets.dart';
 import 'package:touch_down/widgets/home_widgets/k_drawer/k_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-  final HomeController homeController =
-      Get.put(HomeController(), tag: 'homeController');
+  final HomeController homeController = Get.find<HomeController>(tag: 'homeController');
   final deepLink = Get.put(DeepLinkController());
 
   @override

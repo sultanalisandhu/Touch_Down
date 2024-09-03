@@ -113,7 +113,7 @@ class AuthController extends GetxController {
 
 
 
-  void resendOtp(String? email) async {
+  resendOtp(String? email) async {
     setLoading = true;
     try {
       final response =
@@ -126,7 +126,7 @@ class AuthController extends GetxController {
       if (response.statusCode == 200) {
         showSnackBar('Success', data['result']['message'].toString());
       }  else {
-        showSnackBar('Error', data['result']['message'].toString());
+        showSnackBar('Error', data['result']['message'].toString(),isError: true);
       }
     } catch (e) {
       showSnackBar('Error', e.toString(),isError: true);
@@ -183,7 +183,7 @@ class AuthController extends GetxController {
           showSnackBar('Error',  data['result']['message'].toString(), isError: true);
       }
     } catch (e) {
-      showSnackBar('Error', e.toString());
+      showSnackBar('Caught Error', e.toString(),isError: true);
       debugPrint('Catch forgot password error: ${e.toString()}');
     }
     setLoading = false;

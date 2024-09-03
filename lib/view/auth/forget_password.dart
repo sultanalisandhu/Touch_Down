@@ -18,75 +18,98 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(()=>Stack(
+    return Obx(
+          () => Stack(
         alignment: Alignment.center,
         children: [
-           const BackgroundImage(imgPath: ImgUtils.bgImg2, ),
+          const BackgroundImage(imgPath: ImgUtils.bgImg2),
           Scaffold(
             backgroundColor: Colors.transparent,
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Spacer(),
-                const Image(
-                  image: AssetImage(ImgUtils.logo),
-                  fit: BoxFit.cover,
-                ),
-                2.height,
-                Text(
-                  'FORGOT PASSWORD',
-                  style: primaryTextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: AppColor.whiteColor),
-                ),
-                Text(
-                  'Enter your email to reset password',
-                  style: primaryTextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColor.whiteColor),
-                ),
-                4.height,
-                Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      'Email',
-                      style: primaryTextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.lightGreyColor),
-                    )),
-                KTextField(
-                  controller: controller.emailController,
-                  obSecureText: false,
-                  hintText: 'Your email',
-                  context: context,
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                6.height,
-                controller.isLoading
-                    ?kCircularLoading()
-                    :kTextButton(
-                  onPressed: () {
-                    if (controller.emailController.text.isEmpty) {
-                      showSnackBar('Error', 'Enter email address', isError: true);
-                    } else {
-                      controller.forgotPassword();
-                    }
-                  },
-                  btnText: 'SEND CODE',
-                  textColor: AppColor.blackColor,
-                  color: AppColor.primaryColor,
-                  width: 50.w,
-                ),
-                const Spacer(),
-              ],
-            ).paddingSymmetric(horizontal: 4.w),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Image(
+                    image: AssetImage(ImgUtils.logo),
+                    fit: BoxFit.cover,
+                  ),
+                  2.height,
+                  _buildTitleText('FORGOT PASSWORD'),
+                  _buildSubtitleText('Enter your email to reset password'),
+                  4.height,
+                  _buildLabelText('Email'),
+                  KTextField(
+                    controller: controller.emailController,
+                    obSecureText: false,
+                    hintText: 'Your email',
+                    context: context,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  6.height,
+                  controller.isLoading
+                      ? kCircularLoading()
+                      : kTextButton(
+                    onPressed: () {
+                      _handleForgotPassword();
+                    },
+                    btnText: 'SEND CODE',
+                    width: 60.w,
+                  ),
+                ],
+              ).paddingSymmetric(horizontal: 4.w),
+            ),
           ),
         ],
       ),
     );
   }
+
+  Widget _buildTitleText(String text) {
+    return Text(
+      text,
+      style: primaryTextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w700,
+        color: AppColor.whiteColor,
+      ),
+    );
+  }
+
+  Widget _buildSubtitleText(String text) {
+    return Text(
+      text,
+      style: primaryTextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        color: AppColor.whiteColor,
+      ),
+    );
+  }
+
+  Widget _buildLabelText(String text) {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: Text(
+        text,
+        style: primaryTextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w500,
+          color: AppColor.lightGreyColor,
+        ),
+      ),
+    );
+  }
+
+  void _handleForgotPassword() {
+    final email = controller.emailController.text;
+    if (email.isEmpty) {
+      showSnackBar('Error', 'Enter email address', isError: true);
+    } else if (!controller.isValidEmail(email)) {
+      showSnackBar('Error', 'Enter a valid email address', isError: true);
+    } else {
+      controller.forgotPassword();
+    }
+  }
 }
+
 // !controller.isValidEmail(controller.emailController.text)

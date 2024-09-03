@@ -61,7 +61,9 @@ class SelectRole extends StatelessWidget {
                   roleContainer(
                     onTap: () {
                       selectedRole.value = 'agency';
+
                       print('Selected Role: ${selectedRole.value}');
+
                     },
                     title: 'SIGN UP AS AGENCY',
                     iconPath: IconUtils.agencyIcon,
@@ -70,7 +72,6 @@ class SelectRole extends StatelessWidget {
                     onTap: () {
                       selectedRole.value = 'coach';
                       print('Selected Role: ${selectedRole.value}');
-
                       Get.offAll(() => CoachRegistration1(selectedRole: selectedRole.value));
                     },
                     title: 'SIGN UP AS COACH',

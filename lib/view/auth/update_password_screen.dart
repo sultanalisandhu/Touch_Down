@@ -28,7 +28,6 @@ class UpdatePasswordScreen extends StatelessWidget {
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Spacer(),
                 const Image(
                   image: AssetImage(ImgUtils.logo),
                   fit: BoxFit.cover,
@@ -102,32 +101,32 @@ class UpdatePasswordScreen extends StatelessWidget {
                     ?kCircularLoading()
                     :kTextButton(
                   onPressed: () {
-                    if (controller.emailController.text.isEmpty) {
-                      showSnackBar('Error', 'Enter your email address', isError: true);
-                    } else if (controller.updatedPinController.text.isEmpty) {
-                      showSnackBar('Error', 'Enter the verification code', isError: true);
-                    } else if (controller.newPasswordController.text.isEmpty) {
-                      showSnackBar('Error', 'Enter a new password', isError: true);
-                    } else if (!controller.isValidPassword(controller.newPasswordController.text)) {
-                      showSnackBar('Error', 'Password must be at least 8 characters long.',isError: true);
-                    }else{
-                      printWarning('text${controller.newPasswordController.text}');
-                      controller.updatePassword();
-                    }
+                   _handleResetPassword();
                   },
                   btnText: 'RESET PASSWORD',
-                  textColor: AppColor.blackColor,
-                  color: AppColor.primaryColor,
-                  height: 5.h,
-                  width: 50.w,
-                  borderRadius: 26,
+                  width: 60.w,
                 ),
-                const Spacer(),
               ],
             ).paddingSymmetric(horizontal: 4.w),
           ),
         ],
       ),
     );
+  }
+  void _handleResetPassword() {
+    final email = controller.emailController.text;
+    final verificationCode = controller.updatedPinController.text;
+    final newPassword = controller.newPasswordController.text;
+    if (email.isEmpty) {
+      showSnackBar('Error', 'Enter your email address', isError: true);
+    } else if (verificationCode.isEmpty) {
+      showSnackBar('Error', 'Enter the verification code', isError: true);
+    } else if (newPassword.isEmpty) {
+      showSnackBar('Error', 'Enter a new password', isError: true);
+    } else if (!controller.isValidPassword(newPassword)) {
+      showSnackBar('Error', 'Password must be at least 8 characters long.', isError: true);
+    } else {
+      controller.updatePassword();
+    }
   }
 }

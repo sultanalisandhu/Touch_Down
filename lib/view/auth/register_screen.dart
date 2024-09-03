@@ -1,4 +1,3 @@
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,9 +6,7 @@ import 'package:touch_down/controller/auth_controller.dart';
 import 'package:touch_down/utils/constants.dart';
 import 'package:touch_down/utils/extensions/extensions.dart';
 import 'package:touch_down/utils/asset_utils.dart';
-import 'package:touch_down/utils/local_storage.dart';
 import 'package:touch_down/view/auth/login_screen.dart';
-import 'package:touch_down/extras/toggle_button.dart';
 import 'package:touch_down/widgets/auth_widgets/auth_widget.dart';
 import 'package:touch_down/widgets/circular_loading.dart';
 import 'package:touch_down/widgets/k_bg_img.dart';
