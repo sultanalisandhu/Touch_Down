@@ -15,11 +15,11 @@ class LocalStorage{
 
   static void write(String key, dynamic value){
     _storage.write(key, value);
-    // printWarning('key from method write: $key  value: $value');
+     log('write method key: $key  write value: $value');
   }
   static dynamic read(String key) {
     dynamic value = _storage.read(key) ?? '';
-    // log('Read key: $key  value: $value');
+    log('Read method key: $key  read value: $value');
     return value;
   }
 
@@ -29,6 +29,7 @@ class LocalStorage{
 
   static dynamic eraseAllLocalStorage(){
     _storage.erase();
+    log('storage erased while logout');
   }
 
   // /// setters

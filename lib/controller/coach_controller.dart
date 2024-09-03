@@ -85,10 +85,7 @@ class CoachController extends GetxController {
         throw Exception('No userId provided or found in local storage');
       }
       debugPrint('userId To End Point $finalUserId');
-      final response = await baseServices.apiCall(
-        'get', '${ApiRoutes.userDetailsByID}/$finalUserId',
-      );
-
+      final response = await baseServices.apiCall('get', '${ApiRoutes.userDetailsByID}/$finalUserId',);
       var data = response!.data;
       if (response.statusCode == 200) {
         setUserByIdModel = UserByIdModel.fromJson(data);

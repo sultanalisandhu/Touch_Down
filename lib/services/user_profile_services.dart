@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:touch_down/utils/local_storage.dart';
 import 'package:touch_down/view/profile_ui/coach_profile_ui/coach_profile_screen.dart';
@@ -6,7 +8,7 @@ import 'package:touch_down/view/profile_ui/user_profile_ui/user_profile_screen.d
 class UserProfileService {
   static void saveUserProfileData(Map<String, dynamic> data) {
     String userId = data['result']['user']['id'];
-    print('UsrID: $userId');
+    log('UsrID: $userId');
     String bearerToken = data['result']['token'];
     LocalStorage.write(LocalStorage.userId, userId);
     LocalStorage.write(LocalStorage.bearerToken, bearerToken);

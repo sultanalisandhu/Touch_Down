@@ -132,7 +132,7 @@ class Player {
       });
     }
     won = json['won'];
-    location = json['location'];
+    location = json['location']??'';
     lost = json['lost'];
     draw = json['draw'];
     rating = json['rating'];
@@ -296,7 +296,7 @@ class Sport {
 
   Sport.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
+    name = json['name']??'';
     avatar = json['avatar'];
     attributes = json['attributes'];
     playerLimit = json['playerLimit'];
